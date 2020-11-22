@@ -6,7 +6,11 @@
   "dependencies": {
     "discord.js": "^12.4.1",
     "eslint": "^7.14.0",
-    "fs": "0.0.1-security"
+    "frinkiac-gif-generator": "^0.7.0",
+    "fs": "0.0.1-security",
+    "node-movie": "^3.0.0",
+    "superagent": "^6.1.0",
+    "urban": "^0.3.2"
   },
   "devDependencies": {},
   "scripts": {
