@@ -13,7 +13,7 @@ module.exports.run = (client, message, args, utils) => {
 	const person = message.mentions.users.first();
 	const embed = new Discord.MessageEmbed()
 		.setTitle(person.username + ' got banned by ' + message.author.username)
-		.setThumbnail('https://www.progressivecombatsystems.com/wp-content/uploads/2019/03/groin-kick.jpg');
+		.setImage('https://giphy.com/gifs/akban-groin-kick-AW9gsdu7N4cA8');
 	message.channel.send(embed);
 };
 

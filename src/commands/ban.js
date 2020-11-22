@@ -12,7 +12,7 @@ module.exports.run = (client, message, args, utils) => {
 	const person = message.mentions.users.first();
 	const embed = new Discord.MessageEmbed()
 		.setTitle(person.username + ' got banned by ' + message.author.username)
-		.setThumbnail('https://www.computing.co.uk/api/v1/wps/50fc940/19385fcb-fb6e-42f3-b41e-1abceb19bfe4/3/banned-580x358.jpg');
+		.setImage('https://media1.tenor.com/images/d8247f1369dd1ab6ebe9cb772ca12b96/tenor.gif?itemid=18150385');
 	message.channel.send(embed);
 };
 
@@ -27,5 +27,5 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
+	category: 'moderation',
 };
