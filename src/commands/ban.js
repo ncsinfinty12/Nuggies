@@ -9,6 +9,9 @@ module.exports.run = (client, message, args, utils) => {
 	if (!banReason) {
 		banReason = 'None';
 	}
+	User.ban({
+		reason: banReason,
+	});
 	const person = message.mentions.users.first();
 	const embed = new Discord.MessageEmbed()
 		.setTitle(person.username + ' got banned by ' + message.author.username)
