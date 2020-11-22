@@ -12,7 +12,7 @@ module.exports.run = (client, message, args, utils) => {
 	User.kick({ reason: banReason });
 	const person = message.mentions.users.first();
 	const embed = new Discord.MessageEmbed()
-		.setTitle(person.username + ' got banned by ' + message.author.username)
+		.setTitle(person.username + ' got kicked by ' + message.author.username)
 		.setImage('https://giphy.com/gifs/akban-groin-kick-AW9gsdu7N4cA8');
 	message.channel.send(embed);
 };
