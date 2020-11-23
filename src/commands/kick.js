@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const person = message.mentions.users.first();
 	const embed = new Discord.MessageEmbed()
 		.setTitle(person.username + ' got kicked by ' + message.author.username)
-		.setImage('https://giphy.com/gifs/akban-groin-kick-AW9gsdu7N4cA8');
+		.setImage('https://imgur.com/6i9FAoi');
 	message.channel.send(embed);
 };
 
