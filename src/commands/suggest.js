@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const config = require('../../utils/config.json');
-module.exports.run = (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils) => {
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor(0xff75c6)

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 
-module.exports.run = (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils) => {
 	let number = args.join(' ');
 	number = parseInt(number);
 	message.channel.bulkDelete(number);

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 
-module.exports.run = (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils) => {
 	if(!message.mentions.users.first()) {
 		const number = Math.floor(Math.random() * 18);
 		const pp = '=';

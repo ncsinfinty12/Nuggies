@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 
-module.exports.run = (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils) => {
 	message.channel.send('Pinging...').then(m =>{
 		const ping = m.createdTimestamp - message.createdTimestamp;
 
