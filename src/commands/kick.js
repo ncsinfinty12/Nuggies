@@ -5,7 +5,7 @@ module.exports.run = (client, message, args, utils) => {
 	if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('Invalid Permissions');
 	const User = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
 	if (!User) return message.channel.send('Invalid User');
-	let banReason = args.join(' ').slice(22);
+	let banReason = args.join(' ');
 	if (!banReason) {
 		banReason = 'None';
 	}
@@ -26,7 +26,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	args: false,
+	args: true,
 	restricted: false,
 	category: 'misc',
 };
