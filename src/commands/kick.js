@@ -5,7 +5,7 @@ module.exports.run = (client, message, args, utils) => {
 	if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('Invalid Permissions');
 	const User = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
 	if (!User) return message.channel.send('Invalid User');
-	if (User === message.author) return message.channel.send('you cant kick yourself!');
+	if (User.id === message.author.id) return message.channel.send('you cant kick yourself!');
 	let banReason = args.join(' ');
 	if (!banReason) {
 		banReason = 'None';
