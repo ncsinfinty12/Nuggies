@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('Invalid Permissions');
 	const User = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
 	if (!User) return message.channel.send('Invalid User');
-	if (message.member.roles.highest.position < User.member.roles.highest.position) {
+	if (message.member.roles.highest.position < User.roles.highest.position) {
 		message.channel.send('you cant kick the member as he is a higher role than you!');
 		return;
 	}
