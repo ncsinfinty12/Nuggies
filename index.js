@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const translate = require('@vitalets/google-translate-api');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 
 client.commands = new Discord.Collection();
