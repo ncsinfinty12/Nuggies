@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setTitle(`${message.mentions.users.first().username}, you got a kiss from ${message.author.username}!`)
 		.setImage(body.url)
 		.setFooter('kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss');
-	message.channel.send({ embed }).react('🍕');
+	message.channel.send({ embed });
 };
 
 
