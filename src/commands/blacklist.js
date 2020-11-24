@@ -5,7 +5,7 @@ const fs = require('fs');
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.author.id === '734006373343297557') return message.reply('You don\'t have the permission to use this command...:facepalm:');
 	// message.delete();
-	const blacklist = JSON.parse(fs.readFileSync('../../blacklist.json', 'utf8'));
+	const blacklist = JSON.parse(fs.readFileSync(`${__dirname}/../../blacklist.json`, 'utf8'));
 	const user = args[0];
 	const amount = parseInt(user);
 
@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args, utils) => {
 			state: true,
 		};
 		message.reply(`<@${user}> is now Blacklisted!`);
-		fs.writeFile('../../blacklist.json', JSON.stringify(blacklist), err => {
+		fs.writeFile(`${__dirname}/../../blacklist.json`, JSON.stringify(blacklist), err => {
 			if(err) throw err;
 		});
 
