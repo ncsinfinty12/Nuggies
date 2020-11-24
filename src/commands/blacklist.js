@@ -25,12 +25,6 @@ module.exports.run = async (client, message, args, utils) => {
 			if(err) throw err;
 		});
 
-		client.guilds.forEach((guild) => {
-			if(guild.ownerID === user) {
-				message.guild.leave(guild.id);
-			}
-		});
-
 		return;
 	}
 	if (blacklist[user].state === true) {
