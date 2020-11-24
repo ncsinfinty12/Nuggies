@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const fs = require('fs');
-const bl = '../../blacklist.json';
+
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.author.id === '734006373343297557') return message.reply('You don\'t have the permission to use this command...:facepalm:');
 	// message.delete();
-	const blacklist = JSON.parse(fs.readFileSync(bl, 'utf8'));
+	const blacklist = JSON.parse(fs.readFileSync('../../blacklist.json', 'utf8'));
 	const user = args[0];
 	const amount = parseInt(user);
 
@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args, utils) => {
 			state: true,
 		};
 		message.reply(`<@${user}> is now Blacklisted!`);
-		fs.writeFile(bl, JSON.stringify(blacklist), err => {
+		fs.writeFile('../../blacklist.json', JSON.stringify(blacklist), err => {
 			if(err) throw err;
 		});
 
