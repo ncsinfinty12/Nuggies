@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.get('https://nekos.life/api/v2/img/slap');
 
 		const embed = new Discord.MessageEmbed()
-			.setColor('#ff9900')
+			.setColor('BLACK')
 			.setTitle(`No u! *slaps*  ${message.mentions.users.first().username}`)
 			.setImage(body.url)
 			.setFooter('that hurts');

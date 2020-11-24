@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
-    if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("Invalid Permissions")
+	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('Invalid Permissions');
 	let number = args.join(' ');
 	number = parseInt(number);
 	message.channel.bulkDelete(number + 1);
@@ -23,7 +23,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	args: false,
+	args: true,
 	restricted: false,
 	category: 'moderation',
 };
