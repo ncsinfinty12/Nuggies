@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (!User) return message.channel.send('Invalid User');
 	if (User.id === message.author.id) return message.channel.send('you cant kick yourself!');
 	if (message.member.roles.highest.position < User.roles.highest.position) {
-		message.channel.send('you cant ban the member as he is a higher role than you!');
+		message.channel.send('you cant kick the member as he is a higher role than you!');
 		return;
 	}
 	let banReason = args.join(' ');
