@@ -6,6 +6,10 @@ module.exports.run = async (client, message, args, utils) => {
 	const User = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
 	if (!User) return message.channel.send('Invalid User');
 	if (User.id === message.author.id) return message.channel.send('you cant kick yourself!');
+	if (message.member.roles.highest.position < User.roles.highest.position) {
+		message.channel.send('you cant ban the member as he is a higher role than you!');
+		return;
+	}
 	let banReason = args.join(' ');
 	if (!banReason) {
 		banReason = 'None';
