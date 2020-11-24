@@ -27,9 +27,9 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: ['pp'],
-	name: 'penis',
+	name: 'clear',
 	description: 'nein',
-	usage: 'penis',
+	usage: 'clear',
 };
 
 module.exports.config = {
