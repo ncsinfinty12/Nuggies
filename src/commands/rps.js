@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const random = Math.floor((Math.random() * acceptedReplies.length));
 	const result = acceptedReplies[random];
 	const embed = new Discord.MessageEmbed()
-		.setTitle('Rock Paper Scisors')
+		.setTitle('Rock Paper Scissors')
 		.setDescription('React with 🗿 for stone\nReact with 📄 for paper\nReact with ✂️ for scissor')
 		.setThumbnail('https://www.esquireme.com/public/styles/full_img/public/images/2017/05/29/rock_paper_scissors__2x.png?itok=XyCX7Spl');
 	message.channel.send(embed).then(m =>{
