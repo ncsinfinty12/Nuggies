@@ -50,7 +50,6 @@ client.on('message', message => {
 
 		if (client.commands.get(command).config.restricted == true) {
 			if (message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
-			if (message.author.id !== config.ownerID2) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
 		}
 
 		if (client.commands.get(command).config.args == true) {
