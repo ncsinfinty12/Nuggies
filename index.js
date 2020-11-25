@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client({ disableMentions: 'everyone' });
-
+var ownerids = ["734006373343297557","537230099121045504"]
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
@@ -49,7 +49,7 @@ client.on('message', message => {
 		if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
 
 		if (client.commands.get(command).config.restricted == true) {
-			if (message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			if (!ownerids.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
 		}
 
 		if (client.commands.get(command).config.args == true) {
