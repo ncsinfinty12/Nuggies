@@ -1,4 +1,4 @@
-module.exports = guild => {
+exports.run = (guild) => {
 	const client = guild.client;
 	let channelID;
 	const channels = guild.cache.channels;
