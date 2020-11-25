@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client({ disableMentions: 'everyone' });
-var ownerids = ["734006373343297557","537230099121045504"]
+const ownerids = ['734006373343297557', '537230099121045504'];
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
