@@ -1,5 +1,12 @@
 exports.run = (guild) => {
-	const channels = guild.channels.cache.filter(channel => channel.type == 'text');
+	let defaultChannel = '';
+	guild.channels.cache.forEach((channel) => {
+		if(channel.type == 'text' && defaultChannel == '') {
+			if(channel.permissionsFor(guild.me).has('SEND_MESSAGES')) {
+				defaultChannel = channel;
+			}
+		}
+		defaultChannel.send('thank you for inviting me !');
 
-	channels.first().send('Thank you for inviting me!').catch(e => console.log(e));
+	});
 };
