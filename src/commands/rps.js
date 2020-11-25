@@ -2,41 +2,42 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
-    const acceptedReplies = ['rock', 'paper', 'scissors'];
-            const random = Math.floor((Math.random() * acceptedReplies.length));
-            const result = acceptedReplies[random];
-            const embed = new discord.MessageEmbed()
-                .setTitle("Rock Paper Scisors")
-                .setDescription("React with 🗿 for stone\nReact with 📄 for paper\nReact with ✂️ for scissor")
-                .setThumbnail("https://www.esquireme.com/public/styles/full_img/public/images/2017/05/29/rock_paper_scissors__2x.png?itok=XyCX7Spl")
-                message.channel.send(embed).then(m =>{
-                    m.react("🗿")
-                    m.react("📄")
-                    m.react("✂️")
-                    const filter = (reaction, user) => {
-                        return ['🗿', '📄','✂️'].includes(reaction.emoji.name) && user.id === message.author.id;
-                    };
-                    
-                    m.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
-                        .then(collected => {
-                            const reaction = collected.first();
-                    
-                            if (reaction.emoji.name === '🗿') {
-                                if (result === 'paper') return message.reply('I won!');
-                                else return message.reply('You won!')
-                            }
-                            if(reaction.emoji.name === '📄'){
-                                if (result === 'scissors') return message.reply('I won!');
-                                else return message.reply('You won!'); 
-                            }else{ 
-                                if (result === 'rock') return message.reply('I won!');
-                                else return message.reply('You won!');
-                            }}
-                        )
-                        .catch(collected => {
-                            message.reply('You know what is the use if you are just gonna waste my time 🦉');
-                        })
-})}
+	const acceptedReplies = ['rock', 'paper', 'scissors'];
+	const random = Math.floor((Math.random() * acceptedReplies.length));
+	const result = acceptedReplies[random];
+	const embed = new Discord.MessageEmbed()
+		.setTitle('Rock Paper Scisors')
+		.setDescription('React with 🗿 for stone\nReact with 📄 for paper\nReact with ✂️ for scissor')
+		.setThumbnail('https://www.esquireme.com/public/styles/full_img/public/images/2017/05/29/rock_paper_scissors__2x.png?itok=XyCX7Spl');
+	message.channel.send(embed).then(m =>{
+		m.react('🗿');
+		m.react('📄');
+		m.react('✂️');
+		const filter = (reaction, user) => {
+			return ['🗿', '📄', '✂️'].includes(reaction.emoji.name) && user.id === message.author.id;
+		};
+
+		m.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+			.then(collected => {
+				const reaction = collected.first();
+
+				if (reaction.emoji.name === '🗿') {
+					if (result === 'paper') return message.reply('I won!');
+					else return message.reply('You won!');
+				}
+				if(reaction.emoji.name === '📄') {
+					if (result === 'scissors') return message.reply('I won!');
+					else return message.reply('You won!');
+				}
+				else if (result === 'rock') {return message.reply('I won!');}
+				else {return message.reply('You won!');}
+			},
+			)
+			.catch(collected => {
+				message.reply('You know what is the use if you are just gonna waste my time 🦉');
+			});
+	});
+};
 
 
 module.exports.help = {
