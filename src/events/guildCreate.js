@@ -1,5 +1,5 @@
-exports.run = (guild) => {
+exports.run = async (guild) => {
 
-	guild.channels.cache.first().send('thanks for inviting me to the server!');
+	await guild.channels.cache.first().send('thanks for inviting me to the server!');
 
 };
