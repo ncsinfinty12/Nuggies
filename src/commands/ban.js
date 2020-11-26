@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('User:', `${user.username}#${user.discriminator} (${user.id})`)
 			.addField('Moderator:', `${message.author.username}#${message.author.discriminator}`)
 			.addField('Reason', reason)
-			.setThumbnail('https://tenor.com/FYi9.gif');
+			.setThumbnail('https://media1.tenor.com/images/6a61251f5453d93d76f9826be10b7f49/tenor.gif?itemid=7580925');
 		// let obj = JSON.parse(`{"days":7, "reason": ${reason}}`)
 		if(user.bot) return;
 		message.mentions.users.first().send({ embed }).catch(e =>{
