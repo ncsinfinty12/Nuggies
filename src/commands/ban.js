@@ -2,23 +2,49 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
-	if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('Invalid Permissions');
-	const User = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-	if (!User) return message.channel.send('Invalid User');
-	if (message.member.roles.highest.position < User.roles.highest.position) {
-		message.channel.send('you cant kick the member as he is a higher role than you!');
+	let reason = args.slice(1).join(' ');
+	const user = message.mentions.users.first();
+	if (message.mentions.users.size < 1) return message.channel.send('You must mention someone to ban them.').catch(console.error);
+	if (message.mentions.users.first().id === message.author.id) return message.channel.send('I can\'t let you do that, I dont promote self-harm');
+	if (user.id === client.user.id) return message.channel.send('You dumbass, how will I ban myself ?');
+	if (message.mentions.users.first().id === '734006373343297557') return message.channel.send('You can\'t ban my Developer :wink:');
+	if (reason.length < 1) reason = 'No reason supplied.';
+	const botRolePossition = message.guild.member(client.user).roles.highest.position;
+	const rolePosition = message.guild.member(user).roles.highest.position;
+	const userRolePossition = message.member.roles.highest.position;
+	if (userRolePossition <= rolePosition) return message.channel.send('❌**Error:** Cannor ban that member because they have roles that is higher or equal to you.');
+	if (botRolePossition <= rolePosition) return message.channel.send('❌**Error:** Cannor ban that member because they have roles that is higher or equal to me.');
+	if (!message.guild.member(user).bannable) {
+		message.channel.send(':redTick: I cannot ban that member. My role might not be high enough or it\'s an internal error.');
 		return;
 	}
-	let banReason = args.join(' ');
-	if (!banReason) {
-		banReason = 'None';
+	else{
+		const embed = new Discord.MessageEmbed()
+			.setColor('BLACK')
+			.setTimestamp()
+			.addField('Action:', 'Ban')
+			.addField('User:', `${user.username}#${user.discriminator} (${user.id})`)
+			.addField('Moderator:', `${message.author.username}#${message.author.discriminator}`)
+			.addField('Reason', reason);
+		// let obj = JSON.parse(`{"days":7, "reason": ${reason}}`)
+		if(user.bot) return;
+		message.mentions.users.first().send({ embed }).catch(e =>{
+			if(e) return;
+		});
+		message.guild.members.ban(user.id, { days:7, reason: reason });
+		const logchannel = message.guild.channels.cache.find(x => x.name = 'logs');
+		if (!logchannel) {
+			message.channel.send({ embed });
+		}
+		else{
+			client.channels.cache.get(logchannel.id).send({ embed });
+			message.channel.send({ embed });
+		}
+		if(user.bot) return;
+		message.mentions.users.first().send({ embed }).catch(e =>{
+			if(e) return;
+		});
 	}
-	User.ban({ reason: banReason });
-	const person = message.mentions.users.first();
-	const embed = new Discord.MessageEmbed()
-		.setTitle(person.username + ' got banned by ' + message.author.username)
-		.setImage('https://media1.tenor.com/images/d8247f1369dd1ab6ebe9cb772ca12b96/tenor.gif?itemid=18150385');
-	message.channel.send(embed);
 };
 
 
