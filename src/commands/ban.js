@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args, utils) => {
 		// let obj = JSON.parse(`{"days":7, "reason": ${reason}}`)
 		if(user.bot) return;
 		message.mentions.users.first().send({ embed }).catch(e =>{
-			if(e) return;
+			console.log(e);
 		});
 		message.guild.members.ban(user.id, { reason: reason });
 
