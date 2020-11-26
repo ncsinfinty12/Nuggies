@@ -24,7 +24,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.setThumbnail(client.user.avatarURL({ format: 'png', dynamic: true, size: 2048 }))
 			.setURL(client.user.avatarURL({ format: 'png', dynamic: true, size: 2048 }))
 			.setTimestamp()
-			.addField('Cryptonix X Ver.Rewrite', 'Show the bot\'s stats.')
+			.addField('Nuggies', 'Show the bot\'s stats.')
 			.addField('-------------------------------------------------------------------------------', '----------------------------------------------------------------------------')
 			.addField('Global Prefix', globalprefix, true)
 			.addField('Total Servers', `${client.guilds.cache.size}`, true)
