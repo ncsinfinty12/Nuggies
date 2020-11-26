@@ -25,13 +25,14 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Action:', 'Ban')
 			.addField('User:', `${user.username}#${user.discriminator} (${user.id})`)
 			.addField('Moderator:', `${message.author.username}#${message.author.discriminator}`)
-			.addField('Reason', reason);
+			.addField('Reason', reason)
+			.setThumbnail('https://media.tenor.co/videos/524e650967e2487dcb99ced185ebe225/mp4');
 		// let obj = JSON.parse(`{"days":7, "reason": ${reason}}`)
 		if(user.bot) return;
 		message.mentions.users.first().send({ embed }).catch(e =>{
 			if(e) return;
 		});
-		message.guild.members.ban(user.id, { days:7, reason: reason });
+		message.guild.members.ban(user.id, { reason: reason });
 
 		message.channel.send({ embed });
 		if(user.bot) return;
