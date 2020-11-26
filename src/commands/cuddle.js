@@ -24,7 +24,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	args: true,
+	args: false,
 	restricted: false,
 	category: 'misc',
 };
