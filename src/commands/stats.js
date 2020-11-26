@@ -18,7 +18,6 @@ module.exports.run = async (client, message, args, utils) => {
 	seconds = (seconds < 10) ? '0' + seconds : seconds;
 	fs.readdir('./commands/', async (err, files) => {
 		if (err) console.error(err);
-		const totcmds = files.length;
 
 		const prefixs = require('../models/settings.js');
 		prefixs.findOne({
@@ -38,7 +37,6 @@ module.exports.run = async (client, message, args, utils) => {
 					.addField('-------------------------------------------------------------------------------', '----------------------------------------------------------------------------')
 					.addField('Server Prefix', prefix, true)
 					.addField('Global Prefix', globalprefix, true)
-					.addField('Total Commands', `${totcmds} commands`, true)
 					.addField('Total Servers', `${client.guilds.cache.size}`, true)
 					.addField('Total Channels', `${client.channels.cache.size}`, true)
 					.addField('Total Users', `${client.users.cache.size}`, true)
