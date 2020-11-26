@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^12.4.1",
+    "discord.js": "github:monbrey/discord.js#inline-replies",
     "eslint": "^7.14.0",
     "fs": "0.0.1-security",
     "os-utils": "0.0.14",
