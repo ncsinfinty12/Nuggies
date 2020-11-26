@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, utils) => {
 	message.channel.createOverwrite(message.guild.id, {
 		SEND_MESSAGES: true,
 	});
-	message.channel.send(`**${message.author.username}** just unlocked the channel !.`);
+	message.channel.send(`**${message.author.username}** just unlocked the channel !`);
 };
 
 module.exports.help = {
