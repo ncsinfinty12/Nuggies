@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (!client.lockit) client.lockit = [];
 	const time = args.join(' ');
 	const validUnlocks = ['release', 'unlock'];
-	// if (!message.member.hasPermission("MANAGE_CHANNELS")) return msg.reply("❌**Error:** You don't have the permission to do that!");
+	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
 	if (!time) return message.reply('You must set a duration for the lockdown in either hours, minutes or seconds');
 
 	if (validUnlocks.includes(time)) {
