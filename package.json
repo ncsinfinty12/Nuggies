@@ -7,6 +7,7 @@
     "discord.js": "github:monbrey/discord.js#inline-replies",
     "eslint": "^7.14.0",
     "fs": "0.0.1-security",
+    "ms": "^2.1.2",
     "os-utils": "0.0.14",
     "superagent": "^6.1.0"
   },
