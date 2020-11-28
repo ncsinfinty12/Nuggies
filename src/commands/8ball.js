@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, utils) => {
     if(!question) return message.channel.send(`${randompronoun}, ask a question 🥺`)
     const answer = ["nu","yus","yes","no","never","of course","hell yeah","hell no","negative","positive","not today","only today","sadly yes","sadly no","maybe","you bet","not a chance","it's a secret","only for today"];
     const randomanswer = answer[Math.floor(Math.random() * (answer.length - 1 + 1) + 1)]
-    const embed = new discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
         .setTitle(question)
         .setDescription(`${randompronoun}, ${randomanswer}`)
     message.channel.send(embed)
