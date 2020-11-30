@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+
 const Schema = new mongoose.Schema({
-	userID: String,
+	id : String,
 });
 
 module.exports = mongoose.model('blacklist', Schema);
