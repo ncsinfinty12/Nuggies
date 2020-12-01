@@ -11,7 +11,7 @@ mongoose.connect(process.env.mongodburl, { useNewUrlParser: true, useUnifiedTopo
 	if (err) return console.error(err);
 	console.log('Connected to MongoDB database!');
 });
-// // Utils & config requiring
+// Utils & config requiring
 
 const utils = require('./utils/utils');
 const config = require('./utils/config.json');
