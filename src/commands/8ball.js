@@ -9,6 +9,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const answer = ['nu', 'yus', 'yes', 'no', 'never', 'of course', 'hell yeah', 'hell no', 'negative', 'positive', 'not today', 'only today', 'sadly yes', 'sadly no', 'maybe', 'you bet', 'not a chance', 'it\'s a secret', 'only for today'];
 	const randomanswer = answer[Math.floor(Math.random() * (answer.length - 1 + 1) + 1)];
 	const embed = new Discord.MessageEmbed()
+		.setColor("RANDOM")
 		.setTitle(question)
 		.setDescription(`${randompronoun}, ${randomanswer}`);
 	message.channel.send(embed);

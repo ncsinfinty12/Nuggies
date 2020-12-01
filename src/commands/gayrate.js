@@ -7,6 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 	else{ user = message.mentions.users.first();}
 	const rate = Math.floor(Math.random() * (100 - 1 + 1) + 1);
 	const embed = new Discord.MessageEmbed()
+		.setColor("RANDOM")
 		.setTitle(`${user.username}'s gayrate`)
 		.setDescription(`${user.username} is ${rate}% gay`);
 	message.channel.send(embed);
