@@ -11,7 +11,7 @@ mongoose.connect(process.env.mongodburl, { useNewUrlParser: true, useUnifiedTopo
 	if (err) return console.error(err);
 	console.log('Connected to MongoDB database!');
 });
-// Utils & config requiring
+// // Utils & config requiring
 
 const utils = require('./utils/utils');
 const config = require('./utils/config.json');
@@ -53,7 +53,7 @@ client.on('message', async message => {
 		if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
 
 		if (client.commands.get(command).config.restricted == true) {
-			if (message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
 		}
 
 		if (client.commands.get(command).config.args == true) {

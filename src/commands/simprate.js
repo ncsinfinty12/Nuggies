@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 	else{ user = message.mentions.users.first();}
 	const rate = Math.floor(Math.random() * (100 - 1 + 1) + 1);
 	const embed = new Discord.MessageEmbed()
-		.setColor("RANDOM")
+		.setColor('RANDOM')
 		.setTitle(`${user.username}'s simprate`)
 		.setDescription(`${user.username} is ${rate}% simp`);
 	message.channel.send(embed);
