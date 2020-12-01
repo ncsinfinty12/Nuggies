@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (isNaN(args[0])) return message.channel.send('That is not a number!');
 	try{message.channel.setRateLimitPerUser(args[0], 'It was me');}
 	catch(error) {
-		message.channel.send('There was an error, check if i have correct perms');
+		message.channel.send('There was an error, check if I have the correct permissions.');
 	}
 	message.channel.send(`Set the slowmode of this channel to **${args[0]}**`);
 };
