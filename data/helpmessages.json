@@ -1,0 +1,14 @@
+{
+    "mod": [
+        "`ban`, `kick`, `clear`, `lock`, `tlock`, `unlock`, `slowmode`, `addrole`"
+    ],
+    "fun": [
+        "`8ball`, `gayrate`, `simprate`, `penis`, `rps`, `cuddle`, `hug`, `kiss`, `slap`, `poke`, tickle, `say`"
+    ],
+    "info": [
+        "`botinfo`, `botstats`, `invite`,`ping`"
+    ],
+    "owner": [
+        "`blacklist`, `eval`, `reload`, `leave`"
+    ]
+}
