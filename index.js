@@ -1,16 +1,21 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const mongoose = require('mongoose');
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const ownerids = ['734006373343297557', '537230099121045504'];
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 
+// mongoose connect
+mongoose.connect(process.env.mongodburl, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+	if (err) return console.error(err);
+	console.log('Connected to MongoDB database!');
+});
 // Utils & config requiring
 
 const utils = require('./utils/utils');
 const config = require('./utils/config.json');
-
+const blacklist = require('./models/blacklistSchema');
 // Handlers
 
 fs.readdir('./src/events/', (err, files) => {
@@ -38,18 +43,17 @@ fs.readdir('./src/commands/', (err, files) => {
 
 // Message Event
 
-client.on('message', message => {
+client.on('message', async message => {
 	try {
 		if (message.author.bot) return;
 		if (message.content.indexOf(config.prefix) !== 0) return;
-
 		const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 		let command = args.shift().toLowerCase();
 
 		if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
 
 		if (client.commands.get(command).config.restricted == true) {
-			if (!ownerids.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			if (message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
 		}
 
 		if (client.commands.get(command).config.args == true) {
