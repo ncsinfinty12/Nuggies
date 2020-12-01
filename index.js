@@ -42,8 +42,14 @@ fs.readdir('./src/commands/', (err, files) => {
 });
 
 // Message Event
-
 client.on('message', async message => {
+	blacklist.findOne({ id: message.author.id }), async (err, data) => {
+		if(err) throw err;
+		if(data) {
+			message.channel.send('you are blacklisted');
+			return;
+		}
+	};
 	try {
 		if (message.author.bot) return;
 		if (message.content.indexOf(config.prefix) !== 0) return;
