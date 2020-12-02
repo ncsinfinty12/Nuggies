@@ -46,7 +46,7 @@ client.on('message', async message => {
 	if(message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
-			.addField('Prefix and Usage', `The current prefix for **${message.guild.name} is ``.`` \n *Tip: Run .help to get started!*`);
+			.addField('Prefix and Usage', `The current prefix for **${message.guild.name} is ``.`` \n *Tip: Run ``.help`` to get started!*`);
 		message.channel.send(n);
 	}
 	try {
