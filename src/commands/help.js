@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if(!args[0]) {
 		const b = new Discord.MessageEmbed()
 			.setTitle('Command list for Nuggies:')
-			.addField('For more info about a specific Command:", "Use [prefix]help command_name')
+			.addField('For more info about a specific Command:', 'Use [prefix]help command_name')
 			.addField('Moderation', help.mod)
 			.addField('Fun', help.fun)
 			.addField('Information', help.info)
@@ -19,8 +19,8 @@ module.exports.run = async (client, message, args, utils) => {
 };
 
 module.exports.help = {
-	aliases: [],
-	name: 'halp',
+	aliases: ['halp'],
+	name: 'help',
 	description: 'nein',
 	usage: 'gayrate',
 };

@@ -3,7 +3,7 @@
         "`ban`, `kick`, `clear`, `lock`, `tlock`, `unlock`, `slowmode`, `addrole`"
     ],
     "fun": [
-        "`8ball`, `gayrate`, `simprate`, `penis`, `rps`, `cuddle`, `hug`, `kiss`, `slap`, `poke`, tickle, `say`, `joke`, `meme`"
+        "`8ball`, `gayrate`, `simprate`, `penis`, `rps`, `say`, `joke`, `meme`"
     ],
     "info": [
         "`botinfo`, `botstats`, `invite`,`ping`, `serverinfo`"
@@ -13,5 +13,6 @@
     ],
     "misc": [
         "`define`, `avatar`, `remindme`, `suggest`"
-    ]
+    ],
+    "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`"
 }
