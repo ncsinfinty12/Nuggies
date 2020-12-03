@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	const acceptedReplies = ['rock', 'paper', 'scissors'];
@@ -23,14 +24,14 @@ module.exports.run = async (client, message, args, utils) => {
 
 				if (reaction.emoji.name === '🗿') {
 					if (result === 'paper') return message.reply('I won!');
-					else return message.reply('You won! I chose '+result);
+					else return message.reply('You won! I chose ' + result);
 				}
 				if(reaction.emoji.name === '📄') {
 					if (result === 'scissors') return message.reply('I won!');
 					else return message.reply('You won! I chose ' + result);
 				}
 				else if (result === 'rock') {return message.reply('I won!');}
-				else {return message.reply('You won! I chose '+result);}
+				else {return message.reply('You won! I chose ' + result);}
 			},
 			)
 			.catch(collected => {
@@ -43,8 +44,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'rps',
-	description: 'nein',
-	usage: 'rps',
+	description: 'Play Rock Paper Scissor me (I am a pro 🤫)',
+	usage: config.prefix + 'rps',
 };
 
 module.exports.config = {

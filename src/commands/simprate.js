@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	let user;
@@ -17,8 +18,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'simprate',
-	description: 'nein',
-	usage: 'simprate',
+	description: 'See how much simp you and your friends are 😶',
+	usage: config.prefix + 'simprate',
 };
 
 module.exports.config = {

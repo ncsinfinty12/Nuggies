@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('Invalid Permissions');
@@ -16,8 +17,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'slowmode',
-	description: 'nein',
-	usage: 'slowmode',
+	description: 'Set a slowmode in text channel',
+	usage: config.prefix + 'slowmode 10',
 };
 
 module.exports.config = {

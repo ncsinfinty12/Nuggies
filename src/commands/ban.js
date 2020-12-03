@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	let reason = args.slice(1).join(' ');
@@ -46,8 +47,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'ban',
-	description: 'nein',
-	usage: 'ban',
+	description: 'Ban a person from your server',
+	usage: config.prefix + 'ban @user',
 };
 
 module.exports.config = {

@@ -20,8 +20,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'suggest',
-	description: 'nein',
-	usage: 'suggest',
+	description: 'Wanna suggest something? Use this command and see how many people are with you',
+	usage: config.prefix + 'suggest Make chat less dead',
 };
 
 module.exports.config = {

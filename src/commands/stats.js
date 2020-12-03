@@ -4,6 +4,7 @@ const superagent = require('superagent');
 const osutils = require('os-utils');
 const version = require('../../package.json');
 const fs = require('fs');
+const config = require('../../utils/config.json');
 const settings = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	// eslint-disable-next-line prefer-const
@@ -51,8 +52,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'stats',
-	description: 'nein',
-	usage: 'suggest',
+	description: 'Get information about me',
+	usage: config.prefix + 'suggest',
 };
 
 module.exports.config = {

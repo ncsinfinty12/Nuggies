@@ -19,8 +19,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['ball'],
 	name: '8ball',
-	description: 'nein',
-	usage: '8ball',
+	description: 'Tells probability of that thing happening',
+	usage: `${config.prefix}8ball Is this bot good?`,
 };
 
 module.exports.config = {

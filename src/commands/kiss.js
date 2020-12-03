@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const superagent = require('superagent');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.mentions.users.first()) return message.reply('You need to mention someone to kiss them :3');
@@ -21,8 +22,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'kiss',
-	description: 'nein',
-	usage: 'suggest',
+	description: 'Kiss someone 💋',
+	usage: config.prefix + 'kiss @user',
 };
 
 module.exports.config = {

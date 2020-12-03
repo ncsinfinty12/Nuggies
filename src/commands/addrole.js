@@ -26,8 +26,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'addrole',
-	description: 'nein',
-	usage: 'addrole <@user> rolename',
+	description: 'Add any role to any user',
+	usage: config.prefix + 'addrole <@user> rolename',
 };
 
 module.exports.config = {

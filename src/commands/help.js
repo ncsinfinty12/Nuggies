@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const help = require('../../data/helpmessages.json');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if(!args[0]) {
@@ -41,8 +42,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['halp'],
 	name: 'help',
-	description: 'nein',
-	usage: 'gayrate',
+	description: 'You can\'t be helped 😔',
+	usage: config.prefix + 'help',
 };
 
 module.exports.config = {
