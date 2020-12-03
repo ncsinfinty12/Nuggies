@@ -1,0 +1,38 @@
+/* eslint-disable no-unused-vars */
+const Discord = require('discord.js');
+const config = require('../../utils/config.json');
+
+module.exports.run = async (client, message, args, utils) => {
+	const user = args[0];
+	let reason = args.slice(1).join(' ');
+	if (reason.length < 1) reason = 'No reason supplied.';
+	if (!user) return message.channel.send('You must supply a user ID').catch(console.error);
+	message.guild.members.unban(user, reason).catch(e =>{
+		if(e) {
+			return message.reply(`${client.users.cache.get(`${args[0]}`).username} isn't banned, atleast not for now :eyes:`);
+		}
+	}).then(() =>{
+		const embed = new Discord.MessageEmbed()
+			.setColor(0xFF0000)
+			.setTimestamp()
+			.addField('Action:', 'Unban')
+			.addField('User:', `${client.users.cache.get(`${args[0]}`).username}#${client.users.cache.get(`${args[0]}`).discriminator} (${user})`)
+			.addField('Moderator:', `${message.author.username}#${message.author.discriminator}`)
+			.addField('Reason', reason)
+			.setFooter('aww man :(');
+		message.channel.send({ embed });
+	});
+};
+
+module.exports.help = {
+	aliases: ['unyeet'],
+	name: 'unban',
+	description: 'unban a user',
+	usage: '.unban <userID> <reason>',
+};
+
+module.exports.config = {
+	args: false,
+	restricted: false,
+	category: 'moderation',
+};
