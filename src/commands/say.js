@@ -11,8 +11,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['echo'],
 	name: 'say',
-	description: 'nein',
-	usage: 'say',
+	description: 'Make me say something',
+	usage: config.prefix + 'say',
 };
 
 module.exports.config = {

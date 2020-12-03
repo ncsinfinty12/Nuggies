@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+const config = require('../../utils/config.json');
+
 module.exports.run = async (client, message, args, utils) => {
 	let id = args[0];
 	if (!id) id = message.guild.id;
@@ -9,8 +11,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'leave',
-	description: 'nein',
-	usage: 'suggest',
+	description: 'Just leave',
+	usage: config.prefix + 'leave',
 };
 
 module.exports.config = {

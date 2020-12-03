@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const superagent = require('superagent');
+const config = require('../../utils/config.json');
 const ms = require('ms');
 module.exports.run = async (client, message, args, utils) => {
 	if (!client.lockit) client.lockit = [];
@@ -43,7 +44,7 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'tlock',
-	description: 'nein',
+	description: 'Lock the channel',
 	usage: '.tlock <time>',
 };
 

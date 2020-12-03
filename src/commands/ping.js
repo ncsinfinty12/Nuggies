@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	message.channel.send('Pinging...').then(m =>{
@@ -16,8 +17,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'ping',
-	description: 'nein',
-	usage: 'ping',
+	description: 'See bot\'s ping',
+	usage: config.prefix + 'ping',
 };
 
 module.exports.config = {

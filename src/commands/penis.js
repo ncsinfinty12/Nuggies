@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if(!message.mentions.users.first()) {
@@ -25,8 +26,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['pp'],
 	name: 'penis',
-	description: 'nein',
-	usage: 'penis',
+	description: 'Just a command to compare sizes',
+	usage: config.prefix + 'penis @user',
 };
 
 module.exports.config = {

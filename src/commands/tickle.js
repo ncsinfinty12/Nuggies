@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+const config = require('../../utils/config.json');
 const Discord = require('discord.js');
 const superagent = require('superagent');
 module.exports.run = async (client, message, args, utils) => {
@@ -18,8 +19,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'tickle',
-	description: 'nein',
-	usage: 'tickle',
+	description: 'Tickle someone',
+	usage: config.prefix + 'tickle',
 };
 
 module.exports.config = {

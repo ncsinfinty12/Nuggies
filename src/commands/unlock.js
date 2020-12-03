@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	if (!client.lockit) client.lockit = [];
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
@@ -12,8 +13,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['unlockdown'],
 	name: 'unlock',
-	description: 'nein',
-	usage: 'unlock',
+	description: 'Locked the channel? Unlock with this command',
+	usage: config.prefix + 'unlock',
 };
 
 module.exports.config = {

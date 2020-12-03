@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	let time = args[0];
@@ -40,8 +41,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['timer'],
 	name: 'remindme',
-	description: 'nein',
-	usage: 'remindme',
+	description: 'Think you\'ll forget the thing your mom told you to do? Just set a reminder',
+	usage: config.prefix + 'remindme 1 hour I gotta dance',
 };
 
 module.exports.config = {
