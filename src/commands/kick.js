@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+	if (!message.member.hasPermission('KICK_MEMBERS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
 	let reason = args.slice(1).join(' ');
 	const user = message.mentions.users.first();
 	if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').catch(console.error);

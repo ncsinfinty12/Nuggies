@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+	if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
 	const user = args[0];
 	let reason = args.slice(1).join(' ');
 	if (reason.length < 1) reason = 'No reason supplied.';
