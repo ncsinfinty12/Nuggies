@@ -25,8 +25,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: ['av'],
 	name: 'avatar',
-	description: 'nein',
-	usage: 'avatar',
+	description: 'See your or your friends avatar',
+	usage: config.prefix + 'avatar or ' + config.prefix + 'avatar @user',
 };
 
 module.exports.config = {

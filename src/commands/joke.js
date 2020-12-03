@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const oneLinerJoke = require('one-liner-joke');
+const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 
@@ -19,8 +20,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'joke',
-	description: 'nein',
-	usage: 'joke',
+	description: 'Hahahaha funny joke, wanna hear one?',
+	usage: config.prefix + 'joke',
 };
 
 module.exports.config = {

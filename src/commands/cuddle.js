@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const superagent = require('superagent');
+const config = require('../../utils/config.json');
+
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.mentions.users.first()) return message.reply('You need to mention someone to cuddle them');
 	if (message.mentions.users.first().id == client.user.id && message.author.id !== '242263403001937920') return message.channel.send('Aww! *cuddles you* ');
@@ -19,8 +21,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'cuddle',
-	description: 'nein',
-	usage: 'kick',
+	description: 'Cuddle someone',
+	usage: config.prefix + 'cuddle @user',
 };
 
 module.exports.config = {

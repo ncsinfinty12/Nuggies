@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../utils/config.json');
+
 const blacklist = require('../../models/blacklistSchema');
 module.exports.run = async (client, message, args, utils) => {
 	const User = args[0].slice(1);
@@ -20,8 +22,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'blacklist',
-	description: 'nein',
-	usage: 'clear',
+	description: 'Blacklist a person from the bot',
+	usage: 'Why do you wanna know?',
 };
 
 module.exports.config = {
