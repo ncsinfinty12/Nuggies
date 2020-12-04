@@ -12,7 +12,7 @@
         "`blacklist`, `eval`, `reload`, `leave`"
     ],
     "misc": [
-        "`define`, `avatar`, `remindme`, `suggest`"
+        "`define`, `avatar`, `remindme`, `suggest`, `imdb`"
     ],
     "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`"
 }
