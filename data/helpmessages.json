@@ -6,13 +6,13 @@
         "`8ball`, `gayrate`, `simprate`, `penis`, `rps`, `say`, `joke`, `meme`"
     ],
     "info": [
-        "`botinfo`, `botstats`, `invite`,`ping`, `serverinfo`"
+        "`botinfo`, `botstats`, `invite`,`ping`, `serverinfo`, `imdb`, `translate`"
     ],
     "owner": [
         "`blacklist`, `eval`, `reload`, `leave`"
     ],
     "misc": [
-        "`define`, `avatar`, `remindme`, `suggest`, `imdb`"
+        "`define`, `avatar`, `remindme`, `suggest`"
     ],
     "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`"
 }
