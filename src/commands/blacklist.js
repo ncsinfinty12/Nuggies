@@ -30,6 +30,6 @@ module.exports.help = {
 
 module.exports.config = {
 	args: true,
-	restricted: true,
+	restricted: false,
 	category: 'moderation',
 };
