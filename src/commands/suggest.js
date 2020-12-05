@@ -2,14 +2,16 @@
 const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
+	const guild1 = client.guilds.cache.get('780334622164254720');
+	const channel1 = guild1.channels.cache.get('783955997403643914');
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor(0xff75c6)
 		.setTitle('Suggestion from ' + message.author.username)
-		.setThumbnail('https://previews.123rf.com/images/carmenbobo/carmenbobo1405/carmenbobo140500366/28338205-stamp-with-word-suggest-inside-vector-illustration.jpg')
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to suggest something, use ' + config.prefix + 'suggest <suggestion>');
-	message.channel.send(embed).then(sentMessage => {
+	message.channel.send('suggestion submitted. Join discord.gg/zzURhQGpRY and upvote your suggestion !');
+	channel1.send(embed).then(sentMessage => {
 		sentMessage.react('👍');
 		sentMessage.react('👎');
 		message.delete();
@@ -20,7 +22,7 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'suggest',
-	description: 'Wanna suggest something? Use this command and see how many people are with you',
+	description: 'suggest something for the bot !',
 	usage: config.prefix + 'suggest Make chat less dead',
 };
 
