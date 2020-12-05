@@ -43,14 +43,14 @@ fs.readdir('./src/commands/', (err, files) => {
 
 // Message Event
 client.on('message', async message => {
-	if(message.content === '<@!779741162465525790>') {
-		const n = new Discord.MessageEmbed()
-			.setTitle('Hi, I\'m Nuggies !')
-			.addField('Prefix and Usage', `The current prefix for **${message.guild} is ``.`` \n *Tip: Run ``.help`` to get started!*`)
-			.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)');
-		message.channel.send(n);
-	}
 	try {
+		if(message.content === '<@!779741162465525790>') {
+			const n = new Discord.MessageEmbed()
+				.setTitle('Hi, I\'m Nuggies !')
+				.addField('Prefix and Usage', `The current prefix for **${message.guild} is ``.`` \n *Tip: Run ``.help`` to get started!*`)
+				.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)');
+			message.channel.send(n);
+		}
 		if (message.author.bot) return;
 		if (message.content.indexOf(config.prefix) !== 0) return;
 		const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
