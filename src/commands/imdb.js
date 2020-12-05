@@ -10,7 +10,11 @@ module.exports.run = async (client, message, args, utils) => {
 			.setDescription('**Date released:** ' + data.Released + '\n**Runtime**: ' + data.Runtime + '\n**Genre:** ' + data.Genre + '\n**Plot:** ' + data.Plot + '\n**Actors:** ' + data.Actors + '\n**Awards Received:**: ' + data.Awards)
 			.setThumbnail(data.Poster)
 			.setTitle(data.Title);
-		message.channel.send(embed);
+		message.channel.send(embed).catch(e =>{
+			if(e) {
+				return message.reply('couldnt find that movie !');
+			}
+		});
 	});
 };
 
