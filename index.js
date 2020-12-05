@@ -43,9 +43,15 @@ fs.readdir('./src/commands/', (err, files) => {
 
 // Message Event
 client.on('message', async message => {
+	const result = await blacklist.findOne({ id: message.author.id });
+	if(result) {
+		message.author.send('you are blacklisted !');
+		return;
+	}
 	if(message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
+			.setDescription('one of the most compact and easy to use bot on Discord !')
 			.addField('Prefix and Usage', 'The current prefix for This server is ``.`` \n *Tip: Run ``.help`` to get started!*')
 			.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)')
 			.setColor('RANDOM');
