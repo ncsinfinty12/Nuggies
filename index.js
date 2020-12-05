@@ -47,7 +47,7 @@ client.on('message', async message => {
 	if (message.content.indexOf(config.prefix) !== 0) return;
 	const result = await blacklist.findOne({ id: message.author.id });
 	if(result) {
-		message.author.send('you are blacklisted !');
+		message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
 		return;
 	}
 	if(message.content === '<@!779741162465525790>') {
