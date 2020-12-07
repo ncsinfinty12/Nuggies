@@ -18,17 +18,6 @@ const config = require('./utils/config.json');
 const blacklist = require('./models/blacklistSchema');
 // Handlers
 
-fs.readdir('./src/events/', (err, files) => {
-	if (err) return console.error(err);
-	files.forEach(file => {
-		const eventFunction = require(`./src/events/${file}`);
-		const eventStart = eventFunction.run.bind(null, client);
-		const eventName = file.split('.')[0];
-		client.events.set(eventName, eventStart);
-		client.on(eventName, (...args) => eventFunction.run(client, utils, ...args));
-	});
-});
-
 fs.readdir('./src/commands/', (err, files) => {
 	if (err) console.error(err);
 	files.forEach(f => {
@@ -85,5 +74,8 @@ client.on('message', async message => {
 		console.error(err);
 	}
 });
-
-client.login(process.env.token);
+client.on('ready', async () => {
+	console.log('bot is online!');
+	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://discord.gg/zzURhQGpRY' });
+});
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.QNR2rYobi2ihbZ57EduDtZl1srA');
