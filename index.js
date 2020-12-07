@@ -76,6 +76,6 @@ client.on('message', async message => {
 });
 client.on('ready', async () => {
 	console.log('bot is online!');
-	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://discord.gg/zzURhQGpRY' });
+	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
 });
 client.login(process.env.token);
