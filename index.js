@@ -78,4 +78,4 @@ client.on('ready', async () => {
 	console.log('bot is online!');
 	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://discord.gg/zzURhQGpRY' });
 });
-client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.QNR2rYobi2ihbZ57EduDtZl1srA');
+client.login(process.env.token);
