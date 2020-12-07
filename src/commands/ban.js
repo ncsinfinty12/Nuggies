@@ -8,16 +8,16 @@ module.exports.run = async (client, message, args, utils) => {
 	const user = message.mentions.users.first();
 	if (message.mentions.users.size < 1) return message.reply('You must mention someone to ban them.').catch(console.error);
 	if (message.mentions.users.first().id === message.author.id) return message.reply('I can\'t let you do that, I dont promote self-harm');
-	if (user.id === client.user.id) return message.channel.reply('You dumbass, how will I ban myself ?');
+	if (user.id === client.user.id) return message.reply('You dumbass, how will I ban myself ?');
 	if (message.mentions.users.first().id === '734006373343297557') return message.reply('You can\'t ban my Developer :wink:');
 	if (reason.length < 1) reason = 'No reason supplied.';
 	const botRolePossition = message.guild.member(client.user).roles.highest.position;
 	const rolePosition = message.guild.member(user).roles.highest.position;
 	const userRolePossition = message.member.roles.highest.position;
-	if (userRolePossition <= rolePosition) return message.channel.reply('❌**Error:** Cannor ban that member because they have roles that is higher or equal to you.');
-	if (botRolePossition <= rolePosition) return message.channel.reply('❌**Error:** Cannor ban that member because they have roles that is higher or equal to me.');
+	if (userRolePossition <= rolePosition) return message.reply('❌**Error:** Cannor ban that member because they have roles that is higher or equal to you.');
+	if (botRolePossition <= rolePosition) return message.reply('❌**Error:** Cannor ban that member because they have roles that is higher or equal to me.');
 	if (!message.guild.member(user).bannable) {
-		message.channel.reply(':redTick: I cannot ban that member. My role might not be high enough or it\'s an internal error.');
+		message.reply(':redTick: I cannot ban that member. My role might not be high enough or it\'s an internal error.');
 		return;
 	}
 	else{
