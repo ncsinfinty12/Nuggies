@@ -2,5 +2,5 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 exports.run = () => {
 	console.log('bot is online.');
-	client.user.setActivity(`watching ${client.guilds.cache.size} servers !`, { type: 'STREAMING', url: 'https://discord.gg/zzURhQGpRY' });
+	client.user.setActivity(`${client.guilds.cache.size} users !`, { type: 'WATCHING' });
 };
