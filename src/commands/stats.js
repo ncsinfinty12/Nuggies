@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Total Users', `${client.users.cache.size}`, true)
 			.addField('Bot Version', version['version'], true)
 			.addField('Library', 'Discord.js v12', true)
-			.addField('Developers', 'Assassin#1234\n Kakashi Hatake#6781', true)
+			.addField('Developers', `${config.ownername1} \n ${config.ownername2}`, true)
 			.addField('-------------------------------------------------------------------------------', '----------------------------------------------------------------------------')
 			.addField('Platform', osutils.platform(), true)
 			.addField('VPS CPU Cores', osutils.cpuCount() + ' Cores', true)
@@ -50,10 +50,10 @@ module.exports.run = async (client, message, args, utils) => {
 };
 
 module.exports.help = {
-	aliases: [],
+	aliases: ['botstats'],
 	name: 'stats',
 	description: 'Get information about me',
-	usage: config.prefix + 'suggest',
+	usage: config.prefix + 'stats',
 };
 
 module.exports.config = {
