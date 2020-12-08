@@ -4,7 +4,6 @@ const superagent = require('superagent');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	if (message.mentions.users.first().id === client.user.id) return message.channel.send('<a:yayyy:497742636439044096>');
 	const { body } = await superagent
 		.get('https://nekos.life/api/v2/img/fact');
 
