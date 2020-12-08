@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setColor('BLACK')
 		.setTitle('And That\'s a Fact')
 		.setDescription(body.fact)
-		.setFooter('fact fact fact fact fact fact fact fact fact fact fact fact fact fact fact fact fact fact');
+		.setFooter('spittin fax man');
 	message.channel.send({ embed });
 };
 
