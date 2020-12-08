@@ -6,7 +6,7 @@
         "`8ball`, `gayrate`, `simprate`, `penis`, `rps`, `say`, `joke`, `meme`"
     ],
     "info": [
-        "`botinfo`, `botstats`, `invite`,`ping`, `serverinfo`, `imdb`, "
+        "`botinfo`, `botstats`, `invite`,`ping`, `serverinfo`, `imdb`,`fact` "
     ],
     "owner": [
         "`blacklist`, `eval`, `reload`, `leave`"
