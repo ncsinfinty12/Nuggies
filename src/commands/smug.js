@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setColor('BLACK')
 		.setTitle(`${message.author.username} smugs`)
 		.setImage(body.url)
-		.setFooter('smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug');
+		.setFooter('smugs 😳');
 	message.channel.send({ embed });
 };
 
