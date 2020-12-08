@@ -5,7 +5,7 @@ const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.mentions.users.first()) return message.reply('You need to mention someone to kiss them :3');
-	if (message.mentions.users.first().id === client.user.id) return message.channel.send('<a:yayyy:497742636439044096>');
+	if (message.mentions.users.first().id === client.user.id) return message.channel.send('<:hnsFrogOwO:785174828969230388>');
 	if (message.mentions.users.first().id === message.author.id) return message.channel.send('I see you\'re lonely,.. ***kisss you***');
 	const { body } = await superagent
 		.get('https://nekos.life/api/kiss');
