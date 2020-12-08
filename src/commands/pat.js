@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'pat',
-	description: 'pat someone 🤤',
+	description: 'pat someone',
 	usage: config.prefix + 'pat @user',
 };
 
