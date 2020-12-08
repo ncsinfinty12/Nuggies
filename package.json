@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
     "discord.js": "github:monbrey/discord.js#inline-replies",
     "eslint": "^7.14.0",
     "fs": "0.0.1-security",
@@ -13,7 +12,6 @@
     "node-movie": "^3.0.0",
     "one-liner-joke": "^1.2.0",
     "os-utils": "0.0.14",
-    "request-promise": "^4.2.6",
     "superagent": "^6.1.0",
     "urban": "^0.3.2"
   },
