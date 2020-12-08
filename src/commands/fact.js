@@ -5,7 +5,7 @@ const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	const { body } = await superagent
-		.get('https://nekos.life/api/v2/img/fact');
+		.get('https://nekos.life/api/v2/fact');
 
 	const embed = new Discord.MessageEmbed()
 		.setColor('BLACK')
