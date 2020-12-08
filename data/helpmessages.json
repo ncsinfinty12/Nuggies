@@ -14,5 +14,5 @@
     "misc": [
         "`define`, `avatar`, `remindme`, `suggest`, `bug`"
     ],
-    "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`, `feed`"
+    "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`, `feed`, `pat`"
 } 
