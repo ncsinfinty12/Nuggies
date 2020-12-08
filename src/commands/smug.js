@@ -4,9 +4,7 @@ const superagent = require('superagent');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	if (!message.mentions.users.first()) return message.reply('You need to mention someone to smug them :3');
 	if (message.mentions.users.first().id === client.user.id) return message.channel.send('<a:yayyy:497742636439044096>');
-	if (message.mentions.users.first().id === message.author.id) return message.channel.send('I see you\'re lonely,.. ***smugs you***');
 	const { body } = await superagent
 		.get('https://nekos.life/api/v2/img/smug');
 
@@ -22,8 +20,8 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'smug',
-	description: 'smug someone',
-	usage: config.prefix + 'smug @user',
+	description: 'just smug',
+	usage: config.prefix + 'smug',
 };
 
 module.exports.config = {
