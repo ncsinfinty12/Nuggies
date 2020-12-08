@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 	const embed = new Discord.MessageEmbed()
 		.setColor('BLACK')
-		.setTitle(`${message.mentions.users.first().username}, you got a smug from ${message.author.username}!`)
+		.setTitle(`${message.author.username} smugs`)
 		.setImage(body.url)
 		.setFooter('smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug smug');
 	message.channel.send({ embed });
