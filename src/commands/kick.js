@@ -45,4 +45,5 @@ module.exports.config = {
 	args: true,
 	restricted: false,
 	category: 'misc',
+	disable: false,
 };

@@ -3,27 +3,27 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-        var user;
-        var userid;
-        if(message.mentions.users.first()){
-            if (!message.member.hasPermission('MANAGE_NICKNAMES')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
-            else{
-                user = message.mentions.users.first()
-                userid = message.guild.members.cache.get(user.id)
-            }
-        }
-        if(!message.mentions.users.first()){
-            if (!message.member.hasPermission('CHANGE_NICKNAME')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
-            else{
-                user = message.author
-                userid = message.guild.members.cache.get(user.id)
-            }
-            var nick = args.join(" ")
-            if(!nick) return message.channel.send("Tell me what i should change nickname to")
-            if(nick.length >= 32) return message.channel.send("Nickname must be less than 32 characters")
-            userid.setNickname(nick)
-            message.channel.send(`${user.username}'s nickname has been changed to ${nick}`)
-        }
+	let user;
+	let userid;
+	if(message.mentions.users.first()) {
+		if (!message.member.hasPermission('MANAGE_NICKNAMES')) {return message.reply('❌**Error:** You don\'t have the permission to do that!');}
+		else{
+			user = message.mentions.users.first();
+			userid = message.guild.members.cache.get(user.id);
+		}
+	}
+	if(!message.mentions.users.first()) {
+		if (!message.member.hasPermission('CHANGE_NICKNAME')) {return message.reply('❌**Error:** You don\'t have the permission to do that!');}
+		else{
+			user = message.author;
+			userid = message.guild.members.cache.get(user.id);
+		}
+		const nick = args.join(' ');
+		if(!nick) return message.channel.send('Tell me what i should change nickname to');
+		if(nick.length >= 32) return message.channel.send('Nickname must be less than 32 characters');
+		userid.setNickname(nick);
+		message.channel.send(`${user.username}'s nickname has been changed to ${nick}`);
+	}
 };
 
 
@@ -38,4 +38,5 @@ module.exports.config = {
 	args: false,
 	restricted: false,
 	category: 'misc',
+	disable: false,
 };

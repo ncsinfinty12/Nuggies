@@ -19,4 +19,5 @@ module.exports.config = {
 	args: false,
 	restricted: true,
 	category: 'misc',
+	disable: false,
 };

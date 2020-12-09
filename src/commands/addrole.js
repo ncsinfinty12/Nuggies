@@ -34,4 +34,5 @@ module.exports.config = {
 	args: false,
 	restricted: false,
 	category: 'moderation',
+	disable: false,
 };
