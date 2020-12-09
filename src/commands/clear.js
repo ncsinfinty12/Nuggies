@@ -7,10 +7,11 @@ module.exports.run = async (client, message, args, utils) => {
 	let number = args.join(' ');
 	number = parseInt(number);
 	if(number > 100) {
-		message.channel.send('Please provide a number smaller than 100 !').then(m =>{
+		message.reply('Please provide a number smaller than 100 !').then(m =>{
 			setTimeout(() =>{
 				m.delete();
 			}, 5000);
+			return;
 		});
 	}
 	message.channel.bulkDelete(number + 1);
