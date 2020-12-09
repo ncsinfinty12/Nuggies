@@ -59,7 +59,7 @@ client.on('message', async message => {
 		if (client.commands.get(command).config.restricted == true) {
 			if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
 		}
-		if (client.commands.get(command).config.disabled == true) {
+		if (client.commands.get(command).config.disable == true) {
 			return utils.errorEmbed(message, '":warning: this command is disabled for a short period of time ! :warning:');
 		}
 		if (client.commands.get(command).config.args == true) {
