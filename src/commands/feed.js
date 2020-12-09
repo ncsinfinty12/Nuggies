@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setColor('BLACK')
 		.setTitle(`${message.mentions.users.first().username}, you got a feed from ${message.author.username}!`)
 		.setImage(body.url)
-		.setFooter('feed feed feed feed feed feed feed feed feed feed feed feed feed feed feed feed feed feed');
+		.setFooter('you look cute :)');
 	message.channel.send({ embed });
 };
 
