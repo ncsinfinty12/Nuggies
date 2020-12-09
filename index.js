@@ -60,7 +60,11 @@ client.on('message', async message => {
 			if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
 		}
 		if (client.commands.get(command).config.disable == true) {
-			return utils.errorEmbed(message, '":warning: this command is disabled for a short period of time ! :warning:');
+			return utils.errorEmbed(message, ':warning: this command is disabled for a short period of time ! :warning:').then(m =>{
+				setTimeout(() =>{
+					m.delete();
+				}, 5000);
+			});
 		}
 		if (client.commands.get(command).config.args == true) {
 			if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${config.prefix + 'help ' + client.commands.get(command).help.name}`);
