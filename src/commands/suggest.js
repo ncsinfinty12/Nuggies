@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const channel1 = guild1.channels.cache.get('783955997403643914');
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
-		.setColor(0xff75c6)
+		.setColor('#2c2f33')
 		.setTitle('Suggestion from ' + message.author.username)
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to suggest something, use ' + config.prefix + 'suggest <suggestion>');
