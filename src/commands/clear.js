@@ -5,7 +5,7 @@ const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('Invalid Permissions');
 	let number = args.join(' ');
-	if(isNaN(number)) return message.channel.send("That is not a number")
+	if(isNaN(number)) return message.channel.send('That is not a number');
 	number = parseInt(number);
 	if(number > 99) {
 		return message.reply('Please provide a number smaller than 100 !').then(m =>{

@@ -5,7 +5,6 @@ const config = require('../../utils/config.json');
 const blacklist = require('../../models/blacklistSchema');
 module.exports.run = async (client, message, args, utils) => {
 	if(!config.globalmods.includes(message.author.id)) return;
-	if(config.globalmods.includes(message.author.id)) return message.channel.send('you cannot blacklist a global moderator.');
 	const User = args[0];
 	blacklist.findOne({ id : User }, async (err, data) => {
 		if(err) throw err;
