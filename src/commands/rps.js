@@ -23,14 +23,14 @@ module.exports.run = async (client, message, args, utils) => {
 				const reaction = collected.first();
 
 				if (reaction.emoji.name === '🗿') {
-					if (result === 'paper') return message.reply('I won!');
+					if (result === 'paper') return message.reply('I won! I chose ' + result);
 					else return message.reply('You won! I chose ' + result);
 				}
 				if(reaction.emoji.name === '📄') {
-					if (result === 'scissors') return message.reply('I won!');
+					if (result === 'scissors') return message.reply('I won! I chose ' + result);
 					else return message.reply('You won! I chose ' + result);
 				}
-				else if (result === 'rock') {return message.reply('I won!');}
+				else if (result === 'rock') {return message.reply('I won! I chose ' + result);}
 				else {return message.reply('You won! I chose ' + result);}
 			},
 			)
