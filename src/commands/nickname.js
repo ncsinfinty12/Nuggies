@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args, utils) => {
 		if(!nick) return message.channel.send('Tell me what i should change nickname to');
 		if(nick.length >= 32) return message.channel.send('Nickname must be less than 32 characters');
 		userid.setNickname(nick);
-		message.channel.send(Discord.Util.removeMentions(`${user.username}'s nick to ${nick}`));
+		message.channel.send(Discord.Util.removeMentions(`changed ${user.username}'s nick to ${nick}`));
 	}
 };
 
