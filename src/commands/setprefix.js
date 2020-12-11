@@ -2,7 +2,7 @@
 const prefixModel = require('../../models/prefixSchema');
 
 module.exports.run = async (client, message, args, utils) => {
-	if (!message.member.hasPermission('MANAGE_SERVER')) return message.reply('You need the ``manage server`` permission to run this command !');
+	if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply('You need the ``manage server`` permission to run this command !');
 
 	const data = await prefixModel.findOne({
 		GuildID: message.guild.id,
