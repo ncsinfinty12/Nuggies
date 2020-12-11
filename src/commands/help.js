@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Music', '*coming soon ..*')
 			.addField('misc', help.misc, true)
 			.addField('Owner', help.owner, true)
-			.setFooter('use "." before every command !')
+			.setFooter('use ".setprefix" to change the prefix !')
 			.setThumbnail(client.user.displayAvatarURL())
 			.setImage('https://media.discordapp.net/attachments/783289401165873182/784101832997470229/unknown.png')
 			.setColor(Math.floor(Math.random() * 16777215));

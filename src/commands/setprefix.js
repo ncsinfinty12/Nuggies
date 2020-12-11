@@ -1,36 +1,73 @@
 /* eslint-disable no-unused-vars */
 const prefixModel = require('../../models/prefixSchema');
-
+const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
-	const data = await prefixModel.findOne({
-		GuildID: message.guild.id,
-	});
-
-	if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
-
-	if (args[0].length > 5) return message.channel.send('Your new prefix must be under ``5`` characters!');
-
-	if (data) {
-		await prefixModel.findOneAndRemove({
+	if(config.ownerID.includes(message.author.id)) {
+		const data = await prefixModel.findOne({
 			GuildID: message.guild.id,
 		});
 
-		message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
+		if (!args[0]) return message.reply('Please provide a new prefix !');
 
-		const newData = new prefixModel({
-			Prefix: args[0],
-			GuildID: message.guild.id,
-		});
-		newData.save();
+		if (args[0].length > 5) return message.channel.send('Your new prefix must be under ``5`` characters!');
+
+		if (data) {
+			await prefixModel.findOneAndRemove({
+				GuildID: message.guild.id,
+			});
+
+			message.channel.send(`The new prefix is **\`${args[0]}\`**`);
+
+			const newData = new prefixModel({
+				Prefix: args[0],
+				GuildID: message.guild.id,
+			});
+			newData.save();
+		}
+		else if (!data) {
+			message.channel.send(`The new prefix is **\`${args[0]}\`**`);
+
+			const newData = new prefixModel({
+				Prefix: args[0],
+				GuildID: message.guild.id,
+			});
+			newData.save();
+		}
+
 	}
-	else if (!data) {
-		message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
+	else {
+		if (!message.member.hasPermission('MANAGE_SERVER')) return message.reply('You need the ``manage server`` permission to run this command !');
 
-		const newData = new prefixModel({
-			Prefix: args[0],
+		const data = await prefixModel.findOne({
 			GuildID: message.guild.id,
 		});
-		newData.save();
+
+		if (!args[0]) return message.reply('Please provide a new prefix !');
+
+		if (args[0].length > 5) return message.channel.send('Your new prefix must be under ``5`` characters!');
+
+		if (data) {
+			await prefixModel.findOneAndRemove({
+				GuildID: message.guild.id,
+			});
+
+			message.channel.send(`The new prefix is **\`${args[0]}\`**`);
+
+			const newData = new prefixModel({
+				Prefix: args[0],
+				GuildID: message.guild.id,
+			});
+			newData.save();
+		}
+		else if (!data) {
+			message.channel.send(`The new prefix is **\`${args[0]}\`**`);
+
+			const newData = new prefixModel({
+				Prefix: args[0],
+				GuildID: message.guild.id,
+			});
+			newData.save();
+		}
 	}
 
 };
