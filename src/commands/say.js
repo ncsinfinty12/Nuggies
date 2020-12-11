@@ -4,7 +4,7 @@ const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	const saymessage = args.join(' ');
 	message.delete().catch(err => console.log(err));
-	message.channel.send('**' + saymessage + '**\n\n -' + message.author.username);
+	message.channel.send(Discord.Util.removeMentions('**' + saymessage + '**\n\n -' + message.author.username));
 };
 
 
@@ -19,5 +19,5 @@ module.exports.config = {
 	args: false,
 	restricted: false,
 	category: 'misc',
-	disable: true,
+	disable: false,
 };
