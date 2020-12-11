@@ -16,6 +16,7 @@ mongoose.connect(process.env.mongodburl, { useNewUrlParser: true, useUnifiedTopo
 const utils = require('./utils/utils');
 const config = require('./utils/config.json');
 const blacklist = require('./models/blacklistSchema');
+const PrefiX = require('./models/prefixSchema');
 // Handlers
 
 fs.readdir('./src/commands/', (err, files) => {
@@ -32,6 +33,8 @@ fs.readdir('./src/commands/', (err, files) => {
 
 // Message Event
 client.on('message', async message => {
+	const Data = await PrefiX.findOne({ GuildID : message.guild.id });
+
 	if(message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
@@ -41,34 +44,72 @@ client.on('message', async message => {
 			.setColor('RANDOM');
 		message.channel.send(n);
 	}
-	if (message.author.bot) return;
-	if (message.content.indexOf(config.prefix) !== 0) return;
-	const result = await blacklist.findOne({ id: message.author.id });
-	if(result) {
-		message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
-		return;
+	if(Data) {
+		const prefix = Data.Prefix;
+		if (message.author.bot) return;
+		if (message.content.indexOf(prefix) !== 0) return;
+		const result = await blacklist.findOne({ id: message.author.id });
+		if(result) {
+			message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
+			return;
+		}
+	}
+	else if(!Data) {
+		const prefix = config.prefix;
+		if (message.author.bot) return;
+		if (message.content.indexOf(prefix) !== 0) return;
+		const result = await blacklist.findOne({ id: message.author.id });
+		if(result) {
+			message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
+			return;
+		}
 	}
 	try {
-		if (message.author.bot) return;
-		if (message.content.indexOf(config.prefix) !== 0) return;
-		const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-		let command = args.shift().toLowerCase();
+		if(Data) {
+			const prefix = Data.Prefix;
+			if (message.author.bot) return;
+			if (message.content.indexOf(prefix) !== 0) return;
+			const args = message.content.slice(prefix.length).trim().split(/ +/g);
+			let command = args.shift().toLowerCase();
 
-		if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
+			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
 
-		if (client.commands.get(command).config.restricted == true) {
-			if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			if (client.commands.get(command).config.restricted == true) {
+				if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			}
+			if (client.commands.get(command).config.disable == true) {
+				return utils.errorEmbed(message, ':warning: this command is disabled for a short period of time ! :warning:');
+			}
+			if (client.commands.get(command).config.args == true) {
+				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
+			}
+
+			const commandFile = require(`./src/commands/${command}.js`);
+			commandFile.run(client, message, args, utils);
+
 		}
-		if (client.commands.get(command).config.disable == true) {
-			return utils.errorEmbed(message, ':warning: this command is disabled for a short period of time ! :warning:');
-		}
-		if (client.commands.get(command).config.args == true) {
-			if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${config.prefix + 'help ' + client.commands.get(command).help.name}`);
-		}
+		else if(!Data) {
+			const prefix = config.prefix;
+			if (message.author.bot) return;
+			if (message.content.indexOf(prefix) !== 0) return;
+			const args = message.content.slice(prefix.length).trim().split(/ +/g);
+			let command = args.shift().toLowerCase();
 
-		const commandFile = require(`./src/commands/${command}.js`);
-		commandFile.run(client, message, args, utils);
+			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
 
+			if (client.commands.get(command).config.restricted == true) {
+				if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			}
+			if (client.commands.get(command).config.disable == true) {
+				return utils.errorEmbed(message, ':warning: this command is disabled for a short period of time ! :warning:');
+			}
+			if (client.commands.get(command).config.args == true) {
+				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
+			}
+
+			const commandFile = require(`./src/commands/${command}.js`);
+			commandFile.run(client, message, args, utils);
+		}
 	}
 	catch (err) {
 		if (err.message === 'Cannot read property \'config\' of undefined') return;
