@@ -40,7 +40,7 @@ client.on('message', async message => {
 			.setTitle('Hi, I\'m Nuggies !')
 			.setDescription('one of the most compact and easy to use bot on Discord !')
 			.addField('Prefix and Usage', 'The current prefix for This server is ``.`` \n *Tip: Run ``.help`` to get started!*')
-			.addField('invites :', '[support server](https://discord.gg/zzURhQGpRY) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)')
+			.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)')
 			.setColor('RANDOM');
 		message.channel.send(n);
 	}
@@ -50,7 +50,7 @@ client.on('message', async message => {
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
 		if(result) {
-			message.author.send('you are blacklisted from using the bot, please join https://discord.gg/zzURhQGpRY to appeal.');
+			message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
 			return;
 		}
 	}
@@ -60,7 +60,7 @@ client.on('message', async message => {
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
 		if(result) {
-			message.author.send('you are blacklisted from using the bot, please join https://discord.gg/zzURhQGpRY to appeal.');
+			message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
 			return;
 		}
 	}

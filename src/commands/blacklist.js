@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 			data.save()
 				.catch(err => console.log(err));
 			const target = client.users.cache.get(args[0]);
-			target.send('You have been blacklisted from using the bot! \n \n **join this server to appeal:** https://discord.gg/nKBHkSf');
+			target.send('You have been blacklisted from using the bot! \n \n **join this server to appeal:** https://discord.gg/ut7PxgNdef');
 			message.reply(`blacklisted **${target.username + '#' + target.discriminator}**`);
 		}
 	});
