@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
         if(!message.channel.topic){
             message.channel.topic = "No channel topic is set for this channel"
         }
-        const embed = new discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
             .setColor('RANDOM')
             .setTitle(message.channel.name)
             .setThumbnail(message.guild.iconURL())
@@ -53,7 +53,7 @@ module.exports.run = async (client, message, args, utils) => {
             if(!channel.topic){
                 channel.topic = "No channel topic is set for this channel"
             }
-            const embed = new discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
                 .setColor('RANDOM')
                 .setTitle(`Information about **${channel.name}**`)
                 .setThumbnail(message.guild.iconURL())
