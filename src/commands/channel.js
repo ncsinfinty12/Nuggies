@@ -41,7 +41,7 @@ module.exports.run = async (client, message, args, utils) => {
                 {
                     name:"📅  Created At",
                     value: message.channel.createdAt,
-                    inline: true,
+                    inline: false,
                 }
             )
         message.channel.send(embed)
@@ -87,7 +87,7 @@ module.exports.run = async (client, message, args, utils) => {
                     {
                         name:"📅  Created At",
                         value: channel.createdAt,
-                        inline: true,
+                        inline: false,
                     }
             )
             message.channel.send(embed)

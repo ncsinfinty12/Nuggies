@@ -59,7 +59,7 @@ module.exports.run = async (client, message, args, utils) => {
                     {
                         name: "**📅 Created At**",
                         value: role.createdAt,
-                        inline:true,
+                        inline:false,
                     },
                 )
             
