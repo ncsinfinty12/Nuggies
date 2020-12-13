@@ -7,27 +7,91 @@ module.exports.run = async (client, message, args, utils) => {
         if(!message.channel.topic){
             message.channel.topic = "No channel topic is set for this channel"
         }
-        const embed = new Discord.MessageEmbed()
+        const embed = new discord.MessageEmbed()
             .setColor('RANDOM')
-            .setThumbnail(message.guild.iconURL())
             .setTitle(message.channel.name)
-            .setDescription(`🗣  Channel Topic \n              ${message.channel.topic} \n\n🐱‍🏍  Type\n              ${message.channel.type}\n\n👪  Category\n              ${message.channel.parent}\n\n↕  Position\n              ${message.channel.position}\n\n🔞  NSFW\n              ${message.channel.nsfw}\n\n📅  Created At\n              ${message.channel.createdAt}`)
+            .setThumbnail(message.guild.iconURL())
+            .setDescription(`Here is some information about ${message.channel}`)
+            .addFields(
+                {
+                    name: '🗣  Channel Topic',
+                    value: `${message.channel.topic}`,
+                    inline: true,
+                },
+                {
+                    name:"🐱‍🏍  Type",
+                    value: `${message.channel.type}`,
+                    inline: true,
+                },
+                {
+                    name:"👪  Category",
+                    value: message.channel.parent,
+                    inline: true,
+                },
+                {
+                    name:"↕  Position",
+                    value: message.channel.position,
+                    inline: true,
+                },
+                {
+                    name:"🔞  NSFW",
+                    value: message.channel.nsfw,
+                    inline: true,
+                },
+                {
+                    name:"📅  Created At",
+                    value: message.channel.createdAt,
+                    inline: true,
+                }
+            )
         message.channel.send(embed)
     }
     else{
         var channel = args.join(" ")
         if(isNaN(channel)) return message.channel.send('Gimme channel id not other things');
         channel = bot.channels.cache.get(channel)
-        if(!channel.topic){
-            channel.topic = "No channel topic is set for this channel"
+            if(!channel.topic){
+                channel.topic = "No channel topic is set for this channel"
+            }
+            const embed = new discord.MessageEmbed()
+                .setColor('RANDOM')
+                .setTitle(`Information about **${channel.name}**`)
+                .setThumbnail(message.guild.iconURL())
+                .setDescription(`Here is some information about ${channel}`)
+                .addFields(
+                    {
+                        name: '🗣  Channel Topic',
+                        value: `${channel.topic}`,
+                        inline: true,
+                    },
+                    {
+                        name:"🐱‍🏍  Type",
+                        value: `${channel.type}`,
+                        inline: true,
+                    },
+                    {
+                        name:"👪  Category",
+                        value: channel.parent,
+                        inline: true,
+                    },
+                    {
+                        name:"↕  Position",
+                        value: channel.position,
+                        inline: true,
+                    },
+                    {
+                        name:"🔞  NSFW",
+                        value: channel.nsfw,
+                        inline: true,
+                    },
+                    {
+                        name:"📅  Created At",
+                        value: channel.createdAt,
+                        inline: true,
+                    }
+            )
+            message.channel.send(embed)
         }
-        const embed = new Discord.MessageEmbed()
-            .setColor('RANDOM')
-            .setThumbnail(message.guild.iconURL())
-            .setTitle(`Information about **${channel.name}**`)
-            .setDescription(`🗣  Channel Topic \n              ${channel.topic} \n\n🐱‍🏍  Type\n              ${channel.type}\n\n👪  Category\n              ${channel.parent}\n\n↕  Position\n              ${channel.position}\n\n🔞  NSFW\n              ${channel.nsfw}\n\n📅  Created At\n              ${channel.createdAt}`)
-        message.channel.send(embed)
-    }
 };
 
 
