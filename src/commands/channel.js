@@ -47,9 +47,19 @@ module.exports.run = async (client, message, args, utils) => {
         message.channel.send(embed)
     }
     else{
-        var channel = args.join(" ")
-        if(isNaN(channel)) return message.channel.send('Gimme channel id not other things');
-        channel = bot.channels.cache.get(channel)
+        var channel;
+        if(args[0] && isNaN(args[0]) && message.mentions.channels.first()) channel = message.mentions.channels.first()
+        if(args[0] && isNaN(args[0]) && !message.mentions.channels.first()){
+          channel = message.guild.channels.cache.find(e => e.name.toLowerCase().trim() == args.slice(0).join(" ").toLowerCase().trim())
+      
+          if(!message.guild.channels.cache.find(e => e.name.toLowerCase().trim() == args.slice(0).join(" ").toLowerCase().trim())) return message.reply(":x: Role not found")
+        }
+        if(args[0] && !isNaN(args[0])){
+          role = message.guild.channels.cache.find(e => e.id == args[0])
+          if(!message.guild.channels.cache.has(args[0])) return message.reply(":x: Role not found")
+        }
+      
+        if(!channel) return message.reply("You must mention channel")
             if(!channel.topic){
                 channel.topic = "No channel topic is set for this channel"
             }
@@ -65,7 +75,7 @@ module.exports.run = async (client, message, args, utils) => {
                         inline: true,
                     },
                     {
-                        name:"🐱‍🏍  Type",
+                        name:"🤷‍♂️  Type",
                         value: `${channel.type}`,
                         inline: true,
                     },
