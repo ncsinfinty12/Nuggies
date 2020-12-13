@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
         if(!message.channel.topic){
             message.channel.topic = "No channel topic is set for this channel"
         }
-        const embed = new Discord.MessageEmbed()
+        const embed = new discord.MessageEmbed()
             .setColor('RANDOM')
             .setTitle(message.channel.name)
             .setThumbnail(message.guild.iconURL())
@@ -52,18 +52,18 @@ module.exports.run = async (client, message, args, utils) => {
         if(args[0] && isNaN(args[0]) && !message.mentions.channels.first()){
           channel = message.guild.channels.cache.find(e => e.name.toLowerCase().trim() == args.slice(0).join(" ").toLowerCase().trim())
       
-          if(!message.guild.channels.cache.find(e => e.name.toLowerCase().trim() == args.slice(0).join(" ").toLowerCase().trim())) return message.reply(":x: Role not found")
+          if(!message.guild.channels.cache.find(e => e.name.toLowerCase().trim() == args.slice(0).join(" ").toLowerCase().trim())) return message.reply(":x: channel not found")
         }
         if(args[0] && !isNaN(args[0])){
-          role = message.guild.channels.cache.find(e => e.id == args[0])
-          if(!message.guild.channels.cache.has(args[0])) return message.reply(":x: Role not found")
+          channel = message.guild.channels.cache.find(e => e.id == args[0])
+          if(!message.guild.channels.cache.has(args[0])) return message.reply(":x: Channel not found")
         }
       
         if(!channel) return message.reply("You must mention channel")
             if(!channel.topic){
                 channel.topic = "No channel topic is set for this channel"
             }
-            const embed = new Discord.MessageEmbed()
+            const embed = new discord.MessageEmbed()
                 .setColor('RANDOM')
                 .setTitle(`Information about **${channel.name}**`)
                 .setThumbnail(message.guild.iconURL())
@@ -102,95 +102,6 @@ module.exports.run = async (client, message, args, utils) => {
             )
             message.channel.send(embed)
         }
-	if(!args.join(' ')) {
-		if(!message.channel.topic) {
-			message.channel.topic = 'No channel topic is set for this channel';
-		}
-		const embed = new Discord.MessageEmbed()
-			.setColor('RANDOM')
-			.setTitle(message.channel.name)
-			.setThumbnail(message.guild.iconURL())
-			.setDescription(`Here is some information about ${message.channel}`)
-			.addFields(
-				{
-					name:'🐱‍🏍  Type',
-					value: `${message.channel.type}`,
-					inline: true,
-				},
-				{
-					name:'↕  Position',
-					value: message.channel.position,
-					inline: true,
-				},
-				{
-					name:'🔞  NSFW',
-					value: message.channel.nsfw,
-					inline: true,
-				},
-				{
-					name:'👪  Category',
-					value: message.channel.parent,
-					inline: true,
-				},
-				{
-					name: '🗣  Channel Topic',
-					value: `${message.channel.topic}`,
-					inline: true,
-				},
-				{
-					name:'📅  Created At',
-					value: message.channel.createdAt,
-					inline: false,
-				},
-			);
-		message.channel.send(embed);
-	}
-	else{
-		let channel = args.join(' ');
-		if(isNaN(channel)) return message.channel.send('please provide a valid ID');
-		channel = client.channels.cache.get(channel);
-		if(!channel.topic) {
-			channel.topic = 'No channel topic is set for this channel';
-		}
-		const embed = new Discord.MessageEmbed()
-			.setColor('RANDOM')
-			.setTitle(`Information about **${channel.name}**`)
-			.setThumbnail(message.guild.iconURL())
-			.setDescription(`Here is some information about ${channel}`)
-			.addFields(
-				{
-					name:'🐱‍🏍  Type',
-					value: `${channel.type}`,
-					inline: true,
-				},
-				{
-					name:'↕  Position',
-					value: channel.position,
-					inline: true,
-				},
-				{
-					name:'🔞  NSFW',
-					value: channel.nsfw,
-					inline: true,
-				},
-				{
-					name:'👪  Category',
-					value: channel.parent,
-					inline: true,
-				},
-				{
-					name: '🗣  Channel Topic',
-					value: `${channel.topic}`,
-					inline: true,
-				},
-				{
-					name:'📅  Created At',
-					value: channel.createdAt,
-					inline: false,
-				},
-			);
-		message.channel.send(embed);
-	}
 };
 
 
