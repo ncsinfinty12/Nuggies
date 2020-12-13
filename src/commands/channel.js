@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, utils) => {
                     inline: true,
                 },
                 {
-                    name:"🐱‍🏍  Type",
+                    name:"🤷‍♂️  Type",
                     value: `${message.channel.type}`,
                     inline: true,
                 },
