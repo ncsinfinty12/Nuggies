@@ -8,6 +8,8 @@ module.exports.run = async (client, message, args, utils) => {
             message.channel.topic = "No channel topic is set for this channel"
         }
         const embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
+            .setThumbnail(message.guild.iconURL())
             .setTitle(message.channel.name)
             .setDescription(`🗣  Channel Topic \n              ${message.channel.topic} \n\n🐱‍🏍  Type\n              ${message.channel.type}\n\n👪  Category\n              ${message.channel.parent}\n\n↕  Position\n              ${message.channel.position}\n\n🔞  NSFW\n              ${message.channel.nsfw}\n\n📅  Created At\n              ${message.channel.createdAt}`)
         message.channel.send(embed)
@@ -20,6 +22,8 @@ module.exports.run = async (client, message, args, utils) => {
             channel.topic = "No channel topic is set for this channel"
         }
         const embed = new Discord.MessageEmbed()
+            .setColor('RANDOM')
+            .setThumbnail(message.guild.iconURL())
             .setTitle(`Information about **${channel.name}**`)
             .setDescription(`🗣  Channel Topic \n              ${channel.topic} \n\n🐱‍🏍  Type\n              ${channel.type}\n\n👪  Category\n              ${channel.parent}\n\n↕  Position\n              ${channel.position}\n\n🔞  NSFW\n              ${channel.nsfw}\n\n📅  Created At\n              ${channel.createdAt}`)
         message.channel.send(embed)
