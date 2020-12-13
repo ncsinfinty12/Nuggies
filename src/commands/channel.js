@@ -14,6 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
     }
     else{
         var channel = args.join(" ")
+        if(isNaN(channel)) return message.channel.send('Gimme channel id not other things');
         channel = bot.channels.cache.get(channel)
         if(!channel.topic){
             channel.topic = "No channel topic is set for this channel"
