@@ -14,8 +14,8 @@ module.exports.run = async (client, message, args, utils) => {
 	const botRolePossition = message.guild.member(client.user).roles.highest.position;
 	const rolePosition = message.guild.member(user).roles.highest.position;
 	const userRolePossition = message.member.roles.highest.position;
-	if (userRolePossition <= rolePosition) return message.reply('❌**Error:** Cannor ban that member because they have roles that is higher or equal to you.');
-	if (botRolePossition <= rolePosition) return message.reply('❌**Error:** Cannor ban that member because they have roles that is higher or equal to me.');
+	if (userRolePossition <= rolePosition) return message.reply('❌**Error:** Cannot ban that member because they have roles that is higher or equal to you.');
+	if (botRolePossition <= rolePosition) return message.reply('❌**Error:** Cannot ban that member because they have roles that is higher or equal to me.');
 	if (!message.guild.member(user).bannable) {
 		message.reply(':redTick: I cannot ban that member. My role might not be high enough or it\'s an internal error.');
 		return;
