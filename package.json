@@ -13,6 +13,7 @@
     "one-liner-joke": "^1.2.0",
     "os-utils": "0.0.14",
     "superagent": "^6.1.0",
+    "tiyee-url": "0.0.2",
     "urban": "^0.3.2"
   },
   "devDependencies": {},
