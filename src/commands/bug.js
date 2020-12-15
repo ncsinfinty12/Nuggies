@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	const guild1 = client.guilds.cache.get('780334622164254720');
-	const channel1 = guild1.channels.cache.get('783955997403643914');
+	const channel1 = guild1.channels.cache.get('783160016173531176');
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor(0xff75c6)
