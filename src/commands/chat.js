@@ -4,6 +4,7 @@ const superagent = require('superagent');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+	message.channel.startTyping();
 	const query = args.join('%20');
 	const { body } = await superagent
 		.get(`https://cb.totallyusefulapi.ml/${query}`);
@@ -14,6 +15,7 @@ module.exports.run = async (client, message, args, utils) => {
 		return;
 	}
 	message.reply(`${body.reply}`);
+	message.channel.stopTyping();
 };
 
 module.exports.help = {
@@ -27,5 +29,5 @@ module.exports.config = {
 	args: false,
 	restricted: false,
 	category: 'misc',
-	disable: true,
+	disable: false,
 };
