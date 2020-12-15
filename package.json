@@ -18,8 +18,7 @@
     "spotify-url-info": "^2.2.0",
     "superagent": "^6.1.0",
     "urban": "^0.3.2",
-    "ytdl-core": "^4.1.5",
-    "tiyee-url": "0.0.2"
+    "ytdl-core": "^4.1.5"
   },
   "devDependencies": {},
   "scripts": {
