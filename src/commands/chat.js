@@ -5,9 +5,10 @@ const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	message.channel.startTyping();
-	const query = args.join('%20');
+	const query = args.join(' ');
+	const something = encodeURIComponent(query);
 	const { body } = await superagent
-		.get(`https://cb.totallyusefulapi.ml/${query}`);
+		.get(`https://cb.totallyusefulapi.ml/${something}`);
 	if(body.profanity === 'true') {
 		message.reply('Please don\'t swear !').then(m => {
 			m.delete({ timeout: 5000 });
@@ -29,5 +30,5 @@ module.exports.config = {
 	args: false,
 	restricted: false,
 	category: 'misc',
-	disable: true,
+	disable: false,
 };
