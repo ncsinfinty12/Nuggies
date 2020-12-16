@@ -69,7 +69,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 
 module.exports.help = {
-	aliases: [],
+	aliases: ['roleinfo'],
 	name: 'role',
 	description: 'Get information about a role',
 	usage: config.prefix + 'role Admin',
