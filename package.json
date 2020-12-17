@@ -6,7 +6,6 @@
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "discord.js": "github:monbrey/discord.js#inline-replies",
-    "distube": "^2.8.7",
     "eslint": "^7.14.0",
     "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
@@ -20,7 +19,7 @@
     "superagent": "^6.1.0",
     "tiyee-url": "0.0.2",
     "urban": "^0.3.2",
-    "ytdl-core": "^4.1.5"
+    "ytdl-core": "^4.1.6"
   },
   "devDependencies": {},
   "scripts": {
