@@ -9,9 +9,9 @@ module.exports.run = async (client, message, args, utils) => {
 
 	const embed = new Discord.MessageEmbed()
 		.setColor('BLACK')
-		.setTitle('And That\'s a Fact')
-		.setDescription(body.fact)
-		.setFooter('spittin fax man');
+		.setTitle('Here\'s your fact!')
+		.setDescription(body.fact + '\n ...and that\'s a fact!')
+		.setFooter(`Spitting faxx!`);
 	message.channel.send({ embed });
 };
 
