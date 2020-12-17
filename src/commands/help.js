@@ -5,9 +5,9 @@ const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if(!args[0]) {
-		const b = new Discord.MessageEmbed()
-			.setTitle('Command list for Nuggies:')
-			.setDescription('For more info about a specific Command: \n Use [prefix]help command_name')
+		const help = new Discord.MessageEmbed()
+			.setTitle('Hello! I\'m Nuggies!')
+			.setDescription('For more info about a specific command: \n Use [prefix]help command_name')
 			.addField('Moderation', help.mod, true)
 			.addField('Fun', help.fun, true)
 			.addField('Actions', help.action, true)
@@ -15,18 +15,18 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Music', '*coming soon ..*')
 			.addField('misc', help.misc, true)
 			.addField('Owner', help.owner, true)
-			.setFooter('use ".setprefix" to change the prefix !')
+			.setFooter('Want to change the prefix? Run the .prefix command!')
 			.setThumbnail(client.user.displayAvatarURL())
 			.setImage('https://media.discordapp.net/attachments/783289401165873182/784101832997470229/unknown.png')
 			.setColor(Math.floor(Math.random() * 16777215));
-		message.channel.send(b);
+		message.channel.send(help);
 	}
 	else{
 		const command = args[0];
 		if (client.commands.has(command)) {
 			const cmd = client.commands.get(command);
 			const b = new Discord.MessageEmbed()
-				.setTitle('commmand info:')
+				.setTitle('Command help!')
 				.addField('``Description:``', cmd.help.description, true)
 				.addField('``Usage:``', cmd.help.usage, true);
 			message.channel.send(b);
@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 		}
 		else {
-			return message.reply('That command doesn\'t exist!');
+			return message.reply(':x: I couldn\'t find that command!');
 		}
 	}
 };
