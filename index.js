@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const fs = require('fs');
 const mongoose = require('mongoose');
@@ -5,9 +6,8 @@ const client = new Discord.Client({ disableMentions: 'everyone' });
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
-
 // mongoose connect
-mongoose.connect(process.env.mongodburl, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true }, err => {
 	if (err) return console.error(err);
 	console.log('Connected to MongoDB database!');
 });
@@ -31,10 +31,8 @@ fs.readdir('./src/commands/', (err, files) => {
 	});
 });
 
-// Message Event
 client.on('message', async message => {
 	const Data = await PrefiX.findOne({ GuildID : message.guild.id });
-
 	if(message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
@@ -121,4 +119,5 @@ client.on('ready', async () => {
 	console.log('bot is online!');
 	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
 });
-client.login(process.env.token);
+
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.AzKZLR2XhPdXtyBLLfcDFu4N21g');

@@ -8,14 +8,19 @@ module.exports.run = async (client, message, args, utils) => {
 	const query = args.join(' ');
 	const something = encodeURIComponent(query);
 	const { body } = await superagent
-		.get(`https://cb.totallyusefulapi.ml/${something}`);
+		.get(`https://cb.shamim97.repl.co/${something}`);
 	if(body.profanity === 'true') {
-		message.reply('Please don\'t swear !').then(m => {
+		message.reply('Please don\'t swear!').then(m => {
 			m.delete({ timeout: 5000 });
 		});
 		return;
 	}
-	message.reply(`${body.reply}`);
+	const embed = new Discord.MessageEmbed()
+		.setAuthor(message.author.tag)
+		.setDescription(body.reply)
+		.setFooter('Nuggies Chatbot')
+		.setColor('BLUE');
+	message.reply(embed);
 	message.channel.stopTyping();
 };
 
