@@ -3,9 +3,24 @@ const Discord = require('discord.js');
 const help = require('../../data/helpmessages.json');
 const config = require('../../utils/config.json');
 
+
+module.exports.help = {
+	aliases: ['halp'],
+	name: 'help',
+	description: 'You can\'t be helped 😔',
+	usage: config.prefix + 'help',
+};
+
+module.exports.config = {
+	args: false,
+	restricted: false,
+	category: 'misc',
+};
+
+
 module.exports.run = async (client, message, args, utils) => {
-	if(!args[0]) {
-		const help = new Discord.MessageEmbed()
+	if (!args[0]) {
+		const embed = new Discord.MessageEmbed()
 			.setTitle('Hello! I\'m Nuggies!')
 			.setDescription('For more info about a specific command: \n Use [prefix]help command_name')
 			.addField('Moderation', help.mod, true)
@@ -19,9 +34,9 @@ module.exports.run = async (client, message, args, utils) => {
 			.setThumbnail(client.user.displayAvatarURL())
 			.setImage('https://media.discordapp.net/attachments/783289401165873182/784101832997470229/unknown.png')
 			.setColor(Math.floor(Math.random() * 16777215));
-		message.channel.send(help);
+		message.channel.send(embed);
 	}
-	else{
+	else {
 		const command = args[0];
 		if (client.commands.has(command)) {
 			const cmd = client.commands.get(command);
@@ -37,17 +52,4 @@ module.exports.run = async (client, message, args, utils) => {
 			return message.reply(':x: I couldn\'t find that command!');
 		}
 	}
-};
-
-module.exports.help = {
-	aliases: ['halp'],
-	name: 'help',
-	description: 'You can\'t be helped 😔',
-	usage: config.prefix + 'help',
-};
-
-module.exports.config = {
-	args: false,
-	restricted: false,
-	category: 'misc',
 };
