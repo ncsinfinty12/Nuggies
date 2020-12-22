@@ -6,6 +6,7 @@ const client = new Discord.Client({ disableMentions: 'everyone' });
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
+client.snipes = new Discord.Collection();
 const DBL = require('dblapi.js');
 const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
 // mongoose connect
@@ -24,7 +25,7 @@ const PrefiX = require('./models/prefixSchema');
 fs.readdir('./src/commands/', (err, files) => {
 	if (err) console.error(err);
 	files.forEach(f => {
-		const props = require(`./src/commands/${ f }`);
+		const props = require(`./src/commands/${f}`);
 		props.fileName = f;
 		client.commands.set(props.help.name, props);
 		props.help.aliases.forEach(alias => {
@@ -34,8 +35,8 @@ fs.readdir('./src/commands/', (err, files) => {
 });
 
 client.on('message', async message => {
-	const Data = await PrefiX.findOne({ GuildID : message.guild.id });
-	if(message.content === '<@!779741162465525790>') {
+	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
+	if (message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
 			.setDescription('one of the most compact and easy to use bot on Discord !')
@@ -44,28 +45,28 @@ client.on('message', async message => {
 			.setColor('RANDOM');
 		message.channel.send(n);
 	}
-	if(Data) {
+	if (Data) {
 		const prefix = Data.Prefix;
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
-		if(result) {
+		if (result) {
 			message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
 			return;
 		}
 	}
-	else if(!Data) {
+	else if (!Data) {
 		const prefix = config.prefix;
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
-		if(result) {
+		if (result) {
 			message.author.send('you are blacklisted from using the bot, please join discord.gg/ut7PxgNdef to appeal.');
 			return;
 		}
 	}
 	try {
-		if(Data) {
+		if (Data) {
 			const prefix = Data.Prefix;
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
@@ -88,7 +89,7 @@ client.on('message', async message => {
 			commandFile.run(client, message, args, utils);
 
 		}
-		else if(!Data) {
+		else if (!Data) {
 			const prefix = config.prefix;
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
@@ -122,4 +123,27 @@ client.on('ready', async () => {
 	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
 });
 
-client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.AzKZLR2XhPdXtyBLLfcDFu4N21g');
+client.on('messageDelete', async message => {
+	try {
+		if (message.author.bot) return;
+		const snipes = message.client.snipes.get(message.channel.id) || [];
+		snipes.unshift({
+			content: message.content,
+			author: message.author,
+			image: message.attachments.first()
+				? message.attachments.first().proxyURL
+				: null,
+			date: new Date().toLocaleString('en-GB', {
+				dataStyle: 'full',
+				timeStyle: 'short',
+			}),
+		});
+		snipes.splice(10);
+		message.client.snipes.set(message.channel.id, snipes);
+	}
+	catch (e) {
+		console.log(e);
+	}
+});
+
+client.login('NzYwMDQxNzY5NTA4NDA1MjY4.X3GSDg.Oilhx3ElnjvG7BgU-p1oMYwOeC8');

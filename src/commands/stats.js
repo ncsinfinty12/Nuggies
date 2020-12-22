@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Total Users', `${client.users.cache.size}`, true)
 			.addField('Bot Version', version['version'], true)
 			.addField('Library', 'Discord.js v12', true)
-			.addField('Developers', `${config.ownername1} \n ${config.ownername2}`, true)
+			.addField('Developers', `${config.ownername1} \n ${config.ownername2} \n ${config.ownername3}`, true)
 			.addField('-------------------------------------------------------------------------------', '----------------------------------------------------------------------------')
 			.addField('Platform', osutils.platform(), true)
 			.addField('VPS CPU Cores', osutils.cpuCount() + ' Cores', true)
