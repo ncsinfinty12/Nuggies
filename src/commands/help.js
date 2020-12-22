@@ -23,6 +23,7 @@ module.exports.run = async (client, message, args, utils) => {
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Hello! I\'m Nuggies!')
 			.setDescription('For more info about a specific command: \n Use [prefix]help command_name')
+			.addField('Slash commands', '`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register', true)
 			.addField('Moderation', help.mod, true)
 			.addField('Fun', help.fun, true)
 			.addField('Actions', help.action, true)
@@ -30,7 +31,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Music', 'Coming soon:tm: :eyes:')
 			.addField('More', help.misc, true)
 			.addField('Owner', help.owner, true)
-			.setFooter('Want to change the prefix? Run the .prefix command!')
+			.setFooter('Want to change the prefix? Run the .setprefix command!')
 			.setThumbnail(client.user.displayAvatarURL())
 			.setImage('https://media.discordapp.net/attachments/783289401165873182/784101832997470229/unknown.png')
 			.setColor(Math.floor(Math.random() * 16777215));

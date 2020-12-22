@@ -6,6 +6,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setTitle('Invite Nuggies !')
 		.addField('Bot invite', '[click here](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=66321471&scope=bot)', true)
 		.addField('server invite', '[click here](https://discord.gg/zzURhQGpRY)', true)
+		.addField('Invite pwetzel ', '[click here](https://discord.com/api/oauth2/authorize?client_id=723112579584491571&permissions=1812331632&scope=bot)', true)
 		.setColor('RANDOM')
 		.setFooter('thanks for inviting the bot !');
 	message.channel.send(b);
