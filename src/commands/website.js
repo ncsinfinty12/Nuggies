@@ -4,19 +4,17 @@ const superagent = require('superagent');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	message.channel.startTyping();
 	const query = args.join(' ');
 	const something = encodeURIComponent(query);
 	const { body } = await superagent
-		.get(`https://meta.totallyusefulapi.ml?url=${something}`)
-		if (body.error === 'Invalid url query.') return message.channel.send('Website has no meta tags.') 
+		.get(`https://meta.totallyusefulapi.ml?url=${something}`);
+	if (body.error === 'Invalid url query.') return message.channel.send('Website has no meta tags.');
 	const embed = new Discord.MessageEmbed()
-    .setTitle(body.title)
+		.setTitle(body.title)
 		.setDescription(body.description)
 		.setThumbnail(body.icon)
 		.setColor('BLUE');
 	message.reply(embed);
-	message.channel.stopTyping();
 };
 
 module.exports.help = {
