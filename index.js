@@ -181,4 +181,4 @@ client.on('messageDelete', async message => {
 	}
 });
 
-client.login('NzYwMDQxNzY5NTA4NDA1MjY4.X3GSDg.Oilhx3ElnjvG7BgU-p1oMYwOeC8');
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.AzKZLR2XhPdXtyBLLfcDFu4N21g');
