@@ -117,9 +117,43 @@ client.on('message', async message => {
 		console.error(err);
 	}
 });
+// reload command
+client.reload = command => {
+	return new Promise((resolve, reject) => {
+		try {
+			delete require.cache[require.resolve(`./commands/${command}`)];
+			const cmd = require(`./commands/${command}`);
+			client.commands.delete(command);
+			// eslint-disable-next-line no-shadow
+			client.aliases.forEach((cmd, alias) => {
+				if (cmd === command) client.aliases.delete(alias);
+			});
+			client.commands.set(command, cmd);
+			cmd.conf.aliases.forEach(alias => {
+				client.aliases.set(alias, cmd.help.name);
+			});
+			resolve();
+		}
+		catch (e) {
+			reject(e);
+		}
+	});
+};
 client.on('ready', async () => {
 	console.log('bot is online!');
 	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
 });
 
+client.on('guildCreate', async guild => {
+	const m = new Discord.MessageEmbed()
+		.setTitle(`just joined ${guild.name}`)
+		.setDescription(`total servers : ${client.guilds.cache.size}`);
+	client.channels.cache.get('783160231734673408').send(m);
+});
+client.on('guildDelete', async guild => {
+	const m = new Discord.MessageEmbed()
+		.setTitle(`just left ${guild.name}`)
+		.setDescription(`total servers : ${client.guilds.cache.size}`);
+	client.channels.cache.get('783160231734673408').send(m);
+});
 client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.AzKZLR2XhPdXtyBLLfcDFu4N21g');
