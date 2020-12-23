@@ -4,7 +4,7 @@ const config = require('../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	const guild1 = client.guilds.cache.get('780334622164254720');
 	const channel1 = guild1.channels.cache.get('783955997403643914');
-	if(!args) return message.channel.send('Please provide something to suggest !');
+	if(!args[0]) return message.channel.send('Please provide something to suggest !');
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor('#2c2f33')
