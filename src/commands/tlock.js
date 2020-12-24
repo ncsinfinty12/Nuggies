@@ -4,6 +4,8 @@ const superagent = require('superagent');
 const config = require('../../utils/config.json');
 const ms = require('ms');
 module.exports.run = async (client, message, args, utils) => {
+    if(!message.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE CHANNELS ` permission !')
+    
 	if (!client.lockit) client.lockit = [];
 	const time = args.join(' ');
 	const validUnlocks = ['release', 'unlock'];

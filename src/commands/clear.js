@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+    if(!message.guild.me.hasPermission('MANAGE_MESSAGES')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE MESSAGES` permission !')
 	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('Invalid Permissions');
 	let number = args.join(' ');
 	if(isNaN(number)) return message.channel.send('That is not a number');

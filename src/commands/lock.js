@@ -3,6 +3,8 @@ const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	if (!client.lockit) client.lockit = [];
+    if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** I dont have the permission to do that ! \n please give me `MANAGE CHANNELS` permission.');
+
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
 
 	message.channel.createOverwrite(message.guild.id, {

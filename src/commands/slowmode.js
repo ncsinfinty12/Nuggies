@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+    	if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('I dont have the permission to do that ! please give me `MANAGE_CHANNELS permission !`');
 	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('Invalid Permissions');
 	if (!args[0]) return message.reply('You did not specify the time in seconds you wish to set this channel\'s slow mode to!');
 	if (isNaN(args[0])) return message.reply('That is not a number!');

@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+    if(!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n please give me `MANAGE NICKNAMES` permission !')
 	let user;
 	let userid;
 	if(message.mentions.users.first()) {

@@ -142,7 +142,7 @@ client.reload = command => {
 };
 client.on('ready', async () => {
 	console.log('bot is online!');
-	client.user.setActivity('.help', { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
+	client.user.setActivity('Merry Christmas 🎄❄', { type: 'PLAYING' });
 });
 
 client.on('guildCreate', async guild => {
