@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setColor(0xff75c6)
 		.setTitle('Reported by ' + message.author.username)
 		.setDescription('**' + suggestion + '**\n\n\n ')
-		.setFooter('if you want to suggest something, use ' + config.prefix + 'suggest <suggestion>');
+		.setFooter('if you want to report a bug, use ' + config.prefix + 'bug <bug>');
 	message.channel.send('bug report submitted. Join discord.gg/zzURhQGpRY to view your report !');
 	channel1.send(embed);
 	message.delete();
