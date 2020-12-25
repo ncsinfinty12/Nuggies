@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-    if(!message.guild.me.hasPermission('BAN_MEMBERS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `BAN MEMBERS ` permission !')
+	if(!message.guild.me.hasPermission('BAN_MEMBERS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `BAN MEMBERS ` permission !');
 	if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
 	let reason = args.slice(1).join(' ');
 	const user = message.mentions.users.first();
