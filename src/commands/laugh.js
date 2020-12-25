@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const m = new Discord.MessageEmbed()
 		.setTitle(`${message.author.username} is laughing !`)
 		.setImage(body.image)
-		.setFooter('HaHaHaHa')
+		.setFooter('HaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHa')
 		.setColor('BLACK');
 	message.channel.send(m);
 
