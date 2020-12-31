@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Reason', reason)
 			.setThumbnail('https://media1.tenor.com/images/6a61251f5453d93d76f9826be10b7f49/tenor.gif?itemid=7580925');
 		// let obj = JSON.parse(`{"days":7, "reason": ${reason}}`)
-		if(user.bot) return message.channel.reply('the user is a bot ! I cant do that to my own race :pensive:');
+		if(user.bot) return message.reply('the user is a bot ! I cant do that to my own race :pensive:');
 		message.mentions.users.first().send({ embed }).catch(e =>{
 			console.log(e);
 		});
