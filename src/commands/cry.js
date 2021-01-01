@@ -5,22 +5,21 @@ const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	const { body } = await superagent
-		.get('https://nekos.life/api/v2/fact');
+		.get('http://api.nekos.fun:8080/api/cry');
+	const m = new Discord.MessageEmbed()
+		.setTitle(`${message.author.username} is crying ! 😦`)
+		.setImage(body.image)
+		.setFooter('😭')
+		.setColor('BLACK');
+	message.channel.send(m);
 
-	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
-		.setTitle('Here\'s your fact!')
-		.setDescription(body.fact + '\n ...and that\'s a fact!')
-		.setFooter('Spitting faxx!');
-	message.channel.send({ embed });
 };
-
 
 module.exports.help = {
 	aliases: [],
-	name: 'fact',
-	description: 'just facts',
-	usage: config.prefix + 'fact',
+	name: 'cry',
+	description: 'cry 😭😭😭',
+	usage: config.prefix + 'cry',
 };
 
 module.exports.config = {

@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-    if(!message.guild.me.hasPermission('KICK_MEMBERS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `KICK MEMBERS ` permission !')
-    
+	if(!message.guild.me.hasPermission('KICK_MEMBERS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `KICK MEMBERS ` permission !');
+
 	if (!message.member.hasPermission('KICK_MEMBERS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
 	let reason = args.slice(1).join(' ');
 	const user = message.mentions.users.first();
@@ -27,7 +27,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setFooter('Yeeted them outta here')
 		.setThumbnail('https://media.tenor.co/videos/cac50685b4c1a7bb4e82bc53ec4b1612/mp4');
 
-	if(user.bot) return;
+	if(user.bot) return message.reply('the user is a bot ! I cant do that to my own race :pensive:');
 	message.mentions.users.first().send({ embed }).catch(e =>{
 		if(e) return;
 	});
