@@ -148,14 +148,16 @@ client.on('ready', async () => {
 client.on('guildCreate', async guild => {
 	const m = new Discord.MessageEmbed()
 		.setTitle(`just joined ${guild.name}`)
-		.setDescription(`total servers : ${client.guilds.cache.size}`)
+		.setDescription(`guild has : ${guild.users.cache.size} users`)
+		.setFooter(`total servers : ${client.guilds.cache.size}`)
 		.setColor('GREEN');
 	client.channels.cache.get('783160231734673408').send(m);
 });
 client.on('guildDelete', async guild => {
 	const m = new Discord.MessageEmbed()
 		.setTitle(`just left ${guild.name}`)
-		.setDescription(`total servers : ${client.guilds.cache.size}`)
+		.setDescription(`guild had : ${guild.users.cache.size} users`)
+		.setFooter(`total servers : ${client.guilds.cache.size}`)
 		.setColor('RED');
 	client.channels.cache.get('783160231734673408').send(m);
 });
@@ -183,4 +185,4 @@ client.on('messageDelete', async message => {
 	}
 });
 
-client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.AzKZLR2XhPdXtyBLLfcDFu4N21g');
+// client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk');
