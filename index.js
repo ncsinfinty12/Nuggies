@@ -3,10 +3,12 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const client = new Discord.Client({ disableMentions: 'everyone' });
+
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
+
 const DBL = require('dblapi.js');
 const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
 // mongoose connect
@@ -36,6 +38,7 @@ fs.readdir('./src/commands/', (err, files) => {
 
 client.on('message', async message => {
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
+	const cooldowns = new Discord.Collection();
 	if (message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
@@ -185,4 +188,6 @@ client.on('messageDelete', async message => {
 	}
 });
 
-// client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk');
+
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
+

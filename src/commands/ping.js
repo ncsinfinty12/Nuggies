@@ -3,13 +3,18 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	message.channel.send('Pinging...').then(m =>{
-		const ping = m.createdTimestamp - message.createdTimestamp;
+	const start = Date.now();
+
+	message.channel.send({ embed: { description: ':ping_pong:pinging...', color: 0x00FFFF } }).then(m => {
+
+		const end = Date.now();
 
 		const embed = new Discord.MessageEmbed()
-			.setAuthor(`Pong! latency is ${ping}ms`)
-			.setColor('Your Color');
-		m.edit(embed);
+			.setAuthor(':ping_pong:Pong!', message.author.avatarURL())
+			.addField('API Latency', Math.round(client.ws.ping) + 'ms', true)
+			.addField('Message Latency', end - start + 'ms', true)
+			.setColor('RANDOM');
+		m.edit(embed).catch(e => message.channel.send(e));
 	});
 };
 
