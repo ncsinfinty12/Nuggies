@@ -186,4 +186,4 @@ client.on('messageDelete', async message => {
 	}
 });
 
-client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.AzKZLR2XhPdXtyBLLfcDFu4N21g');
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
