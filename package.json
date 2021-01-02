@@ -9,6 +9,7 @@
     "discord-mongo-currency": "^1.0.4",
     "discord-music-player": "^6.3.5",
     "discord.js": "github:monbrey/discord.js#inline-replies",
+    "distube": "^2.8.8",
     "eslint": "^7.14.0",
     "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
@@ -24,7 +25,7 @@
     "superagent": "^6.1.0",
     "tiyee-url": "0.0.2",
     "urban": "^0.3.2",
-    "ytdl-core": "^4.1.6"
+    "ytdl-core": "^4.3.0"
   },
   "devDependencies": {},
   "scripts": {
