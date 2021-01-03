@@ -142,7 +142,6 @@ client.on('ready', async () => {
 client.on('guildCreate', async guild => {
 	const m = new Discord.MessageEmbed()
 		.setTitle(`just joined ${guild.name}`)
-		.setDescription(`guild has : ${guild.users.cache.size} users`)
 		.setFooter(`total servers : ${client.guilds.cache.size}`)
 		.setColor('GREEN');
 	client.channels.cache.get('783160231734673408').send(m);
@@ -150,7 +149,6 @@ client.on('guildCreate', async guild => {
 client.on('guildDelete', async guild => {
 	const m = new Discord.MessageEmbed()
 		.setTitle(`just left ${guild.name}`)
-		.setDescription(`guild had : ${guild.users.cache.size} users`)
 		.setFooter(`total servers : ${client.guilds.cache.size}`)
 		.setColor('RED');
 	client.channels.cache.get('783160231734673408').send(m);
