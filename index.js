@@ -121,28 +121,7 @@ client.on('message', async message => {
 		console.error(err);
 	}
 });
-// reload command
-client.reload = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			delete require.cache[require.resolve(`./commands/${command}`)];
-			const cmd = require(`./commands/${command}`);
-			client.commands.delete(command);
-			// eslint-disable-next-line no-shadow
-			client.aliases.forEach((cmd, alias) => {
-				if (cmd === command) client.aliases.delete(alias);
-			});
-			client.commands.set(command, cmd);
-			cmd.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, cmd.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
+// ready
 client.on('ready', async () => {
 	console.log('bot is online!');
 	client.user.setActivity('Merry Christmas 🎄❄', { type: 'PLAYING' });
@@ -190,4 +169,3 @@ client.on('messageDelete', async message => {
 
 
 client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
-
