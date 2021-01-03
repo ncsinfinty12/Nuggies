@@ -73,6 +73,11 @@ client.on('message', async message => {
 			const prefix = Data.Prefix;
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
+			const channel1 = client.channels.cache.get('795207572398931968');
+			const m = new Discord.MessageEmbed()
+				.setTitle('Command used')
+				.setDescription(message.content);
+			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
@@ -96,6 +101,11 @@ client.on('message', async message => {
 			const prefix = config.prefix;
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
+			const channel1 = client.channels.cache.get('795207572398931968');
+			const m = new Discord.MessageEmbed()
+				.setTitle('Command used')
+				.setDescription(message.content);
+			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
@@ -169,3 +179,4 @@ client.on('messageDelete', async message => {
 
 
 client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
+// token for test - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
