@@ -136,7 +136,7 @@ client.on('message', async message => {
 // ready
 client.on('ready', async () => {
 	console.log('bot is online!');
-	client.user.setActivity('Merry Christmas 🎄❄', { type: 'PLAYING' });
+	client.user.setActivity(`${client.guilds.cache.size} servers !`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO' });
 });
 
 client.on('guildCreate', async guild => {
