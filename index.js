@@ -77,7 +77,7 @@ client.on('message', async message => {
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
 				.setColor('GREEN')
-				.setDescription(`Author : ${message.author.username} \n ID: ${message.author.id} \n Content: ${message.content}`);
+				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
 			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
@@ -106,7 +106,7 @@ client.on('message', async message => {
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
 				.setColor('GREEN')
-				.setDescription(`Author : ${message.author.username} \n ID: ${message.author.id} \n Content: ${message.content}`);
+				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
 			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
