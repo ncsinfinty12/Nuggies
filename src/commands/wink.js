@@ -1,18 +1,25 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
-const superagent = require('superagent');
+const axios = require('axios');
 const config = require('../../utils/config.json');
-
 module.exports.run = async (client, message, args, utils) => {
-	const { body } = await superagent
-		.get('http://api.nekos.fun:8080/api/wink');
-	const m = new Discord.MessageEmbed()
-		.setTitle(`${message.author.username} is winking !`)
-		.setImage(body.image)
-		.setFooter('😉')
-		.setColor('RANDOM');
-	message.channel.send(m);
-
+	axios.get('https://api.otakugifs.xyz/gif/wink', {
+		headers: {
+			'X-API-KEY': 'pLsoTHg2vHBKpB4CNeGnVysCP60645uW8fFRRbgT7AIvkyHbBgE3IsgNBS3rUuD8321l23GHAT8GfbE4K4c9T0qH9P2',
+		},
+	})
+		.then(function(response) {
+			const gifurl = response.data.url;
+			const embed = new Discord.MessageEmbed()
+				.setTitle(`${message.author.username} is winking !`)
+				.setFooter('😉')
+				.setColor('RANDOM')
+				.setImage(gifurl);
+			message.channel.send(embed);
+		})
+		.catch(function(error) {
+			message.channel.send('❌**Error:** ' + error);
+		});
 };
 
 module.exports.help = {
@@ -25,6 +32,6 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
+	category: 'moderation',
 	disable: false,
 };
