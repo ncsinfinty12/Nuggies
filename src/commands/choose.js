@@ -3,13 +3,14 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	const texttoreverse = args.join(' ');
+	let choices = args.join(' ');
+	choices = choices.split('|');
 	const pronouns = ['silly', 'mommy', 'dad', 'mom', 'master', 'nii-san', 'onee-san', 'love', 'ma\'am', 'sir', 'friend', 'b-baka', 'honey'];
 	const randompronoun = pronouns[Math.floor(Math.random() * (pronouns.length - 1 + 1) + 1)];
-	if(!texttoreverse) return message.channel.send(`${randompronoun}, Gimme something to reverse`);
-	const reversed = texttoreverse.split('').reverse().join('');
+	if(!choices) return message.channel.send(`${randompronoun}, you have to split choices with | , \n\n Example: \`\`\`.choose small | big \`\`\``);
+	const randomchoice = choices[Math.floor(Math.random() * choices.length)];
 	const embed = new Discord.MessageEmbed()
-		.setTitle(`Reversed text: ${reversed}`)
+		.setTitle(`You should go with "${randomchoice}"`)
 		.setColor('RANDOM')
 		.setAuthor(message.author.username, message.author.avatarURL());
 	message.channel.send(embed);
@@ -18,9 +19,9 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: [],
-	name: 'reverse',
-	description: 'Reverse some text',
-	usage: config.prefix + 'reverse Ohayo',
+	name: 'choose',
+	description: 'See bot\'s choose',
+	usage: config.prefix + 'choose',
 };
 
 module.exports.config = {
