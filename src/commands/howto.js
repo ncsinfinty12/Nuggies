@@ -9,6 +9,7 @@ module.exports.run = async (client, message, args, utils) => {
 	wikihow.howTo(howto)
 		.then(hows =>{
 			const embed = new Discord.MessageEmbed()
+				.setColor('RANDOM')
 				.setTitle(`Steps for ${howto}`)
 				.setDescription(hows);
 			message.channel.send(embed);
@@ -20,7 +21,7 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'howto',
-	description: 'See bot\'s howto',
+	description: 'Learn how to do stuff',
 	usage: config.prefix + 'howto ',
 };
 
