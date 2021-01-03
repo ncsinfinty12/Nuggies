@@ -76,7 +76,7 @@ client.on('message', async message => {
 			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
-				.setColor('GREEN')
+				.setColor('RANDOM')
 				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
 			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -105,7 +105,7 @@ client.on('message', async message => {
 			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
-				.setColor('GREEN')
+				.setColor('RANDOM')
 				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
 			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
