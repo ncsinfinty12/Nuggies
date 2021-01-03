@@ -75,7 +75,8 @@ client.on('message', async message => {
 			if (message.content.indexOf(prefix) !== 0) return;
 			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
-				.setTitle('Command used')
+				.setTitle(`Command used in ${message.guild.name}`)
+				.setColor('GREEN')
 				.setDescription(message.content);
 			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -103,7 +104,8 @@ client.on('message', async message => {
 			if (message.content.indexOf(prefix) !== 0) return;
 			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
-				.setTitle('Command used')
+				.setTitle(`Command used in ${message.guild.name}`)
+				.setColor('GREEN')
 				.setDescription(message.content);
 			channel1.send(m);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
