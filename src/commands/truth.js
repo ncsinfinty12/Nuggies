@@ -164,11 +164,21 @@ module.exports.run = async (client, message, args, utils) => {
 		'Could you go two months without talking to your friends?',
 	];
 	const randomtruth = truth[Math.floor(Math.random() * truth.length)];
-	const embed = new Discord.MessageEmbed()
-		.setTitle(`Truth: ${randomtruth}`)
-		.setColor('RANDOM')
-		.setAuthor(message.author.username, message.author.avatarURL());
-	message.channel.send(embed);
+	if(!message.mentions.users.first()) {
+		const embed = new Discord.MessageEmbed()
+			.setTitle(`Truth: ${randomtruth}`)
+			.setColor('RANDOM')
+			.setAuthor(message.author.username, message.author.avatarURL());
+		message.channel.send(embed);
+	}
+	if(message.mentions.users.first()) {
+		const embed = new Discord.MessageEmbed()
+			.setTitle(`${message.mentions.users.first().username}, ${message.author.username} is asking you a Truth`)
+			.setDescription(`Truth: ${randomtruth}`)
+			.setColor('RANDOM')
+			.setAuthor(message.author.username, message.author.avatarURL());
+		message.channel.send(embed);
+	}
 };
 
 
