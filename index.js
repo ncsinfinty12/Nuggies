@@ -135,7 +135,7 @@ client.on('message', async message => {
 });
 // ready
 client.on('ready', async () => {
-	console.log('bot is online!');
+	console.log(`${client.user.username} is now online!`);
 	client.user.setActivity(`.help on ${client.guilds.cache.size} servers !`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO' });
 });
 
