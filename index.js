@@ -135,8 +135,8 @@ client.on('message', async message => {
 });
 // ready
 client.on('ready', async () => {
-	console.log('bot is online!');
-	client.user.setActivity('Merry Christmas 🎄❄', { type: 'PLAYING' });
+	console.log(`${client.user.username} is now online!`);
+	client.user.setActivity(`.help on ${client.guilds.cache.size} servers !`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO' });
 });
 
 client.on('guildCreate', async guild => {
@@ -178,5 +178,5 @@ client.on('messageDelete', async message => {
 });
 
 
-client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
+client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk');
 // token for test - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk

@@ -3,7 +3,7 @@
         "`ban`, `unban`, `kick`, `clear`, `lock`, `tlock`, `unlock`, `slowmode`, `addrole`"
     ],
     "fun": [
-        "`8ball`, `rps`, `say`, `joke`, `meme`, `gayrate`, `simprate`, `pp`, `chat`"
+        "`anime`, `8ball`, `rps`, `say`, `joke`, `meme`, `gayrate`, `simprate`, `pp`, `chat`, `roll`, `reverse`, `choose`, `truth`, `dare`"
     ],
     "info": [
         "`botstats`, `invite`,`ping`, `serverinfo`, `fact`, `channel`, `role`, `whois` "
