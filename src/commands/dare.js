@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-
 	const dare = [
 		'Show the most embarrassing photo on your phone',
 		'Show the last five people you texted and what the messages said',
@@ -111,11 +110,21 @@ module.exports.run = async (client, message, args, utils) => {
 		'Lick a car tire.',
 	];
 	const randomtruth = dare[Math.floor(Math.random() * dare.length)];
-	const embed = new Discord.MessageEmbed()
-		.setTitle(`Truth: ${randomtruth}`)
-		.setColor('RANDOM')
-		.setAuthor(message.author.username, message.author.avatarURL());
-	message.channel.send(embed);
+	if(!message.mentions.users.first()) {
+		const embed = new Discord.MessageEmbed()
+			.setTitle(`Truth: ${randomtruth}`)
+			.setColor('RANDOM')
+			.setAuthor(message.author.username, message.author.avatarURL());
+		message.channel.send(embed);
+	}
+	if(message.mentions.users.first()) {
+		const embed = new Discord.MessageEmbed()
+			.setTitle(`${message.mentions.users.first().username}, ${message.author.username} is asking you a Dare`)
+			.setDescription(`Truth: ${randomtruth}`)
+			.setColor('RANDOM')
+			.setAuthor(message.author.username, message.author.avatarURL());
+		message.channel.send(embed);
+	}
 };
 
 
