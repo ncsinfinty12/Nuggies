@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const query = args.join(' ');
 	const something = encodeURIComponent(query);
 	const { body } = await superagent
-		.get(`https://cb.shamim97.repl.co/${something}`);
+		.get(`https://cb.totallyusefulapi.ml/${something}`);
 	/*if(body.profanity === 'true') {
 		message.reply('Please don\'t swear!').then(m => {
 			m.delete({ timeout: 5000 });
