@@ -8,6 +8,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
+client.esnipes = new Discord.Collection();
 
 const DBL = require('dblapi.js');
 const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
@@ -135,7 +136,7 @@ client.on('message', async message => {
 });
 // ready
 client.on('ready', async () => {
-	console.log('bot is online!');
+	console.log(`${client.user.username} is now online!`);
 	client.user.setActivity(`.help on ${client.guilds.cache.size} servers !`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO' });
 });
 
@@ -177,6 +178,29 @@ client.on('messageDelete', async message => {
 	}
 });
 
+client.on('messageUpdate', async message => {
+	try {
+		if (message.author.bot) return;
+		const esnipes = message.client.esnipes.get(message.channel.id) || [];
+		esnipes.unshift({
+			content: message.content,
+			author: message.author,
+			image: message.attachments.first()
+				? message.attachments.first().proxyURL
+				: null,
+			date: new Date().toLocaleString('en-GB', {
+				dataStyle: 'full',
+				timeStyle: 'short',
+			}),
+		});
+		esnipes.splice(10);
+		message.client.esnipes.set(message.channel.id, esnipes);
+	}
+	catch (e) {
+		console.log(e);
+	}
+});
 
-client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk');
+
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
 // token for test - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk

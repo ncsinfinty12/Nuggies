@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args, utils) => {
 		if(!message.guild.roles.cache.has(args[0])) return message.reply(':x: Role not found');
 	}
 
-	if(!role) return message.reply('You must mention role');
+	if(!role) return message.reply('You must provide a role name!');
 	let rolemembers;
 	if(role.members.size > 20) rolemembers = role.members.map(e => `<@${e.id}>`).slice(0, 20).join(', ') + ` and ${role.members.size - 20} more members...`;
 	if(role.members.size < 20) rolemembers = role.members.map(e => `<@${e.id}>`).join(', ');

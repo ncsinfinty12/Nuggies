@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
+	if(!args) message.reply('❌**Error:** please give me something to choose from');
 	let choices = args.join(' ');
 	choices = choices.split('|');
 	const pronouns = ['silly', 'mommy', 'dad', 'mom', 'master', 'nii-san', 'onee-san', 'love', 'ma\'am', 'sir', 'friend', 'b-baka', 'honey'];

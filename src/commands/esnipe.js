@@ -5,8 +5,8 @@ const config = require('../../utils/config.json');
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
-	const snipes = message.client.snipes.get(message.channel.id) || [];
-	const msg = snipes[args[0] - 1 || 0];
+	const esnipes = message.client.esnipes.get(message.channel.id) || [];
+	const msg = esnipes[args[0] - 1 || 0];
 	if (!msg) return message.channel.send('theres nothing to be sniped');
 	const Embed = new MessageEmbed()
 		.setColor('RANDOM')
@@ -15,16 +15,16 @@ module.exports.run = async (client, message, args, utils) => {
 			msg.author.displayAvatarURL({ dynamic: true, size: 256 }),
 		)
 		.setDescription(msg.content)
-		.setFooter(`Date: ${msg.date} | page ${args[0] || 1}/${snipes.length}`);
+		.setFooter(`Date: ${msg.date} | ${args[0] || 1}/${esnipes.length}`);
 	if (msg.attachment) Embed.setImage(msg.attachment);
 	message.channel.send(Embed);
 };
 
 module.exports.help = {
-	aliases: ['sn'],
-	name: 'snipe',
-	description: 'see deleted msgs',
-	usage: config.prefix + 'snipe',
+	aliases: ['esn'],
+	name: 'esnipe',
+	description: 'see the content of what the msg was before edited',
+	usage: config.prefix + 'esnipe',
 };
 
 module.exports.config = {
