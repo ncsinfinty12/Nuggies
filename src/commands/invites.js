@@ -38,7 +38,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 
 module.exports.help = {
-	aliases: [''],
+	aliases: [],
 	name: 'invites',
 	description: 'Shows the amount of invites you have!',
 	usage: `${config.prefix}invites`,
