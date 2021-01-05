@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 
 module.exports.help = {
-	aliases: [''],
+	aliases: [],
 	name: 'emojify',
 	description: 'Emojify text',
 	usage: config.prefix + 'emojify',
