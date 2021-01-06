@@ -25,7 +25,6 @@
     "slash-create": "^1.0.0",
     "spotify-url-info": "^2.2.0",
     "superagent": "^6.1.0",
-    "tiyee-url": "0.0.2",
     "urban": "^0.3.2",
     "ytdl-core": "^4.3.0"
   },
