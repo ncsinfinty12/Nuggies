@@ -7,15 +7,15 @@ module.exports.run = async (client, message, args, utils) => {
 };
 
 module.exports.help = {
-	aliases: [],
-	name: 'yay',
-	description: 'yay',
-	usage: config.prefix + 'yay',
+	aliases: ['aliases'],
+	name: 'name',
+	description: 'description',
+	usage: config.prefix + 'usage',
 };
 
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'category',
 	disable: false,
 };
