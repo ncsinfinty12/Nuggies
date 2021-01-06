@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 
 module.exports.help = {
-	aliases: [''],
+	aliases: [],
 	name: 'ascii',
 	description: 'Turn text into ascii',
 	usage: config.prefix + 'ascii',
