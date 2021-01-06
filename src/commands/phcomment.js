@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args, utils) => {
 		return message.channel.send('**Enter Text!**');
 	}
 
-	const m = await message.channel.send('**Please Wait...**');
+	const m = await message.channel.send('<a:loadingonline:787905402603438100>');
 	try {
 		const res = await fetch(encodeURI(`https://nekobot.xyz/api/imagegen?type=phcomment&username=${name}&image=${pfp}&text=${text}`));
 		const json = await res.json();
