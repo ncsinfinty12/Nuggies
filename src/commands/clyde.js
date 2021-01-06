@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, utils) => {
 		return message.channel.send('**Enter Text**');
 	}
 
-	const m = await message.channel.send('**Please Wait...**');
+	const m = await message.channel.send('<a:loadingonline:787905402603438100>');
 	try {
 		const res = await fetch(encodeURI(`https://nekobot.xyz/api/imagegen?type=clyde&text=${text}`));
 		const json = await res.json();
@@ -33,6 +33,6 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'category',
+	category: 'fun',
 	disable: false,
 };
