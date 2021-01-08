@@ -137,7 +137,7 @@ client.on('message', async message => {
 // ready
 client.on('ready', async () => {
 	console.log(`${client.user.username} is now online!`);
-	client.user.setActivity(`.help on ${client.guilds.cache.size} servers !`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO' });
+	client.user.setActivity(`nuggies.tech | ${client.guilds.cache.size} servers`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO' });
 });
 
 client.on('guildCreate', async guild => {
@@ -203,4 +203,5 @@ client.on('messageUpdate', async message => {
 
 
 client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
-// token for test - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
+// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
+// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM
