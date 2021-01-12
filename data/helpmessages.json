@@ -14,5 +14,8 @@
     "misc": [
         "`define`, `avatar`, `remindme`, `suggest`, `bug`, `nickname`, `snipe`, `vote`, `setprefix`, `editsnipe`, `invites`, `invites`"
     ],
-    "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`, `feed`, `pat`, `smug`, `lick`, `cry`, `laugh`, `bite`, `blush`, `dance`, `happy`, `punch`, `brofist`, `sad`, `mad`, `run`, `shy`, `wink`, `yawn`, `yay`"
+    "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`, `feed`, `pat`, `smug`, `lick`, `cry`, `laugh`, `bite`, `blush`, `dance`, `happy`, `punch`, `brofist`, `sad`, `mad`, `run`, `shy`, `wink`, `yawn`, `yay`",
+    "utility": [
+        "`setchat`"
+    ]
 }
