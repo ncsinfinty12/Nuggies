@@ -30,6 +30,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Information', help.info, true)
 			.addField('Music', 'Coming soon:tm: :eyes:')
 			.addField('More', help.misc, true)
+			.addField('Utility', help.utility, true)
 			.addField('Owner', help.owner, true)
 			.setFooter('Want to change the prefix? Run the .setprefix command!')
 			.setThumbnail(client.user.displayAvatarURL())
