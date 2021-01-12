@@ -2,7 +2,10 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const mongoose = require('mongoose');
+const currency = require('./models/currencySchema');
 const client = new Discord.Client({ disableMentions: 'everyone' });
+const chatcord = require('chatcord');
+const chatting = new chatcord.Client();
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -23,6 +26,7 @@ const utils = require('./utils/utils');
 const config = require('./utils/config.json');
 const blacklist = require('./models/blacklistSchema');
 const PrefiX = require('./models/prefixSchema');
+const chat = require('./models/channelSchema');
 // Handlers
 
 fs.readdir('./src/commands/', (err, files) => {
@@ -38,6 +42,16 @@ fs.readdir('./src/commands/', (err, files) => {
 });
 
 client.on('message', async message => {
+	chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
+		if(data.channelID.includes(message.channel.id)) {
+			if(message.author.bot) return;
+			message.channel.startTyping();
+			chatting.chat(message.content).then(reply => {
+				message.reply(reply);
+				message.channel.stopTyping();
+			});
+		}
+	});
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	const cooldowns = new Discord.Collection();
 	if (message.content === '<@!779741162465525790>') {
@@ -201,7 +215,37 @@ client.on('messageUpdate', async message => {
 	}
 });
 
-
+// functions
+// eslint-disable-next-line no-async-promise-executor
+client.bal = (id) => new Promise(async ful => {
+	const data = await currency.findOne({ id });
+	if(!data) return ful(0);
+	ful(data.coins);
+});
+client.add = (id, coins) => {
+	currency.findOne({ id }, async (err, data) => {
+		if(err) throw err;
+		if(data) {
+			data.coins += coins;
+		}
+		else {
+			data = new currency({ id, coins });
+		}
+		data.save();
+	});
+};
+client.remove = (id, coins) => {
+	currency.findOne({ id }, async (err, data) => {
+		if(err) throw err;
+		if(data) {
+			data.coins -= coins;
+		}
+		else {
+			data = new currency({ id, coins: -coins });
+		}
+		data.save();
+	});
+};
 client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM');
 // token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
 // token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.orZCqjlCd5CJc4bWJKz7wlrNSpM
