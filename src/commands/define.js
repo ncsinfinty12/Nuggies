@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const trollface = urban(saymessage);
 	trollface.first(function(json) {
 		const m = new Discord.MessageEmbed()
-			.setTitle(`definition for ${saymessage}`)
+			.setTitle(`Definition for ${saymessage}`)
 			.setDescription('**' + saymessage + '**: ' + json.definition + '\n\n' + json.example + '\n Go to ' + json.permalink + ' for more information')
 			.setColor('RANDOM');
 		try{message.channel.send(m);}
