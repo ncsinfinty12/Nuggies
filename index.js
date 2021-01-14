@@ -14,7 +14,7 @@ client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
 
 const DBL = require('dblapi.js');
-const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
+const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEwNjEwNjQ4fQ.iYdkKs8g3BhWvgtT8eOrIUh39C3qI85pNVQxvAcXvc8', client);
 // mongoose connect
 mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true }, err => {
 	if (err) return console.error(err);
