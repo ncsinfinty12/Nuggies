@@ -1,5 +1,5 @@
 module.exports = async (client, message) => {
-    try {
+	try {
 		if (message.author.bot) return;
 		const snipes = message.client.snipes.get(message.channel.id) || [];
 		snipes.unshift({
