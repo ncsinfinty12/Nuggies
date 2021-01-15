@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
 const utils = require('../../utils/utils');
@@ -81,7 +82,7 @@ module.exports = async (client, message) => {
 
 		}
 		else if (!Data) {
-			const prefix = config.Prefix;;
+			const prefix = config.Prefix;
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
 			const channel1 = client.channels.cache.get('795207572398931968');
