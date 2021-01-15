@@ -5,6 +5,7 @@ const config = require('../../utils/config.json');
 const ms = require('ms');
 module.exports.run = async (client, message, args, utils) => {
 	if(!message.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE CHANNELS ` permission !');
+	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE CHANNELS` permission.');
 
 	if (!client.lockit) client.lockit = [];
 	const time = args.join(' ');
@@ -32,7 +33,7 @@ module.exports.run = async (client, message, args, utils) => {
 				client.lockit[message.channel.id] = setTimeout(() => {
 					message.channel.createOverwrite(message.guild.id, {
 						SEND_MESSAGES: null,
-					}).then(message.channel.send('channel unlocked, :wink:')).catch(console.error);
+					}).then(message.channel.send('channel unlocked :wink:')).catch(console.error);
 					delete client.lockit[message.channel.id];
 				}, ms(time));
 
