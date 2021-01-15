@@ -12,6 +12,7 @@ client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
+client.economy = require('./utils/economy')
 
 async function startUp() {
 
@@ -42,9 +43,16 @@ readdir('./src/commands/', (err, files) => {
 const DBL = require('dblapi.js');
 const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
 // mongoose connect
-mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true }, err => {
-	if (err) return console.error(err);
-	console.log('Connected to MongoDB database!');
+mongoose.set('useFindAndModify', false);
+mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+}).then(() => {
+    //If it connects log the following
+    console.log('Connected to MongoDB database!');
+}).catch((err) => {
+    //If it doesn't connect log the following
+    console.log('Unable to connect Economy to the Mongodb database. Error:'+ err);
 });
 
 // functions
