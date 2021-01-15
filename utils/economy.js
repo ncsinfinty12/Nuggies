@@ -1,4 +1,4 @@
-const currency = require('./models/currencySchema');
+const currency = require('../models/currencySchema');
 
 module.exports = {
     /**

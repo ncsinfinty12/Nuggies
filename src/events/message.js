@@ -76,8 +76,8 @@ module.exports = async (client, message) => {
 				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 			}
 
-			const commandFile = require(`../commands/${command}.js`);
-			commandFile.run(client, message, args, utils);
+			const commandFile = client.commands.get(command);
+			if (commandFile) commandFile.run(client, message, args, utils);
 
 		}
 		else if (!Data) {
@@ -105,8 +105,9 @@ module.exports = async (client, message) => {
 				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 			}
 
-			const commandFile = require(`../commands/${command}.js`);
-			commandFile.run(client, message, args, utils);
+			const commandFile = client.commands.get(command);
+			if (commandFile) commandFile.run(client, message, args, utils);
+
 		}
 	}
 	catch (err) {
