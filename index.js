@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const fs = require('fs');
-const util = require("util");
+const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const mongoose = require('mongoose');
 const currency = require('./models/currencySchema');
@@ -12,27 +12,27 @@ client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
-client.economy = require('./utils/economy')
+client.economy = require('./utils/economy');
 
 async function startUp() {
 
 	// Handlers
 
-	//load all events
+	// load all events
 	const eventFiles = fs.readdirSync('./src/events/').filter(file => file.endsWith('.js'));
 	console.log(`Loading a total of ${eventFiles.length} events.`);
 	for (const file of eventFiles) {
 		const event = require(`./src/events/${file}`);
-		const eventName = file.split(".")[0];
+		const eventName = file.split('.')[0];
 		console.log(`Loading Event - ${eventName}`);
 		client.on(eventName, event.bind(null, client));
 	}
 
-	//iya's command loader
-	let folders = await readdir("./src/commands/");
+	// iya's command loader
+	const folders = await readdir('./src/commands/');
 	console.log(`Loading a total of ${folders.length} categories.`);
 	folders.forEach(direct => {
-		const commandFiles = fs.readdirSync('./src/commands/' + direct + "/").filter(file => file.endsWith('.js'));
+		const commandFiles = fs.readdirSync('./src/commands/' + direct + '/').filter(file => file.endsWith('.js'));
 		for (const file of commandFiles) {
 			const props = require(`./src/commands/${direct}/${file}`);
 			props.fileName = file;
@@ -42,7 +42,7 @@ async function startUp() {
 			});
 			console.log(`Loading Command: ${props.help.name}.`);
 		}
-	})
+	});
 
 	const DBL = require('dblapi.js');
 	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
@@ -50,12 +50,12 @@ async function startUp() {
 	mongoose.set('useFindAndModify', false);
 	mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', {
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
 	}).then(() => {
-		//If it connects log the following
+		// If it connects log the following
 		console.log('Connected to MongoDB database!');
 	}).catch((err) => {
-		//If it doesn't connect log the following
+		// If it doesn't connect log the following
 		console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 	});
 
@@ -95,8 +95,8 @@ async function startUp() {
 
 startUp();
 
-//For any unhandled errors
-process.on("unhandledRejection", (err) => {
+// For any unhandled errors
+process.on('unhandledRejection', (err) => {
 	console.log(err);
 });
 // token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk

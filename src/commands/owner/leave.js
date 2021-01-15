@@ -4,7 +4,7 @@ const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	let id = args[0];
 	if (!id) id = message.guild.id;
-	client.guilds.get(id).leave()
+	client.guilds.cache.get(id).leave()
 		.then(g => console.log(`Left ${g}`));
 };
 
