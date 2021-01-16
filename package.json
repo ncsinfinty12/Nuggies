@@ -2,7 +2,7 @@
   "name": "nuggies",
   "version": "1.2.2",
   "description": "",
-  "main": "index.js",
+  "main": "shard.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "amethyste-api": "^1.1.4",
