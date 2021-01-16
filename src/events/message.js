@@ -35,18 +35,18 @@ module.exports = async (client, message) => {
 		}
 	});
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
-	if (message.content === '<@!779741162465525790>') {
-		const n = new Discord.MessageEmbed()
-			.setTitle('Hi, I\'m Nuggies !')
-			.setDescription('one of the most compact and easy to use bot on Discord !')
-			.addField('Prefix and Usage', 'The current prefix for This server is ``.`` \n *Tip: Run ``.help`` to get started!*')
-			.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)')
-			.setColor('RANDOM');
-		message.channel.send(n);
-	}
 	if (Data) {
 		const prefix = Data.Prefix;
 		if (message.author.bot) return;
+		if (message.content === '<@!779741162465525790>') {
+			const n = new Discord.MessageEmbed()
+				.setTitle('Hi, I\'m Nuggies !')
+				.setDescription('one of the most compact and easy to use bot on Discord !')
+				.addField('Prefix and Usage', 'The current prefix for This server is `' + prefix + '`\n *Tip: Run ``' + prefix + 'help`` to get started!*')
+				.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)')
+				.setColor('RANDOM');
+			message.channel.send(n);
+		}
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
 		if (result) {
@@ -57,6 +57,15 @@ module.exports = async (client, message) => {
 	else if (!Data) {
 		const prefix = config.prefix;
 		if (message.author.bot) return;
+		if (message.content === '<@!779741162465525790>') {
+			const n = new Discord.MessageEmbed()
+				.setTitle('Hi, I\'m Nuggies !')
+				.setDescription('one of the most compact and easy to use bot on Discord !')
+				.addField('Prefix and Usage', 'The current prefix for This server is `' + prefix + '`\n *Tip: Run ``' + prefix + 'help`` to get started!*')
+				.addField('invites :', '[support server](https://discord.gg/ut7PxgNdef) | [bot invite](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=8&scope=bot)')
+				.setColor('RANDOM');
+			message.channel.send(n);
+		}
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
 		if (result) {
