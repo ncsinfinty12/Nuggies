@@ -45,7 +45,10 @@ module.exports = async (client, message) => {
 		message.channel.send(n);
 	}
 	if (Data) {
-		const prefix = Data.Prefix;
+		let prefix = Data.Prefix;
+		if(client.user.id == '741000865288290435') {
+			prefix = ('..');
+		}
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
@@ -55,7 +58,10 @@ module.exports = async (client, message) => {
 		}
 	}
 	else if (!Data) {
-		const prefix = config.prefix;
+		let prefix = config.prefix;
+		if(client.user.id == '741000865288290435') {
+			prefix = ('..');
+		}
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		const result = await blacklist.findOne({ id: message.author.id });
@@ -66,7 +72,10 @@ module.exports = async (client, message) => {
 	}
 	try {
 		if (Data) {
-			const prefix = Data.Prefix;
+			let prefix = Data.Prefix;
+			if(client.user.id == '741000865288290435') {
+				prefix = ('..');
+			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
 			const channel1 = client.channels.cache.get('795207572398931968');
@@ -95,7 +104,11 @@ module.exports = async (client, message) => {
 
 		}
 		else if (!Data) {
-			const prefix = config.Prefix;
+
+			let prefix = config.prefix;
+			if(client.user.id == '741000865288290435') {
+				prefix = ('..');
+			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
 			const channel1 = client.channels.cache.get('795207572398931968');
