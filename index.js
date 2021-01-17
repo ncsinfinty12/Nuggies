@@ -44,8 +44,8 @@ async function startUp() {
 		}
 	});
 
-	// const DBL = require('dblapi.js');
-	// const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
+	const DBL = require('dblapi.js');
+	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEwODgwMDE3fQ.TN5q1kUn02mVtvxOt_zBWbeVc83acpfE-E6VnoKgvNE', client);
 	// mongoose connect
 	mongoose.set('useFindAndModify', false);
 	mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', {
