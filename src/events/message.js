@@ -1,5 +1,6 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const mongoose = require('mongoose');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
 const blacklist = require('../../models/blacklistSchema');
@@ -9,24 +10,9 @@ const chatcord = require('chatcord');
 const chatting = new chatcord.Client();
 
 module.exports = async (client, message) => {
-
-	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
-		setTimeout(async function() {
-			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.reply(Discord.Util.removeMentions(reply));
-				message.channel.stopTyping();
-				// The module will reply with the based on stimulus (1st parameter of the chat function!)
-			}).catch(error => {
-				return console.log(error.name),
-				message.channel.stopTyping();
-			});
-		}, 2000);
-	}
-
 	chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
-		if (data.channelID.includes(message.channel.id)) {
-			if (message.author.bot) return;
+		if(data.channelID.includes(message.channel.id)) {
+			if(message.author.bot) return;
 			message.channel.startTyping();
 			chatting.chat(message.content).then(reply => {
 				message.reply(reply);
@@ -35,6 +21,7 @@ module.exports = async (client, message) => {
 		}
 	});
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
+	const cooldowns = new Discord.Collection();
 	if (message.content === '<@!779741162465525790>') {
 		const n = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
@@ -90,8 +77,8 @@ module.exports = async (client, message) => {
 				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 			}
 
-			const commandFile = client.commands.get(command);
-			if (commandFile) commandFile.run(client, message, args, utils);
+			const commandFile = require(`../commands/${command}.js`);
+			commandFile.run(client, message, args, utils);
 
 		}
 		else if (!Data) {
@@ -119,9 +106,8 @@ module.exports = async (client, message) => {
 				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 			}
 
-			const commandFile = client.commands.get(command);
-			if (commandFile) commandFile.run(client, message, args, utils);
-
+			const commandFile = require(`../commands/${command}.js`);
+			commandFile.run(client, message, args, utils);
 		}
 	}
 	catch (err) {
