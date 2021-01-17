@@ -5,7 +5,7 @@ const config = require('../../../utils/config.json');
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
-	const esnipes = message.client.esnipes.get(message.channel.id) || [];
+	const esnipes = client.esnipes.get(message.channel.id) || [];
 	const msg = esnipes[args[0] - 1 || 0];
 	if (!msg) return message.channel.send('theres nothing to be sniped');
 	const Embed = new MessageEmbed()
@@ -14,7 +14,8 @@ module.exports.run = async (client, message, args, utils) => {
 			msg.author.tag,
 			msg.author.displayAvatarURL({ dynamic: true, size: 256 }),
 		)
-		.setDescription(msg.content)
+		.addField('Before', msg.oldContent, false)
+		.addField('After', msg.newContent, false)
 		.setFooter(`Date: ${msg.date} | ${args[0] || 1}/${esnipes.length}`);
 	if (msg.attachment) Embed.setImage(msg.attachment);
 	message.channel.send(Embed);
