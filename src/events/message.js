@@ -87,13 +87,18 @@ module.exports = async (client, message) => {
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
 				.setColor('RANDOM')
 				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
-			channel1.send(m);
-			const args = message.content.slice(prefix.length).trim().split(/ +/g);
+			client.shard.broadcastEval(`
+				(async () => {
+				const channel = await this.channels.cache.get('795207572398931968');
+				if (channel) {
+					channel.send({ embed: ${JSON.stringify(m)} });
+				}
+			})();
+		`);			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
@@ -120,12 +125,18 @@ module.exports = async (client, message) => {
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
 				.setColor('RANDOM')
 				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
-			channel1.send(m);
+			client.shard.broadcastEval(`
+				(async () => {
+				const channel = await this.channels.cache.get('795207572398931968');
+				if (channel) {
+					channel.send({ embed: ${JSON.stringify(m)} });
+				}
+			})();
+		`);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
