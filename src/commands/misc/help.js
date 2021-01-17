@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const help = require('../../../data/helpmessages.json');
 const config = require('../../../utils/config.json');
-const PrefiX = require('../../models/prefixSchema');
+const PrefiX = require('../../../models/prefixSchema');
 
 
 module.exports.help = {
