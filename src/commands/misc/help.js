@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 const help = require('../../../data/helpmessages.json');
 const config = require('../../../utils/config.json');
+const PrefiX = require('../../../models/prefixSchema');
 
 
 module.exports.help = {
@@ -19,10 +20,18 @@ module.exports.config = {
 
 
 module.exports.run = async (client, message, args, utils) => {
+	let prefix = ('a');
+	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
+	if (Data) {
+		prefix = Data.Prefix;
+	}
+	if (!Data) {
+		prefix = config.prefix;
+	}
 	if (!args[0]) {
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Hello! I\'m Nuggies!')
-			.setDescription('For more info about a specific command: \n Use [prefix]help command_name')
+			.setDescription(`For more info about a specific command: \n Use ${prefix} help command_name`)
 			.addField('Slash commands', '`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register', true)
 			.addField('Moderation', help.mod, true)
 			.addField('Fun', help.fun, true)
@@ -32,7 +41,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('More', help.misc, true)
 			.addField('Utility', help.utility, true)
 			.addField('Owner', help.owner, true)
-			.setFooter('Want to change the prefix? Run the .setprefix command!')
+			.setFooter(`Want to change the prefix? Run the ${prefix}setprefix command!`)
 			.setThumbnail(client.user.displayAvatarURL())
 			.setImage('https://media.discordapp.net/attachments/783289401165873182/784101832997470229/unknown.png')
 			.setColor(Math.floor(Math.random() * 16777215));
