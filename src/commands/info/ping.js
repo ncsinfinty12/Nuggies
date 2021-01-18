@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	const start = message.createdTimestamp;
+	const start = Date.now();
 
 	message.channel.send({ embed: { description: 'pinging...', color: 0x00FFFF } }).then(m => {
 
