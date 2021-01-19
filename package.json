@@ -6,6 +6,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "amethyste-api": "^1.1.4",
+    "ascii-table": "0.0.9",
     "chatcord": "0.0.5",
     "dblapi.js": "^2.4.1",
     "discord-mongo-currency": "^1.0.4",

@@ -5,7 +5,9 @@ const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const mongoose = require('mongoose');
 const currency = require('./models/currencySchema');
+const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
+const ascii = require('ascii-table');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -19,16 +21,20 @@ async function startUp() {
 	// Handlers
 
 	// load all events
+	const eventtable = new ascii('Event\'s');
+	eventtable.setHeading('Event', 'Load status');
 	const eventFiles = fs.readdirSync('./src/events/').filter(file => file.endsWith('.js'));
 	console.log(`Loading a total of ${eventFiles.length} events.`);
 	for (const file of eventFiles) {
 		const event = require(`./src/events/${file}`);
 		const eventName = file.split('.')[0];
-		console.log(`Loading Event - ${eventName}`);
+		eventtable.addRow(eventName, '✔');
 		client.on(eventName, event.bind(null, client));
 	}
-
+	console.log(eventtable.toString());
 	// iya's command loader
+	const tble = new ascii('Commands');
+	tble.setHeading('Command', 'Load status');
 	const folders = await readdir('./src/commands/');
 	console.log(`Loading a total of ${folders.length} categories.`);
 	folders.forEach(direct => {
@@ -40,12 +46,12 @@ async function startUp() {
 			props.help.aliases.forEach(alias => {
 				client.aliases.set(alias, props.help.name);
 			});
-			console.log(`Loading Command: ${props.help.name}.`);
+			tble.addRow(props.help.name, '✔');
 		}
 	});
-
-	const DBL = require('dblapi.js');
-	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
+	console.log(tble.toString());
+	// const DBL = require('dblapi.js');
+	// const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA4NTQyNTk3fQ.KEmsrFQu7QsGsGmj5raaRauApsE-vlOG-eNrFiEC9gI', client);
 	// mongoose connect
 	mongoose.set('useFindAndModify', false);
 	mongoose.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/test', {
@@ -90,7 +96,9 @@ async function startUp() {
 			data.save();
 		});
 	};
-	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM');
+	client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk');
+	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
+	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM
 }
 
 startUp();
@@ -99,5 +107,3 @@ startUp();
 process.on('unhandledRejection', (err) => {
 	console.log(err);
 });
-// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
-// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM
