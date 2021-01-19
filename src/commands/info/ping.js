@@ -4,7 +4,7 @@ const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
 	const start = message.createdTimestamp;
-
+	const users = await client.shard.fetchClientValues('users.cache.size');
 	message.channel.send({ embed: { description: 'pinging...', color: 0x00FFFF } }).then(m => {
 
 		const end = Date.now();
@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 				{ name: 'Message Latency', value: end - start + 'ms', inline: true },
 				{ name: '\u200B', value: '\u200B', inline: true },
 				{ name: 'Commands Loaded', value: client.commands.size, inline: true },
-				{ name: 'User\'s Cached', value: client.users.cache.size, inline: true },
+				{ name: 'Users Cached', value: users.reduce((acc, count) => acc + count, 0), inline: true },
 			)
 			.setColor('RANDOM');
 		m.edit(embed).catch(e => message.channel.send(e));
