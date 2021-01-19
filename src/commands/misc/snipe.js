@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 		)
 		.setDescription(msg.content)
 		.setFooter(`Date: ${msg.date} | page ${args[0] || 1}/${snipes.length}`);
-	if (msg.attachment) Embed.setImage(msg.attachment);
+	if (msg.image) Embed.setImage(msg.image);
 	message.channel.send(Embed);
 };
 
