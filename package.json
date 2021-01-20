@@ -21,7 +21,7 @@
     "got": "^11.8.1",
     "mal-scraper": "^2.11.2",
     "mongoose": "^5.10.17",
-    "ms": "^2.1.2",
+    "ms": "^2.1.3",
     "node-fetch": "^2.6.1",
     "node-movie": "^3.0.0",
     "one-liner-joke": "^1.2.0",
