@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
 		setTimeout(async function() {
 			message.channel.startTyping();
 			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.reply(Discord.Util.removeMentions(reply));
+				message.channel.send(Discord.Util.removeMentions(reply));
 				message.channel.stopTyping();
 				// The module will reply with the based on stimulus (1st parameter of the chat function!)
 			}).catch(error => {
