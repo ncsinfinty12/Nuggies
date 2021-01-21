@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
 		setTimeout(async function() {
 			message.channel.startTyping();
 			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.reply(Discord.Util.removeMentions(reply));
+				message.channel.send(Discord.Util.removeMentions(reply));
 				message.channel.stopTyping();
 				// The module will reply with the based on stimulus (1st parameter of the chat function!)
 			}).catch(error => {
@@ -37,8 +37,8 @@ module.exports = async (client, message) => {
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		let prefix = Data.Prefix;
-		if(client.user.id == '800588645006311444') {
-			prefix = ('$');
+		if(client.user.id == '741000865288290435') {
+			prefix = ('..');
 		}
 		if (message.author.bot) return;
 		if (message.content === '<@!779741162465525790>') {
@@ -59,8 +59,8 @@ module.exports = async (client, message) => {
 	}
 	else if (!Data) {
 		let prefix = config.prefix;
-		if(client.user.id == '800588645006311444') {
-			prefix = ('$');
+		if(client.user.id == '741000865288290435') {
+			prefix = ('..');
 		}
 		if (message.author.bot) return;
 		if (message.content === '<@!779741162465525790>') {
@@ -82,18 +82,23 @@ module.exports = async (client, message) => {
 	try {
 		if (Data) {
 			let prefix = Data.Prefix;
-			if(client.user.id == '800588645006311444') {
-				prefix = ('$');
+			if(client.user.id == '741000865288290435') {
+				prefix = ('..');
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
 				.setColor('RANDOM')
 				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
-			channel1.send(m);
-			const args = message.content.slice(prefix.length).trim().split(/ +/g);
+			client.shard.broadcastEval(`
+				(async () => {
+				const channel = await this.channels.cache.get('795207572398931968');
+				if (channel) {
+					channel.send({ embed: ${JSON.stringify(m)} });
+				}
+			})();
+		`);			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
@@ -115,17 +120,23 @@ module.exports = async (client, message) => {
 		else if (!Data) {
 
 			let prefix = config.prefix;
-			if(client.user.id == '800588645006311444') {
-				prefix = ('$');
+			if(client.user.id == '741000865288290435') {
+				prefix = ('..');
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			const channel1 = client.channels.cache.get('795207572398931968');
 			const m = new Discord.MessageEmbed()
 				.setTitle(`Command used in ${message.guild.name}`)
 				.setColor('RANDOM')
 				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
-			channel1.send(m);
+			client.shard.broadcastEval(`
+				(async () => {
+				const channel = await this.channels.cache.get('795207572398931968');
+				if (channel) {
+					channel.send({ embed: ${JSON.stringify(m)} });
+				}
+			})();
+		`);
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 

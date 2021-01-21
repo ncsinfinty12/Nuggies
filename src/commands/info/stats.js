@@ -13,6 +13,10 @@ module.exports.run = async (client, message, args, utils) => {
 	let	minutes = parseInt((client.uptime / (1000 * 60)) % 60);
 	let	hours = parseInt((client.uptime / (1000 * 60 * 60)) % 24);
 	let days = parseInt((client.uptime / (1000 * 60 * 60 * 24)) % 60);
+	const values = await client.shard.fetchClientValues('guilds.cache.size');
+	const users = await client.shard.fetchClientValues('users.cache.size');
+	const channels = await client.shard.fetchClientValues('channels.cache.size');
+
 	days = (days < 10) ? '0' + days : days;
 	hours = (hours < 10) ? '0' + hours : hours;
 	minutes = (minutes < 10) ? '0' + minutes : minutes;
@@ -28,9 +32,9 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Nuggies', 'Show the bot\'s stats.')
 			.addField('-------------------------------------------------------------------------------', '----------------------------------------------------------------------------')
 			.addField('Global Prefix', globalprefix, true)
-			.addField('Total Servers', `${client.guilds.cache.size}`, true)
-			.addField('Total Channels', `${client.channels.cache.size}`, true)
-			.addField('Total Users', `${client.users.cache.size}`, true)
+			.addField('Total Servers', values.reduce((acc, count) => acc + count, 0), true)
+			.addField('Total Channels', channels.reduce((acc, count) => acc + count, 0), true)
+			.addField('Total Users', users.reduce((acc, count) => acc + count, 0), true)
 			.addField('Bot Version', version['version'], true)
 			.addField('Library', 'Discord.js v12', true)
 			.addField('Developers', `${config.ownername1} \n ${config.ownername2} \n ${config.ownername3} \n ${config.ownername4} \n ${config.ownername5}`, true)
