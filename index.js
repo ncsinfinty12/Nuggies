@@ -90,7 +90,7 @@ async function startUp() {
 			data.save();
 		});
 	};
-	client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk');
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM');
 }
 
 startUp();
