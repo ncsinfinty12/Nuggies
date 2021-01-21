@@ -7,7 +7,7 @@ const prefixModel = require('../../../models/prefixSchema');
 
 module.exports.run = async (client, message, args) => {
 
-	const prefixdata = await prefixModel.findOneAndDelete({ GuildID: message.guild.id });
+	const prefixdata = await prefixModel.findOne({ GuildID: message.guild.id });
 	const data = await muteRoleModel.findOne({ GuildID: message.guild.id });
 
 	let muteRoleId;
@@ -25,6 +25,9 @@ module.exports.run = async (client, message, args) => {
 
 	if (member.roles.highest.position >= message.member.roles.highest.position) {return message.channel.send('You cannot mute someone with an equal or higher role');}
 
+	if(member.roles.highest.position > message.guild.me.roles.highest.position)
+    	return message.channel.send("My highest role is lower than the mentioned user's role");
+
 	if (!args[1]) {return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)');}
 
 	const time = ms(args[1]);
@@ -38,7 +41,7 @@ module.exports.run = async (client, message, args) => {
 	if (!reason) reason = '`Not Specified`';
 	if (reason.length > 1024) reason = reason.slice(0, 1021) + '...';
 
-	if (member.roles.cache.has(muteRoleId)) {return message.channel.send('Provided member is already muted');}
+	if (member.roles.cache.has(muteRoleId.id)) {return message.channel.send('Provided member is already muted');}
 
 	// Mute member
 	try {
@@ -50,6 +53,7 @@ module.exports.run = async (client, message, args) => {
 	}
 
 	const muteEmbed = new Discord.MessageEmbed()
+		.setColor('RANDOM')
 		.setDescription(`${member} has now been muted for **${ms(time, { long: true })}**.`)
 		.addField('Moderator', message.member, true)
 		.addField('Member', member, true)
