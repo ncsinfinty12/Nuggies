@@ -46,7 +46,7 @@ module.exports.run = async (client, message, args, utils) => {
 			data.save();
 			const a = new MessageEmbed()
 				.setColor('GREEN')
-				.addField('Success', `chat setted to \`false\` in <#${channel.id}>`);
+				.addField('Success', `chat successfully set to \`false\` in <#${channel.id}>`);
 			message.channel.send(a);
 		}
 		else {
