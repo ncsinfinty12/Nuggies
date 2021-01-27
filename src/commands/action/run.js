@@ -5,7 +5,7 @@ const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	axios.get('https://api.otakugifs.xyz/gif/run', {
 		headers: {
-			'X-API-KEY': 'pLsoTHg2vHBKpB4CNeGnVysCP60645uW8fFRRbgT7AIvkyHbBgE3IsgNBS3rUuD8321l23GHAT8GfbE4K4c9T0qH9P2',
+			'X-API-KEY': 'oUIyhMl1SNDIlYVxbhGYqznXgvJtLkWQsg05AzQ2dSh7yQVfnMEJA25Bs89VnJxM1G0hUUrNgc4B2vlP8LvrNq',
 		},
 	})
 		.then(function(response) {

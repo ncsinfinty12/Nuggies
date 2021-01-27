@@ -1,9 +1,9 @@
 {
     "mod": [
-        "`ban`, `unban`, `kick`, `clear`, `lock`, `tlock`, `unlock`, `slowmode`, `addrole`"
+        "`ban`, `unban`, `kick`, `clear`, `lock`, `tlock`, `unlock`, `slowmode`, `addrole`, `mute`"
     ],
     "fun": [
-        "`anime`, `8ball`, `rps`, `say`, `joke`, `meme`, `gayrate`, `simprate`, `pp`, `chat`, `roll`, `reverse`, `choose`, `truth`, `dare`, `ascii`"
+        "`anime`, `8ball`, `rps`, `say`, `joke`, `meme`, `gayrate`, `simprate`, `pp`, `chat`, `roll`, `reverse`, `choose`, `truth`, `dare`, `ascii`, `imdb`, `news`"
     ],
     "info": [
         "`botstats`, `invite`,`ping`, `serverinfo`, `fact`, `channel`, `role`, `whois` "
@@ -12,10 +12,10 @@
         "`blacklist`, `eval`, `reload`, `leave`"
     ],
     "misc": [
-        "`define`, `avatar`, `remindme`, `suggest`, `bug`, `nickname`, `snipe`, `vote`, `setprefix`, `editsnipe`, `invites`, `invites`"
+        "`define`, `avatar`, `remindme`, `suggest`, `bug`, `nickname`, `snipe`, `vote`, `editsnipe`, `invites`"
     ],
     "action": "`cuddle`, `hug`, `kiss`, `slap`, `poke`, `tickle`, `feed`, `pat`, `smug`, `lick`, `cry`, `laugh`, `bite`, `blush`, `dance`, `happy`, `punch`, `brofist`, `sad`, `mad`, `run`, `shy`, `wink`, `yawn`, `yay`",
     "utility": [
-        "`setchat`"
+        "`setchat`, `muterole`, `setprefix`"
     ]
 }

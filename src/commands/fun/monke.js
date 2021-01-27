@@ -1,18 +1,14 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
-const axios = require('axios');
 const config = require('../../../utils/config.json');
+const axios = require('axios');
 module.exports.run = async (client, message, args, utils) => {
-	axios.get('https://api.otakugifs.xyz/gif/mad', {
-		headers: {
-			'X-API-KEY': 'oUIyhMl1SNDIlYVxbhGYqznXgvJtLkWQsg05AzQ2dSh7yQVfnMEJA25Bs89VnJxM1G0hUUrNgc4B2vlP8LvrNq',
-		},
-	})
+	axios.get('https://monke.vip/api/images/monkey')
 		.then(function(response) {
 			const gifurl = response.data.url;
 			const embed = new Discord.MessageEmbed()
-				.setTitle(`${message.author.username} is mad ! 💢`)
-				.setFooter('😡')
+				.setTitle(`${message.author.username}, here is your monke pic !`)
+				.setFooter('🐵🐒')
 				.setColor('RANDOM')
 				.setImage(gifurl);
 			message.channel.send(embed);
@@ -23,15 +19,15 @@ module.exports.run = async (client, message, args, utils) => {
 };
 
 module.exports.help = {
-	aliases: [],
-	name: 'mad',
-	description: 'get mad !',
-	usage: config.prefix + 'mad',
+	aliases: ['monkey'],
+	name: 'monke',
+	description: 'Wanna see some meme? Just use the command',
+	usage: config.prefix + 'meme',
 };
 
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'misc',
 	disable: false,
 };
