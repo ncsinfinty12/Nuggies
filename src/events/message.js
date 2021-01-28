@@ -14,7 +14,6 @@ module.exports = async (client, message) => {
 	const pingeduser = (message.mentions.members.first());
 	if (pingeduser) {
 		const Data = await afk.findOne({ id: pingeduser.id });
-		console.log(Data.reason);
 		if (!Data) {
 			return;
 		}
