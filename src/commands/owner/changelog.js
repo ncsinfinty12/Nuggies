@@ -26,7 +26,7 @@ fs.readFile("./changelog.json", "utf8", (err, jsonString) => {
 module.exports.help = {
 	aliases: [],
 	name: 'changelog',
-	description: 'Changelogs for the Nuggies Discord',
+	description: 'Changelogs for the Nuggies Support Discord Server',
 	usage: 'changelog',
 };
 
