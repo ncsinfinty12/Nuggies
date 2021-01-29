@@ -4,6 +4,9 @@ const Discord = require('discord.js');
 const warnings = require('../../../models/warningSchema')
 
 module.exports.run = async (client, message, args) => {
+	let perms = message.member.permissions;
+	let hasKick = perms.has("KICK_MEMBERS");
+		if(!hasKick) return message.channel.send('You are missing permissions to use this command!')
 
 		let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 			if(!member) return message.channel.send('This user is not identified in your guild')
