@@ -34,4 +34,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'moderation',
 	disable: false,
+	cooldown: 1000,
 };

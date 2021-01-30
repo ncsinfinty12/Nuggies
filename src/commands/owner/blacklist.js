@@ -35,4 +35,5 @@ module.exports.config = {
 	args: true,
 	category: 'moderation',
 	disable: false,
+	cooldown: 0,
 };

@@ -26,4 +26,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'fun',
 	disable: false,
+	cooldown: 5000,
 };

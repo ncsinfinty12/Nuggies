@@ -61,4 +61,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'mod',
 	disable: false,
+	cooldown: 1000,
 };
