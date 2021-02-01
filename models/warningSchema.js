@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = new mongoose.Schema({
-	Warns: Array,
-	User: String,
-	Guild: String,
+	GuildID: String,
+	UserID: String,
+	Punishments: Array,
 });
-module.exports = mongoose.model('warns', Schema);
+module.exports = mongoose.model('warnings', Schema);
