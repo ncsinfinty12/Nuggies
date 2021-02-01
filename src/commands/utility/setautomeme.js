@@ -5,7 +5,7 @@ const schema = require('../../../models/channelSchema');
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE CHANNELS` permission.');
 	const channel = message.mentions.channels.first();
-	schema.findOne({ _id : '5ffd88aa1e69af05e28b0761' }, (err, data) => {
+	schema.findOne({ _id : '6013acea437941a76a964b56' }, (err, data) => {
 		if(args[1] === 'true') {
 			if(!channel) {
 				const m = new MessageEmbed()
@@ -17,12 +17,12 @@ module.exports.run = async (client, message, args, utils) => {
 			if(data.channelID.includes(channel.id)) {
 				return message.channel.send(new MessageEmbed()
 					.setColor('red')
-					.addField('Error', `Chat is already \`true\` in <#${channel.id}>`));
+					.addField('Error', `automeme is already \`true\` in <#${channel.id}>`));
 			}
 			data.channelID.push(channel.id);
 			const me = new MessageEmbed()
 				.setColor('GREEN')
-				.addField('Success', `setted chat to \`true\` in <#${channel.id}>`);
+				.addField('Success', `automeme set to \`true\` in <#${channel.id}>`);
 			message.channel.send(me);
 			data.save();
 		}
@@ -37,7 +37,7 @@ module.exports.run = async (client, message, args, utils) => {
 			if(!data.channelID.includes(channel.id)) {
 				const n = new MessageEmbed()
 					.setColor('red')
-					.addField('Error', `chat is already \`false\` in <#${channel.id}>`);
+					.addField('Error', `automeme is already \`false\` in <#${channel.id}>`);
 				message.channel.send(n);
 				return;
 			}
@@ -46,13 +46,13 @@ module.exports.run = async (client, message, args, utils) => {
 			data.save();
 			const a = new MessageEmbed()
 				.setColor('GREEN')
-				.addField('Success', `chat successfully set to \`false\` in <#${channel.id}>`);
+				.addField('Success', `automeme successfully set to \`false\` in <#${channel.id}>`);
 			message.channel.send(a);
 		}
 		else {
 			const v = new MessageEmbed()
 				.setColor('RED')
-				.addField('Error', 'please follow the following format - .setchat <channel mention> true/false');
+				.addField('Error', 'please follow the following format - .setautomeme <channel mention> true/false');
 			message.channel.send(v);
 		}
 
@@ -62,9 +62,9 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: [],
-	name: 'setchat',
-	description: 'enable chatbot in a channel !',
-	usage: '.setchat <channel mention> true/false',
+	name: 'setautomeme',
+	description: 'enable/disable automeme in a channel !',
+	usage: '.setautomeme <channel mention> true/false',
 };
 
 module.exports.config = {

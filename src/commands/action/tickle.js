@@ -36,4 +36,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'misc',
 	disable: false,
+	cooldown: 1000,
 };
