@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args, utils) => {
-	const guild = this.guilds.cache.find(g => g.name === args.join(' ')) || client.guilds.cache.get(args[0]);
+	const guild = client.guilds.cache.find(g => g.name === args.join(' ')) || client.guilds.cache.get(args[0]);
 	if(!guild) {
 		const mewhennoguild = new Discord.MessageEmbed()
 			.setTitle('⚠ You just hit a bruh moment ⚠')
@@ -39,5 +39,4 @@ module.exports.config = {
 	restricted: true,
 	category: 'owner',
 	disable: false,
-	cooldown: 1000,
 };
