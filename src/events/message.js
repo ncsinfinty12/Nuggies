@@ -14,9 +14,7 @@ module.exports = async (client, message) => {
 	const pingeduser = (message.mentions.members.first());
 	if (pingeduser) {
 		const Data = await afk.findOne({ id: pingeduser.id });
-		if (!Data) {
-			return;
-		}
+
 		if (Data) {
 			message.channel.send(`**${pingeduser.user.username}** is currently afk for: **${Data.reason}**`);
 		}
