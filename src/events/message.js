@@ -56,7 +56,7 @@ module.exports = async (client, message) => {
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		let prefix = Data.Prefix;
-		if(client.user.id == '741000865288290435') {
+		if (client.user.id == '741000865288290435') {
 			prefix = ('..');
 		}
 		if (message.author.bot) return;
@@ -78,7 +78,7 @@ module.exports = async (client, message) => {
 	}
 	else if (!Data) {
 		let prefix = config.prefix;
-		if(client.user.id == '741000865288290435') {
+		if (client.user.id == '741000865288290435') {
 			prefix = ('..');
 		}
 		if (message.author.bot) return;
@@ -101,7 +101,7 @@ module.exports = async (client, message) => {
 	try {
 		if (Data) {
 			let prefix = Data.Prefix;
-			if(client.user.id == '741000865288290435') {
+			if (client.user.id == '741000865288290435') {
 				prefix = ('..');
 			}
 			if (message.author.bot) return;
@@ -117,7 +117,7 @@ module.exports = async (client, message) => {
 					channel.send({ embed: ${JSON.stringify(m)} });
 				}
 			})();
-		`);			const args = message.content.slice(prefix.length).trim().split(/ +/g);
+		`); const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
@@ -131,15 +131,31 @@ module.exports = async (client, message) => {
 			if (client.commands.get(command).config.args == true) {
 				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 			}
-
 			const commandFile = client.commands.get(command);
-			if (commandFile) commandFile.run(client, message, args, utils);
-
+			const cooldown = client.commands.get(command).config.cooldown;
+			const timestamps = client.cooldowns.get(command);
+			if (timestamps.has(message.author.id)) {
+				const expirationTime = timestamps.get(message.author.id) + cooldown;
+				if (Date.now() < expirationTime) {
+					const timeLeft = utils.timer(expirationTime);
+					return message.channel.send(`**\`${message.author.username}\`** | ⏰ Hold up! Command in cooldown for **\`${timeLeft}\`**`);
+				}
+			}
+			if (commandFile) {
+				try{
+					await timestamps.set(message.author.id, Date.now());
+					setTimeout(async () => await timestamps.delete(message.author.id), cooldown);
+					await commandFile.run(client, message, args, utils);
+				}
+				catch (error) {
+					return message.channel.send(`\`❌ COMMAND ERROR\` \`\`\`xl\n${(error.message)}\n\`\`\``);
+				}
+			}
 		}
 		else if (!Data) {
 
 			let prefix = config.prefix;
-			if(client.user.id == '741000865288290435') {
+			if (client.user.id == '741000865288290435') {
 				prefix = ('..');
 			}
 			if (message.author.bot) return;
@@ -170,9 +186,26 @@ module.exports = async (client, message) => {
 			if (client.commands.get(command).config.args == true) {
 				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 			}
-
 			const commandFile = client.commands.get(command);
-			if (commandFile) commandFile.run(client, message, args, utils);
+			const cooldown = client.commands.get(command).config.cooldown;
+			const timestamps = client.cooldowns.get(command);
+			if (timestamps.has(message.author.id)) {
+				const expirationTime = timestamps.get(message.author.id) + cooldown;
+				if (Date.now() < expirationTime) {
+					const timeLeft = utils.timer(expirationTime);
+					return message.channel.send(`**\`${message.author.username}\`** | ⏰ Hold up! Command in cooldown for **\`${timeLeft}\`**`);
+				}
+			}
+			if (commandFile) {
+				try{
+					await timestamps.set(message.author.id, Date.now());
+					setTimeout(async () => await timestamps.delete(message.author.id), cooldown);
+					await commandFile.run(client, message, args, utils);
+				}
+				catch (error) {
+					return message.channel.send(`\`❌ COMMAND ERROR\` \`\`\`xl\n${(error.message)}\n\`\`\``);
+				}
+			}
 
 		}
 	}
