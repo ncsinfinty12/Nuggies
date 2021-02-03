@@ -28,4 +28,5 @@ module.exports.config = {
 	restricted: true,
 	category: 'misc',
 	disable: false,
+	cooldown: 0,
 };

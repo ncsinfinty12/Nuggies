@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args, utils) => {
 module.exports.help = {
 	aliases: [],
 	name: 'changelog',
-	description: 'Changelogs for the Nuggies Discord',
+	description: 'Changelogs for the Nuggies Support Discord Server',
 	usage: 'changelog',
 };
 
@@ -37,4 +37,5 @@ module.exports.config = {
 	restricted: true,
 	category: 'owner',
 	disable: false,
+	cooldown: 0,
 };

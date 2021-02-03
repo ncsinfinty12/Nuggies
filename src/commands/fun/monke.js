@@ -3,12 +3,12 @@ const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 const axios = require('axios');
 module.exports.run = async (client, message, args, utils) => {
-	axios.get('https://monke.vip/api/images/monkey')
+	axios.get('https://api.monke.vip/attachments/monkey?key=xRbAMC0IZk2ik4cnssQHejIpj')
 		.then(function(response) {
 			const gifurl = response.data.url;
 			const embed = new Discord.MessageEmbed()
 				.setTitle(`${message.author.username}, here is your monke pic !`)
-				.setFooter('🐵🐒')
+				.setFooter('🐵🐒 api by https://monke.vip')
 				.setColor('RANDOM')
 				.setImage(gifurl);
 			message.channel.send(embed);
@@ -30,4 +30,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'misc',
 	disable: false,
+	cooldown: 1000,
 };

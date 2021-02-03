@@ -21,9 +21,9 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: [],
-	name: 'updatecount',
-	description: 'updates *something*',
-	usage: config.prefix + 'updatecount',
+	name: 'count',
+	description: 's *something*',
+	usage: config.prefix + 'count',
 };
 
 module.exports.config = {
@@ -31,4 +31,5 @@ module.exports.config = {
 	restricted: true,
 	category: 'misc',
 	disable: false,
+	cooldown: 0,
 };

@@ -6,10 +6,29 @@ const blacklist = require('../../models/blacklistSchema');
 const PrefiX = require('../../models/prefixSchema');
 const chat = require('../../models/channelSchema');
 const chatcord = require('chatcord');
+const afk = require('../../models/afkSchema');
 const chatting = new chatcord.Client();
 
 module.exports = async (client, message) => {
 
+	const pingeduser = (message.mentions.members.first());
+	if (pingeduser) {
+		const Data = await afk.findOne({ id: pingeduser.id });
+
+		if (Data) {
+			message.channel.send(`**${pingeduser.user.username}** is currently afk for: **${Data.reason}**`);
+		}
+	}
+	const afkData = await afk.findOne({ id: message.author.id });
+	if (afkData) {
+		await afk.findOneAndRemove({
+			id: message.author.id,
+		});
+		message.channel.send('Welcome back **' + message.author.username + '**! You are no longer afk.');
+	}
+	if (afkData) {
+		return;
+	}
 	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
 		setTimeout(async function() {
 			message.channel.startTyping();

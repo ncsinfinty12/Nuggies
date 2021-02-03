@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args, utils) => {
-	const guild = client.shard.broadcastEval('this.guilds.cache.find(g => g.name === args.join(" ")) || client.guilds.cache.get(args[0])');
+	const guild = client.guilds.cache.find(g => g.name === args.join(' ')) || client.guilds.cache.get(args[0]);
 	if(!guild) {
 		const mewhennoguild = new Discord.MessageEmbed()
 			.setTitle('⚠ You just hit a bruh moment ⚠')
@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, utils) => {
 		return message.channel.send(mewhennoguild);
 	}
 	try {
-		const tChannel = client.shard.broadcastEval('guild.channels.cache.find(ch => ch.type == "text" && ch.permissionsFor(ch.guild.me).has("CREATE_INSTANT_INVITE"))');
+		const tChannel = guild.channels.cache.find(ch => ch.type == 'text' && ch.permissionsFor(ch.guild.me).has('CREATE_INSTANT_INVITE'));
 		if(!tChannel) {
 			const error = new Discord.MessageEmbed()
 				.setColor('RANDOM')
