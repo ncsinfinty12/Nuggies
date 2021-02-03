@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
 
 	const pingeduser = (message.mentions.members.first());
 	if (pingeduser) {
-		const Data = await afk.findOne({ id: pingeduser.id });
+		const Data = await afk.findOne({ id: pingeduser.id, GuildID: message.guild.id });
 
 		if (Data) {
 			message.channel.send(`**${pingeduser.user.username}** is currently afk for: **${Data.reason}**`);
@@ -21,10 +21,13 @@ module.exports = async (client, message) => {
 	}
 	const afkData = await afk.findOne({ id: message.author.id });
 	if (afkData) {
-		await afk.findOneAndRemove({
-			id: message.author.id,
-		});
-		message.channel.send('Welcome back **' + message.author.username + '**! You are no longer afk.');
+		if (afkData.GuildID == message.guild.id) {
+			await afk.findOneAndRemove({
+				id: message.author.id,
+				GuildID: message.GuildID,
+			});
+			message.channel.send('Welcome back **' + message.author.username + '**! You are no longer afk.');
+		}
 	}
 	if (afkData) {
 		return;
