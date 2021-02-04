@@ -10,6 +10,7 @@ const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 
 client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
@@ -43,6 +44,7 @@ async function startUp() {
 			const props = require(`./src/commands/${direct}/${file}`);
 			props.fileName = file;
 			client.commands.set(props.help.name, props);
+			client.cooldowns.set(props.help.name, new Discord.Collection());
 			props.help.aliases.forEach(alias => {
 				client.aliases.set(alias, props.help.name);
 			});
