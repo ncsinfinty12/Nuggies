@@ -5,6 +5,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const afkreason = args.join(' ') || 'AFK';
 	const newData = new afkSchema({
 		id: message.author.id,
+		GuildID: message.guild.id,
 		reason: afkreason,
 	});
 	newData.save();
