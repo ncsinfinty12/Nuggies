@@ -32,7 +32,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'Actions',
 	disable: false,
 	cooldown: 1000,
 };
