@@ -24,6 +24,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'fun',
+	category: 'Actions',
 	disable: false,
+	cooldown: 1000,
 };

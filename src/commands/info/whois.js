@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: [],
-	name: 'whois',
+	name: 'Information',
 	description: 'Get information about someone',
 	usage: config.prefix + 'whois <@537230099121045504>',
 };
@@ -41,4 +41,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'misc',
 	disable: false,
+	cooldown: 1000,
 };

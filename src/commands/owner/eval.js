@@ -26,6 +26,7 @@ module.exports.help = {
 module.exports.config = {
 	args: true,
 	restricted: true,
-	category: 'misc',
+	category: 'Owner',
 	disable: false,
+	cooldown: 0,
 };

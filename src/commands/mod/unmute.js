@@ -5,7 +5,8 @@ const muteRoleModel = require('../../../models/muteRoleSchema');
 const prefixModel = require('../../../models/prefixSchema');
 
 module.exports.run = async (client, message, args, utils) => {
-    const prefixdata = await prefixModel.findOne({ GuildID: message.guild.id });
+	if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE ROLES` permission');
+	const prefixdata = await prefixModel.findOne({ GuildID: message.guild.id });
 	const data = await muteRoleModel.findOne({ GuildID: message.guild.id });
 
 	let muteRoleId;
@@ -20,10 +21,9 @@ module.exports.run = async (client, message, args, utils) => {
 
 	if (member === message.guild.me) return message.channel.send('You cannot mute me');
 
-    if (member.roles.highest.position >= message.member.roles.highest.position) {return message.channel.send('You cannot mute someone with an equal or higher role');}
-    
-    if(member.roles.highest.position > message.guild.me.roles.highest.position)
-    return message.channel.send("My highest role is lower than the mentioned user's role");
+	if (member.roles.highest.position >= message.member.roles.highest.position) {return message.channel.send('You cannot mute someone with an equal or higher role');}
+
+	if(member.roles.highest.position > message.guild.me.roles.highest.position) {return message.channel.send('My highest role is lower than the mentioned user\'s role');}
 
 	let reason = args.slice(1).join(' ');
 	if (!reason) reason = '`Not Specified`';
@@ -59,6 +59,7 @@ module.exports.help = {
 module.exports.config = {
 	args: true,
 	restricted: false,
-	category: 'mod',
+	category: 'Moderation',
 	disable: false,
+	cooldown: 1000,
 };

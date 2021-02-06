@@ -5,7 +5,7 @@ const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	axios.get('https://api.otakugifs.xyz/gif/shrug', {
 		headers: {
-			'X-API-KEY': 'pLsoTHg2vHBKpB4CNeGnVysCP60645uW8fFRRbgT7AIvkyHbBgE3IsgNBS3rUuD8321l23GHAT8GfbE4K4c9T0qH9P2',
+			'X-API-KEY': 'FrDrFYi5XFr7dijUh6uhMcTnc0r5MeAIrHp2waZo8FWrk3LuRzvYgbmrVW4Z04pFgzcXf2x5yxJUJ7DDslmDqb',
 		},
 	})
 		.then(function(response) {
@@ -32,6 +32,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'Actions',
 	disable: false,
+	cooldown: 1000,
 };

@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
 
 module.exports = async (client, guild) => {
+	const values = await client.shard.fetchClientValues('guilds.cache.size');
 	const m = new Discord.MessageEmbed()
 		.setTitle(`just left ${guild.name}`)
-		.setFooter(`total servers : ${client.guilds.cache.size}`)
+		.setFooter(`total servers : ${values.reduce((acc, count) => acc + count, 0)}`)
 		.setColor('RED');
 	client.shard.broadcastEval(`
 		(async () => {

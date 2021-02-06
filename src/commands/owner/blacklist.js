@@ -33,6 +33,7 @@ module.exports.help = {
 module.exports.config = {
 	restricted: true,
 	args: true,
-	category: 'moderation',
+	category: 'Owner',
 	disable: false,
+	cooldown: 0,
 };

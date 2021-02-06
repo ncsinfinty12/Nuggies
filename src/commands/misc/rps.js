@@ -51,6 +51,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
+	category: 'More',
 	disable: false,
+	cooldown: 3000,
 };
