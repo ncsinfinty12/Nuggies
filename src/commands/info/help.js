@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (!args[0]) {
 		const a = new Discord.MessageEmbed()
 			.setTitle('Hello! I\'m Nuggies!')
-			.setDescription('For more info about a specific command: Use . help command_name\n[Invite Me!](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=1609952759&scope=applications.commands%20bot)')
+			.setDescription('For more info about a specific command: use .help {command} \n[Invite Me!](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=1609952759&scope=applications.commands%20bot) ・ [support server](https://https://discord.gg/zzURhQGpRY)')
 			.addField('<:slash:782701715479724063> Slash commands', `\`${prefix}help slash-commands\``, true)
 			.addField('<:bfdmoderator:807662459879817236> Moderation', `\`${prefix}help moderation\``, true)
 			.addField('<:information:807646586884063283> Info', `\`${prefix}help info\``, true)
