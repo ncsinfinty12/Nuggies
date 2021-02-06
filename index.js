@@ -8,6 +8,7 @@ const currency = require('./models/currencySchema');
 const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
+const config = require('./utils/config.json');
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -16,6 +17,8 @@ client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
 client.economy = require('./utils/economy');
+
+const unhhook = new Discord.WebhookClient(config.unhhookID, config.unhhookTOKEN);
 
 async function startUp() {
 
@@ -109,5 +112,12 @@ startUp();
 
 // For any unhandled errors
 process.on('unhandledRejection', (err) => {
-	console.log(err);
+	if (client.user.id === '779741162465525790') {
+		const errEmbed = new Discord.MessageEmbed()
+			.setTitle('unhandledRejection Error')
+			.setDescription(err.stack, { code: 'ini' })
+			.setTimestamp();
+		unhhook.send(errEmbed);
+	}
+	return console.log(err);
 });
