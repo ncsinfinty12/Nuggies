@@ -8,6 +8,8 @@ const chat = require('../../models/channelSchema');
 const chatcord = require('chatcord');
 const afk = require('../../models/afkSchema');
 const chatting = new chatcord.Client();
+const cmdhook = new Discord.WebhookClient(config.cmdhookID, config.cmdhookTOKEN);
+const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN);
 
 module.exports = async (client, message) => {
 
@@ -32,7 +34,7 @@ module.exports = async (client, message) => {
 	if (afkData) {
 		return;
 	}
-	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
+	if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
 		setTimeout(async function() {
 			message.channel.startTyping();
 			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
@@ -109,31 +111,12 @@ module.exports = async (client, message) => {
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			const m = new Discord.MessageEmbed()
-				.setTitle(`Command used in ${message.guild.name}`)
-				.setColor('RANDOM')
-				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
-			client.shard.broadcastEval(`
-				(async () => {
-				const channel = await this.channels.cache.get('795207572398931968');
-				if (channel) {
-					channel.send({ embed: ${JSON.stringify(m)} });
-				}
-			})();
-		`); const args = message.content.slice(prefix.length).trim().split(/ +/g);
+
+			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
 
-			if (client.commands.get(command).config.restricted == true) {
-				if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
-			}
-			if (client.commands.get(command).config.disable == true) {
-				return utils.errorEmbed(message, ':warning: This command is disabled for a short period of time! :warning:');
-			}
-			if (client.commands.get(command).config.args == true) {
-				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
-			}
 			const commandFile = client.commands.get(command);
 			const cooldown = client.commands.get(command).config.cooldown;
 			const timestamps = client.cooldowns.get(command);
@@ -146,11 +129,26 @@ module.exports = async (client, message) => {
 			}
 			if (commandFile) {
 				try{
+					if (client.user.id === '779741162465525790') {
+						const m = new Discord.MessageEmbed()
+							.setTitle(`Command used in ${message.guild.name}`)
+							.setColor('RANDOM')
+							.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
+						await cmdhook.send(m);
+					}
 					await timestamps.set(message.author.id, Date.now());
 					setTimeout(async () => await timestamps.delete(message.author.id), cooldown);
 					await commandFile.run(client, message, args, utils);
 				}
 				catch (error) {
+					if (client.user.id === '779741162465525790') {
+						const errEmbed = new Discord.MessageEmbed()
+							.setTitle(`Command error in ${message.guild.name}`)
+							.addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false)
+							.setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``)
+							.setTimestamp();
+						errhook.send(errEmbed);
+					}
 					return message.channel.send(`\`❌ COMMAND ERROR\` \`\`\`xl\n${(error.message)}\n\`\`\``);
 				}
 			}
@@ -163,18 +161,7 @@ module.exports = async (client, message) => {
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			const m = new Discord.MessageEmbed()
-				.setTitle(`Command used in ${message.guild.name}`)
-				.setColor('RANDOM')
-				.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
-			client.shard.broadcastEval(`
-				(async () => {
-				const channel = await this.channels.cache.get('795207572398931968');
-				if (channel) {
-					channel.send({ embed: ${JSON.stringify(m)} });
-				}
-			})();
-		`);
+
 			const args = message.content.slice(prefix.length).trim().split(/ +/g);
 			let command = args.shift().toLowerCase();
 
@@ -199,13 +186,29 @@ module.exports = async (client, message) => {
 					return message.channel.send(`**\`${message.author.username}\`** | ⏰ Hold up! Command in cooldown for **\`${timeLeft}\`**`);
 				}
 			}
+
 			if (commandFile) {
 				try{
+					if (client.user.id === '779741162465525790') {
+						const m = new Discord.MessageEmbed()
+							.setTitle(`Command used in ${message.guild.name}`)
+							.setColor('RANDOM')
+							.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
+						await cmdhook.send(m);
+					}
 					await timestamps.set(message.author.id, Date.now());
 					setTimeout(async () => await timestamps.delete(message.author.id), cooldown);
 					await commandFile.run(client, message, args, utils);
 				}
 				catch (error) {
+					if (client.user.id === '779741162465525790') {
+						const errEmbed = new Discord.MessageEmbed()
+							.setTitle(`Command error in ${message.guild.name}`)
+							.addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false)
+							.setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``)
+							.setTimestamp();
+						errhook.send(errEmbed);
+					}
 					return message.channel.send(`\`❌ COMMAND ERROR\` \`\`\`xl\n${(error.message)}\n\`\`\``);
 				}
 			}
@@ -213,8 +216,8 @@ module.exports = async (client, message) => {
 		}
 	}
 	catch (err) {
-		if (err.message === 'Cannot read property \'config\' of undefined') return;
-		if (err.code == 'MODULE_NOT_FOUND') return;
+		// if (err.message === 'Cannot read property \'config\' of undefined') return;
+		// if (err.code == 'MODULE_NOT_FOUND') return;
 		console.error(err);
 	}
 };
