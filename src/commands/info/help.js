@@ -22,7 +22,7 @@ module.exports.config = {
 
 
 module.exports.run = async (client, message, args, utils) => {
-	let prefix = ('a');
+	let prefix;
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		prefix = Data.Prefix;
@@ -31,33 +31,110 @@ module.exports.run = async (client, message, args, utils) => {
 		prefix = config.prefix;
 	}
 	if (!args[0]) {
-		const embed = new Discord.MessageEmbed();
-		// If no command was specified, show every command in a list.
-		embed.setTitle('Hello! I\'m Nuggies!');
-		embed.setColor('RANDOM');
-		embed.setDescription(`For more info about a specific command: \n Use ${prefix} help command_name.\n`);
-		embed.addField('Slash commands', '`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register', true);
-		embed.setThumbnail(client.user.displayAvatarURL());
-		embed.setFooter(`Want to change the prefix? Run the ${prefix}setprefix command!`);
-		// Create a command list for each command category.
-		config.categories.forEach(category => {
-			let list = '';
-			message.client.commands.forEach(command => {
-				if (command.config.category != category) return;
-				list += `\`${command.help.name}\`, `;
-			});
-			embed.addField(category, list.slice(0, -2), true);
-		});
-		message.channel.send(embed);
+		const a = new Discord.MessageEmbed()
+			.setTitle('Hello! I\'m Nuggies!')
+			.setDescription('For more info about a specific command: Use . help command_name\n[Invite Me!](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=1609952759&scope=applications.commands%20bot)')
+			.addField('<:slash:782701715479724063> Slash commands', `\`${prefix}help slash-commands\``, true)
+			.addField('<:bfdmoderator:506624224723730462> Moderation', `\`${prefix}help moderation\``, true)
+			.addField('<:information:807646586884063283> Info', `\`${prefix}help info\``, true)
+			.addField('<a:LX_Yay:807646869948727307> Fun', `\`${prefix}help fun\``, true)
+			.addField('<a:distraction:807647150438744064> Actions', `\`${prefix}help actions\``, true)
+			.addField('<:ohok:792607053621362700> More', `\`${prefix}help more\``, true)
+			.addField('⚙ Utility', `\`${prefix}help utility\``, true)
+			.setFooter('Check out our website: https://nuggies.tech')
+			.setThumbnail(client.user.avatarURL({ type:  'png' }))
+			.setColor('RANDOM');
+		message.channel.send(a);
 	}
 	else {
-		const command = args[0];
-		if (client.commands.has(command)) {
-			const cmd = client.commands.get(command);
+		let modCmds = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'Moderation') {modCmds += `\`${command.help.name}\`, `;}
+		});
+		let funCmds = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'Fun') {funCmds += `\`${command.help.name}\`, `;}
+		});
+		let actionCmds = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'Actions') {actionCmds += `\`${command.help.name}\`, `;}
+		});
+		let moreCmds = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'More') {moreCmds += `\`${command.help.name}\`, `;}
+		});
+		let infoCmds = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'Information') {infoCmds += `\`${command.help.name}\`, `;}
+		});
+		let utilityCmds = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'Utility') {utilityCmds += `\`${command.help.name}\`, `;}
+		});
+		if (args[0] === 'info') {
+			const infoCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Info Commands')
+				.setDescription(infoCmds.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(infoCmdsembed);
+		}
+		if (args[0] === 'fun') {
+			const funCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Fun Commands')
+				.setDescription(funCmds.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(funCmdsembed);
+		}
+		if (args[0] === 'actions') {
+			const ActionsCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Action Commands')
+				.setDescription(actionCmds.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(ActionsCmdsembed);
+		}
+		if (args[0] === 'more') {
+			const moreCmdsembed = new Discord.MessageEmbed()
+				.setTitle('More Commands')
+				.setDescription(moreCmds.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(moreCmdsembed);
+		}
+		if (args[0] === 'utility') {
+			const utilityCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Utility Commands')
+				.setDescription(utilityCmds.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(utilityCmdsembed);
+		}
+		if (args[0] === 'moderation') {
+			const moderationCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Moderation Commands')
+				.setDescription(modCmds.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(moderationCmdsembed);
+		}
+		if (args[0] === 'slash-commands') {
+			const slashCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Slash Commands')
+				.setDescription('`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register')
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(slashCmdsembed);
+		}
+		else
+		if (client.commands.has(args[0])) {
+			const cmd = client.commands.get(args[0]);
 			const b = new Discord.MessageEmbed()
 				.setTitle('Command help!')
-				.addField('``Description:``', cmd.help.description, false)
-				.addField('``Usage:``', cmd.help.usage, false);
+				.addField('``Description:``', cmd.help.description, true)
+				.addField('``Usage:``', cmd.help.usage, true)
+				.setColor('RANDOM');
 			message.channel.send(b);
 			return;
 

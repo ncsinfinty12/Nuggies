@@ -49,6 +49,7 @@ module.exports = async (client, message) => {
 	chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
 		if (data.channelID.includes(message.channel.id)) {
 			if (message.author.bot) return;
+			if (!message.content) return message.channel.send('Please say something');
 			message.channel.startTyping();
 			chatting.chat(message.content).then(reply => {
 				message.reply(reply);
