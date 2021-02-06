@@ -33,14 +33,16 @@ module.exports.run = async (client, message, args, utils) => {
 	if (!args[0]) {
 		const a = new Discord.MessageEmbed()
 			.setTitle('Hello! I\'m Nuggies!')
-			.setDescription('For more info about a specific command:\n Use . help command_name\n[**Invite Me!**](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=1609952759&scope=applications.commands%20bot)\n[**Website!**](https://nuggies.tech)')
-			.addField('Slash commands', '`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register', true)
+			.setDescription('For more info about a specific command: Use . help command_name\n[Invite Me!](https://discord.com/api/oauth2/authorize?client_id=779741162465525790&permissions=1609952759&scope=applications.commands%20bot)')
+			.addField('Slash commands', `\`${prefix}help slash-commands\``, true)
 			.addField('Moderation', `\`${prefix}help moderation\``, true)
 			.addField('Info', `\`${prefix}help info\``, true)
 			.addField('Fun', `\`${prefix}help fun\``, true)
 			.addField('Actions', `\`${prefix}help Actions\``, true)
 			.addField('More', `\`${prefix}help more\``, true)
 			.addField('Utility', `\`${prefix}help Utility\``, true)
+			.setFooter('Check out our website: https://nuggies.tech')
+			.setThumbnail()
 			.setColor('RANDOM');
 		message.channel.send(a);
 	}
@@ -116,6 +118,14 @@ module.exports.run = async (client, message, args, utils) => {
 				.setColor('RANDOM')
 				.setFooter('Page 1/1');
 			return message.channel.send(moderationCmdsembed);
+		}
+		if (args[0] === 'slash-commands') {
+			const slashCmdsembed = new Discord.MessageEmbed()
+				.setTitle('Slash Commands')
+				.setDescription('`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register')
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(slashCmdsembed);
 		}
 		else
 		if (client.commands.has(args[0])) {
