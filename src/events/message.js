@@ -117,7 +117,15 @@ module.exports = async (client, message) => {
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
-
+			if (client.commands.get(command).config.restricted == true) {
+				if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			}
+			if (client.commands.get(command).config.disable == true) {
+				return utils.errorEmbed(message, ':warning: This command is disabled for a short period of time! :warning:');
+			}
+			if (client.commands.get(command).config.args == true) {
+				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
+			}
 			const commandFile = client.commands.get(command);
 			const cooldown = client.commands.get(command).config.cooldown;
 			const timestamps = client.cooldowns.get(command);
