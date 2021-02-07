@@ -5,15 +5,7 @@ function clean(text) {
 }
 
 module.exports.run = async (client, message, args, utils) => {
-	args = args.join(' ');
-	try {
-		let evaled = eval(args);
-		if (typeof evaled !== 'string') {evaled = require('util').inspect(evaled);}
-		message.channel.send(`\`\`\`xl\n${clean(evaled)}\n\`\`\``);
-	}
-	catch (err) {
-		message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-	}
+	console.log('bruh');
 };
 
 module.exports.help = {
@@ -27,6 +19,6 @@ module.exports.config = {
 	args: true,
 	restricted: true,
 	category: 'Owner',
-	disable: false,
+	disable: true,
 	cooldown: 0,
 };
