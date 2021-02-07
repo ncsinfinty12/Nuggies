@@ -4,7 +4,7 @@ const superagent = require('superagent');
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	/* let command;
+	let command;
 	if (client.commands.has(args[0])) {
 		command = args[0];
 	}
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args, utils) => {
 						m.edit(`Command reload failed: ${command}\n\`\`\`${e.stack}\`\`\``);
 					});
 			});
-	} */
+	}
 };
 
 module.exports.help = {

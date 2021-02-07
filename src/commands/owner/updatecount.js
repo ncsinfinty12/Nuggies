@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
-	/*
 	try {
 		const fetch = require('node-fetch');
 		fetch(`https://voidbots.net/api/auth/stats/${client.user.id}`, {
@@ -17,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 	catch (e) {
 		message.channel.send(e);
 
-	}*/
+	}
 };
 
 module.exports.help = {
