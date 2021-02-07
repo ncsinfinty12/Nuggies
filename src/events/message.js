@@ -131,12 +131,14 @@ module.exports = async (client, message) => {
 			if (commandFile) {
 				try{
 					if (client.user.id === '779741162465525790') {
+						if (!command) return;
 						const m = new Discord.MessageEmbed()
 							.setTitle(`Command used in ${message.guild.name}`)
 							.setColor('RANDOM')
 							.addField('User:', `\`\`\`${message.author.tag}\`\`\``)
 							.addField('User ID:', `\`\`\`${message.author.id}\`\`\``)
 							.addField('Command:', `\`\`\`${command}\`\`\``)
+							.addField('Message Content:', `\`\`\`${message.content}\`\`\``)
 							.addField('Guild ID:', `\`\`\`${message.guild.id}\`\`\``);
 						await cmdhook.send(m);
 					}
