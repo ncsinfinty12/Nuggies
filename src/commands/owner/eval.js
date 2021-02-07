@@ -27,6 +27,6 @@ module.exports.config = {
 	args: true,
 	restricted: true,
 	category: 'Owner',
-	disable: true,
+	disable: false,
 	cooldown: 0,
 };
