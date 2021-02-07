@@ -2,11 +2,11 @@
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	let id = args[0];
+	/* let id = args[0];
 	if (!id) id = message.guild.id;
 	const lguild = client.guilds.cache.get(id);
 	lguild.leave()
-		.then(g => console.log(`Left ${g}`));
+		.then(g => console.log(`Left ${g}`)); */
 };
 
 module.exports.help = {

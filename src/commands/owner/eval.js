@@ -5,7 +5,15 @@ function clean(text) {
 }
 
 module.exports.run = async (client, message, args, utils) => {
-	console.log('bruh');
+	/* args = args.join(' ');
+	try {
+		let evaled = eval(args);
+		if (typeof evaled !== 'string') {evaled = require('util').inspect(evaled);}
+		message.channel.send(`\`\`\`xl\n${clean(evaled)}\n\`\`\``);
+	}
+	catch (err) {
+		message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+	} */
 };
 
 module.exports.help = {

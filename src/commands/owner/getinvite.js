@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args, utils) => {
-	const guild = client.guilds.cache.find(g => g.name === args.join(' ')) || client.guilds.cache.get(args[0]);
+	/* const guild = client.guilds.cache.find(g => g.name === args.join(' ')) || client.guilds.cache.get(args[0]);
 	if(!guild) {
 		const mewhennoguild = new Discord.MessageEmbed()
 			.setTitle('⚠ You just hit a bruh moment ⚠')
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.setColor('RANDOM')
 			.setDescription('There was an err doing that. Heres the err: ```' + err + '\n```');
 		return message.channel.send(error1);
-	}
+	} */
 };
 module.exports.help = {
 	aliases: [],
