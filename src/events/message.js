@@ -134,7 +134,10 @@ module.exports = async (client, message) => {
 						const m = new Discord.MessageEmbed()
 							.setTitle(`Command used in ${message.guild.name}`)
 							.setColor('RANDOM')
-							.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
+							.addField('User:', message.author.tag)
+							.addField('User ID:', message.author.id)
+							.addField('Command:', command)
+							.addField('Guild ID:', message.guild.id);
 						await cmdhook.send(m);
 					}
 					await timestamps.set(message.author.id, Date.now());
