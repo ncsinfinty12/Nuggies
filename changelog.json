@@ -1,4 +1,0 @@
-{
-    "changelog" : "- Fixed a lot of de-capitalization in message event. Experienced PTSD due to it.\n\n- Added new command muterole. This is the command to actually set a mute role for a guild. By default - it checks for a role called Muted. Usage: muterole @role or RoleID\n\n- Changed package.json and package-lock.json to have a new module 'ms'. Needed to parse time in mute commands\n\n- MuteRoleSchema for the mute command to store the mute roles\n\n- Added new command mute. Like any other moderation bot - mutes the user. Usage: mute @user <time> <reason>\n\n- Updated the help message to have the new commands in place. mute, muterole, news, imdb\n- Fixed lint errors on muterole and mute",
-    "date" : "01/20/2021"
-}
