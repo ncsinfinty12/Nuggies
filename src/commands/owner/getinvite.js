@@ -37,6 +37,6 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: true,
-	category: 'owner',
+	category: 'Owner',
 	disable: false,
 };

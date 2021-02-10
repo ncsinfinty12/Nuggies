@@ -5,7 +5,7 @@ const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
 	axios.get('https://api.otakugifs.xyz/gif/yay', {
 		headers: {
-			'X-API-KEY': 'oUIyhMl1SNDIlYVxbhGYqznXgvJtLkWQsg05AzQ2dSh7yQVfnMEJA25Bs89VnJxM1G0hUUrNgc4B2vlP8LvrNq',
+			'X-API-KEY': 'FrDrFYi5XFr7dijUh6uhMcTnc0r5MeAIrHp2waZo8FWrk3LuRzvYgbmrVW4Z04pFgzcXf2x5yxJUJ7DDslmDqb',
 		},
 	})
 		.then(function(response) {
@@ -32,7 +32,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'Actions',
 	disable: false,
 	cooldown: 1000,
 };

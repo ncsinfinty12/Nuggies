@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: [],
-	name: 'invite',
+	name: 'Information',
 	description: 'invite the bot to your server !',
 	usage: '.invite',
 };

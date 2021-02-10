@@ -5,7 +5,7 @@ const schema = require('../../../models/channelSchema');
 module.exports.run = async (client, message, args, utils) => {
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE CHANNELS` permission.');
 	const channel = message.mentions.channels.first();
-	schema.findOne({ _id : '5ffd88aa1e69af05e28b0761' }, (err, data) => {
+	schema.findOne({ _id : '6023f079f935032c19dd341a' }, (err, data) => {
 		if(args[1] === 'true') {
 			if(!channel) {
 				const m = new MessageEmbed()
@@ -70,7 +70,7 @@ module.exports.help = {
 module.exports.config = {
 	args: true,
 	restricted: false,
-	category: 'misc',
+	category: 'Utility',
 	disable: false,
 	cooldown: 10000,
 };

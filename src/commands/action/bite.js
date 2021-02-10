@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (message.mentions.users.first().id == message.author.id) return message.reply('❌**Error**: You cant bite yourself!');
 	axios.get('https://api.otakugifs.xyz/gif/bite', {
 		headers: {
-			'X-API-KEY': 'oUIyhMl1SNDIlYVxbhGYqznXgvJtLkWQsg05AzQ2dSh7yQVfnMEJA25Bs89VnJxM1G0hUUrNgc4B2vlP8LvrNq',
+			'X-API-KEY': 'FrDrFYi5XFr7dijUh6uhMcTnc0r5MeAIrHp2waZo8FWrk3LuRzvYgbmrVW4Z04pFgzcXf2x5yxJUJ7DDslmDqb',
 		},
 	})
 		.then(function(response) {
@@ -34,7 +34,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'Actions',
 	disable: false,
 	cooldown: 1000,
 };
