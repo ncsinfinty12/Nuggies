@@ -56,8 +56,8 @@ async function startUp() {
 	});
 
 	console.log(tble.toString());
-	// const DBL = require('dblapi.js');
-	// const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEwODgwMDE3fQ.TN5q1kUn02mVtvxOt_zBWbeVc83acpfE-E6VnoKgvNE', client);
+	const DBL = require('dblapi.js');
+	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI', client);
 
 	// mongoose connect
 	mongoose.set('useFindAndModify', false);
