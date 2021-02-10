@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
@@ -48,7 +47,7 @@ module.exports = async (client, message) => {
 		}, 2000);
 	}
 
-	chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
+	chat.findOne({ _id: '6023f079f935032c19dd341a' }, (err, data) => {
 		if (data.channelID.includes(message.channel.id)) {
 			if (message.author.bot) return;
 			if (!message.content) return message.channel.send('Please say something');
