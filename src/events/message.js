@@ -33,19 +33,20 @@ module.exports = async (client, message) => {
 	if (afkData) {
 		return;
 	}
-	if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
-		setTimeout(async function() {
-			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.channel.send(Discord.Util.removeMentions(reply));
-				message.channel.stopTyping();
-				// The module will reply with the based on stimulus (1st parameter of the chat function!)
-			}).catch(error => {
-				return console.log(error.name),
-				message.channel.stopTyping();
-			});
-		}, 2000);
-	}
+	// if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
+	// 	setTimeout(async function() {
+	// 		message.channel.startTyping();
+	// 		await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+	// 			message.channel.send(Discord.Util.removeMentions(reply));
+	// 			message.channel.stopTyping();
+	// 			// The module will reply with the based on stimulus (1st parameter of the chat function!)
+	// 		}).catch(error => {
+	// 			return console.log(error.name),
+	// 			message.channel.stopTyping();
+	// 		});
+	// 	}, 2000);
+	// }
+
 	// chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
 	// 	if (data.channelID.includes(message.channel.id)) {
 	// 		if (message.author.bot) return;
