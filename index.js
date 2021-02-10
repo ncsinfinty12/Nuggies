@@ -121,3 +121,4 @@ process.on('unhandledRejection', (err) => {
 	}
 	return console.log(err);
 });
+client.on('debug', console.log);
