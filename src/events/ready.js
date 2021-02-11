@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
 const schema = require('../../models/channelSchema');
