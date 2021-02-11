@@ -46,6 +46,17 @@ module.exports = async (client, message) => {
 	// 		});
 	// 	}, 2000);
 	// }
+	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
+		if(err) throw err;
+		if(message.author.bot) return;
+		if(data.channelID.includes(message.channel.id)) {
+			message.channel.startTyping();
+			await chatting.chat(message.content).then(m => {
+				message.channel.send(m);
+				message.channel.stopTyping();
+			});
+		}
+	});
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		let prefix = Data.Prefix;
