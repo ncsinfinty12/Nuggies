@@ -12,7 +12,12 @@ module.exports.run = async (client, message, args, utils) => {
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to report a bug, use ' + config.prefix + 'bug <bug>');
 	message.channel.send('bug report submitted. Join discord.gg/zzURhQGpRY to view your report !');
-	channel1.send(embed);
+	client.shard.broadcastEval(`
+		const e = this.channels.cache.get('783160016173531176');
+		if(e) {
+			e.send({embed: ${JSON.stringify(embed)}})
+		}
+	`);
 	message.delete();
 };
 
@@ -27,6 +32,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
+	category: 'More',
 	disable: false,
+	cooldown: 0,
 };

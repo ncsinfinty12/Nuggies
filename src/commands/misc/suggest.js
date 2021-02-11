@@ -11,12 +11,16 @@ module.exports.run = async (client, message, args, utils) => {
 		.setTitle('Suggestion from ' + message.author.username)
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to suggest something, use ' + config.prefix + 'suggest <suggestion>');
-	message.channel.send('suggestion submitted. Join discord.gg/zzURhQGpRY and upvote your suggestion !');
-	channel1.send(embed).then(sentMessage => {
-		sentMessage.react('👍');
-		sentMessage.react('👎');
-		message.delete();
-	});
+	client.shard.broadcastEval(`
+		const e = this.channels.cache.get('783955997403643914');
+		if(e) {
+			e.send({embed: ${JSON.stringify(embed)}}).then(m => {
+				m.react('👍');
+				m.react('👎');
+		})
+			
+		}
+	`);
 };
 
 
@@ -30,6 +34,6 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
-	disable: false,
+	category: 'More',
+	cooldown: 0,
 };

@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
-	if(!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE ROLES` permission !');
+	if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE ROLES` permission');
 	if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** I don\'t have the **Manage Roles** permission!');
 	if (message.mentions.users.size === 0) return message.reply('❌Please mention a user to give the role to.\nExample: `addrole @user Members`');
 	const member = message.guild.member(message.mentions.users.first());
@@ -34,6 +34,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'moderation',
+	category: 'Moderation',
 	disable: false,
+	cooldown: 1000,
 };

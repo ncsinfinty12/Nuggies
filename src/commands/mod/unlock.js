@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
-	if(!client.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE CHANNELS ` permission !');
+	if(!message.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE CHANNELS ` permission !');
 
 	if (!client.lockit) client.lockit = [];
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that!');
@@ -22,6 +22,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
+	category: 'Moderation',
 	disable: false,
+	cooldown: 1000,
 };
