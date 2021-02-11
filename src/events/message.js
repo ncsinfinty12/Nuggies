@@ -126,10 +126,15 @@ module.exports = async (client, message) => {
 			if (commandFile) {
 				try{
 					if (client.user.id === '779741162465525790') {
+						if (!command) return;
 						const m = new Discord.MessageEmbed()
 							.setTitle(`Command used in ${message.guild.name}`)
 							.setColor('RANDOM')
-							.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
+							.addField('User:', `\`\`\`${message.author.tag}\`\`\``)
+							.addField('User ID:', `\`\`\`${message.author.id}\`\`\``)
+							.addField('Command:', `\`\`\`${command}\`\`\``)
+							.addField('Message Content:', `\`\`\`${message.content}\`\`\``)
+							.addField('Guild ID:', `\`\`\`${message.guild.id}\`\`\``);
 						await cmdhook.send(m);
 					}
 					await timestamps.set(message.author.id, Date.now());
@@ -212,8 +217,8 @@ module.exports = async (client, message) => {
 		}
 	}
 	catch (err) {
-		// if (err.message === 'Cannot read property \'config\' of undefined') return;
-		// if (err.code == 'MODULE_NOT_FOUND') return;
+		if (err.message === 'Cannot read property \'config\' of undefined') return;
+		if (err.code == 'MODULE_NOT_FOUND') return;
 		console.error(err);
 	}
 };
