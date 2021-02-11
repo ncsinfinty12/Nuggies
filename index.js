@@ -106,18 +106,18 @@ async function startUp() {
 
 
 	// For any unhandled errors
-process.on('unhandledRejection', async(err) => {
-	if (client.user.id === '800588645006311444') {
-		const errEmbed = new Discord.MessageEmbed()
-			.setTitle('unhandledRejection Error')
-			.setDescription(err.stack, { code: 'ini' })
-			.setTimestamp();
-		unhhook.send(errEmbed);
-	}
-	return console.log(err);
+	process.on('unhandledRejection', async(err) => {
+		if (client.user.id === '800588645006311444') {
+			const errEmbed = new Discord.MessageEmbed()
+				.setTitle('unhandledRejection Error')
+				.setDescription(err.stack, { code: 'ini' })
+				.setTimestamp();
+			unhhook.send(errEmbed);
+		}
+		return console.log(err);
 });
 
-	client.login('ODAwNTg4NjQ1MDA2MzExNDQ0.YAUURw.A6ML1bfMbShSeNhgejX9gaiMzYg');
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
 	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM
 }
