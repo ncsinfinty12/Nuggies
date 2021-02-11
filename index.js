@@ -106,8 +106,8 @@ client.remove = (id, coins) => {
 	});
 };
 
-
 // For any unhandled errors
+
 process.on('unhandledRejection', async (err) => {
 	if (client.user.id === '800588645006311444') {
 		const errEmbed = new Discord.MessageEmbed()
@@ -124,4 +124,3 @@ startUp();
 client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc');
 // token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
 // token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc
-

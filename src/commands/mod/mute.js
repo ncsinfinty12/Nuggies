@@ -6,16 +6,15 @@ const muteRoleModel = require('../../../models/muteRoleSchema');
 const prefixModel = require('../../../models/prefixSchema');
 
 module.exports.run = async (client, message, args) => {
-
 	if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE ROLES` permission');
-	const Prefix = await prefixModel.findOne({ GuildID: message.guild.id });
+	const prefixdata = await prefixModel.findOne({ GuildID: message.guild.id });
 	const data = await muteRoleModel.findOne({ GuildID: message.guild.id });
-	if(!data) return message.channel.send(`Please use \`${Prefix.Prefix}muterole @role\` to set a mute role for the server!`)
-    let muteRoleId;
-    if (data.MuteRole !== 'null') muteRoleId = message.guild.roles.cache.find(r => r.id === data.MuteRole);
-    if (data.MuteRole == 'null') muteRoleId = message.guild.roles.cache.find(r => r.name === 'Muted')
 
-	if (!muteRoleId || muteRoleId === null) return message.channel.send(`Sorry but this guild doesn't have a Muted role created nor is it assigned to a different role.\nUse \`${prefixdata.Prefix}muterole @role or RoleID\` to assign a muted role`);
+	let muteRoleId;
+	if (data.MuteRole) muteRoleId = message.guild.roles.cache.find(r => r.id === data.MuteRole);
+	if (!data.MuteRole) muteRoleId = message.guild.roles.cache.find(r => r.name === 'Muted');
+
+	if (!muteRoleId) return message.channel.send(`Sorry but this guild doesn't have a Muted role created nor is it assigned to a different role.\nUse \`${prefixdata.Prefix}muterole @role or RoleID\` to assign a muted role`);
 
 	const member = message.mentions.members.first();
 	if (!member) {return message.channel.send('Please mention a user or provide a valid user ID');}
