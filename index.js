@@ -56,8 +56,8 @@ async function startUp() {
 	});
 
 	console.log(tble.toString());
-	// const DBL = require('dblapi.js');
-	// const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEwODgwMDE3fQ.TN5q1kUn02mVtvxOt_zBWbeVc83acpfE-E6VnoKgvNE', client);
+	const DBL = require('dblapi.js');
+	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI', client);
 
 	// mongoose connect
 	mongoose.set('useFindAndModify', false);
@@ -103,9 +103,9 @@ async function startUp() {
 			data.save();
 		});
 	};
-	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.u0Iu5BWfsNQXatJNnKQDjCrKlhE');
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs
-	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.u0Iu5BWfsNQXatJNnKQDjCrKlhE
+	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc
 }
 
 startUp();

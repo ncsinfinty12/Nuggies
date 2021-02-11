@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
@@ -34,31 +33,19 @@ module.exports = async (client, message) => {
 	if (afkData) {
 		return;
 	}
-	if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
-		setTimeout(async function() {
-			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.channel.send(Discord.Util.removeMentions(reply));
-				message.channel.stopTyping();
-				// The module will reply with the based on stimulus (1st parameter of the chat function!)
-			}).catch(error => {
-				return console.log(error.name),
-				message.channel.stopTyping();
-			});
-		}, 2000);
-	}
-
-	chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
-		if (data.channelID.includes(message.channel.id)) {
-			if (message.author.bot) return;
-			if (!message.content) return message.channel.send('Please say something');
-			message.channel.startTyping();
-			chatting.chat(message.content).then(reply => {
-				message.reply(reply);
-				message.channel.stopTyping();
-			});
-		}
-	});
+	// if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
+	// 	setTimeout(async function() {
+	// 		message.channel.startTyping();
+	// 		await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+	// 			message.channel.send(Discord.Util.removeMentions(reply));
+	// 			message.channel.stopTyping();
+	// 			// The module will reply with the based on stimulus (1st parameter of the chat function!)
+	// 		}).catch(error => {
+	// 			return console.log(error.name),
+	// 			message.channel.stopTyping();
+	// 		});
+	// 	}, 2000);
+	// }
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		let prefix = Data.Prefix;
@@ -117,7 +104,15 @@ module.exports = async (client, message) => {
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
-
+			if (client.commands.get(command).config.restricted == true) {
+				if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			}
+			if (client.commands.get(command).config.disable == true) {
+				return utils.errorEmbed(message, ':warning: This command is disabled for a short period of time! :warning:');
+			}
+			if (client.commands.get(command).config.args == true) {
+				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
+			}
 			const commandFile = client.commands.get(command);
 			const cooldown = client.commands.get(command).config.cooldown;
 			const timestamps = client.cooldowns.get(command);
