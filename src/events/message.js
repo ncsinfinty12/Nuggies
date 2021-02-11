@@ -217,8 +217,8 @@ module.exports = async (client, message) => {
 		}
 	}
 	catch (err) {
-		// if (err.message === 'Cannot read property \'config\' of undefined') return;
-		// if (err.code == 'MODULE_NOT_FOUND') return;
+		if (err.message === 'Cannot read property \'config\' of undefined') return;
+		if (err.code == 'MODULE_NOT_FOUND') return;
 		console.error(err);
 	}
 };
