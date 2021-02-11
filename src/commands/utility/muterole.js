@@ -3,8 +3,9 @@ const Discord = require('discord.js');
 const muteRoleModel = require('../../../models/muteRoleSchema.js');
 
 module.exports.run = async (client, message, args, utils) => {
-
+	if(!args) return message.channel.send(argcheck);
 	const muteRole = message.mentions.roles.first();
+	if(!muteRole) return message.channel.send(errEmbed);
 
 	const errEmbed = new Discord.MessageEmbed()
 		.setColor('#FF0000')
@@ -26,9 +27,6 @@ module.exports.run = async (client, message, args, utils) => {
 		.setColor('#FF0000')
 		.setAuthor('Error executing the command')
 		.setDescription('Please provide a role to set as muterole!');
-
-	if(!args) return message.channel.send(argcheck);
-	if(!muteRole) return message.channel.send(errEmbed);
 
 	if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(perms);
 

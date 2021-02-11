@@ -8,4 +8,3 @@ const manager = new ShardingManager('./index.js', {
 
 manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} launched`));
 
-manager.spawn(2, 15000, -1);
