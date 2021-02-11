@@ -103,11 +103,16 @@ async function startUp() {
 			data.save();
 		});
 	};
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc');
+	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs
+	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc
+}
 
+startUp();
 
-	// For any unhandled errors
-process.on('unhandledRejection', async(err) => {
-	if (client.user.id === '800588645006311444') {
+// For any unhandled errors
+process.on('unhandledRejection', (err) => {
+	if (client.user.id === '779741162465525790') {
 		const errEmbed = new Discord.MessageEmbed()
 			.setTitle('unhandledRejection Error')
 			.setDescription(err.stack, { code: 'ini' })
@@ -116,10 +121,3 @@ process.on('unhandledRejection', async(err) => {
 	}
 	return console.log(err);
 });
-
-	client.login('ODAwNTg4NjQ1MDA2MzExNDQ0.YAUURw.A6ML1bfMbShSeNhgejX9gaiMzYg');
-	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
-	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM
-}
-
-startUp();
