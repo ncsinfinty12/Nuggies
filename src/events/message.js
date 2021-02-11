@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
@@ -12,6 +11,7 @@ const cmdhook = new Discord.WebhookClient(config.cmdhookID, config.cmdhookTOKEN)
 const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN);
 
 module.exports = async (client, message) => {
+	const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
 
 	const afkData = await afk.findOne({ id: message.author.id, GuildID: message.guild.id });
 	if (afkData) {
@@ -34,38 +34,27 @@ module.exports = async (client, message) => {
 	if (afkData) {
 		return;
 	}
-	if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
-		setTimeout(async function() {
-			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.channel.send(Discord.Util.removeMentions(reply));
-				message.channel.stopTyping();
-				// The module will reply with the based on stimulus (1st parameter of the chat function!)
-			}).catch(error => {
-				return console.log(error.name),
-				message.channel.stopTyping();
-			});
-		}, 2000);
-	}
-
-	chat.findOne({ _id: '5ffd88aa1e69af05e28b0761' }, (err, data) => {
-		if (data.channelID.includes(message.channel.id)) {
-			if (message.author.bot) return;
-			message.channel.startTyping();
-			chatting.chat(message.content).then(reply => {
-				message.reply(reply);
-				message.channel.stopTyping();
-			});
-		}
-	});
+	// if (message.channel.id === '799671677888757830' && message.author.id == '779741162465525790') {
+	// 	setTimeout(async function() {
+	// 		message.channel.startTyping();
+	// 		await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+	// 			message.channel.send(Discord.Util.removeMentions(reply));
+	// 			message.channel.stopTyping();
+	// 			// The module will reply with the based on stimulus (1st parameter of the chat function!)
+	// 		}).catch(error => {
+	// 			return console.log(error.name),
+	// 			message.channel.stopTyping();
+	// 		});
+	// 	}, 2000);
+	// }
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		let prefix = Data.Prefix;
-		if (client.user.id == '741000865288290435') {
-			prefix = ('..');
-		}
+		if(client.user.id == '800588645006311444') {
+			prefix = ('$');
+		} 
 		if (message.author.bot) return;
-		if (message.content === '<@!779741162465525790>') {
+		if (message.content === '<@!800588645006311444>') {
 			const n = new Discord.MessageEmbed()
 				.setTitle('Hi, I\'m Nuggies !')
 				.setDescription('one of the most compact and easy to use bot on Discord !')
@@ -83,11 +72,11 @@ module.exports = async (client, message) => {
 	}
 	else if (!Data) {
 		let prefix = config.prefix;
-		if (client.user.id == '741000865288290435') {
-			prefix = ('..');
+		if(client.user.id == '800588645006311444') {
+			prefix = ('$');
 		}
 		if (message.author.bot) return;
-		if (message.content === '<@!779741162465525790>') {
+		if (message.content === prefixMention) {
 			const n = new Discord.MessageEmbed()
 				.setTitle('Hi, I\'m Nuggies !')
 				.setDescription('one of the most compact and easy to use bot on Discord !')
@@ -106,8 +95,8 @@ module.exports = async (client, message) => {
 	try {
 		if (Data) {
 			let prefix = Data.Prefix;
-			if (client.user.id == '741000865288290435') {
-				prefix = ('..');
+			if(client.user.id == '800588645006311444') {
+				prefix = ('$');
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
@@ -116,7 +105,15 @@ module.exports = async (client, message) => {
 			let command = args.shift().toLowerCase();
 
 			if (client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name;
-
+			if (client.commands.get(command).config.restricted == true) {
+				if (!config.ownerID.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:');
+			}
+			if (client.commands.get(command).config.disable == true) {
+				return utils.errorEmbed(message, ':warning: This command is disabled for a short period of time! :warning:');
+			}
+			if (client.commands.get(command).config.args == true) {
+				if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
+			}
 			const commandFile = client.commands.get(command);
 			const cooldown = client.commands.get(command).config.cooldown;
 			const timestamps = client.cooldowns.get(command);
@@ -130,10 +127,15 @@ module.exports = async (client, message) => {
 			if (commandFile) {
 				try{
 					if (client.user.id === '779741162465525790') {
+						if (!command) return;
 						const m = new Discord.MessageEmbed()
 							.setTitle(`Command used in ${message.guild.name}`)
 							.setColor('RANDOM')
-							.setDescription(`**Author :** ${message.author.username} \n **ID:** ${message.author.id} \n **Content:** ${message.content}`);
+							.addField('User:', `\`\`\`${message.author.tag}\`\`\``)
+							.addField('User ID:', `\`\`\`${message.author.id}\`\`\``)
+							.addField('Command:', `\`\`\`${command}\`\`\``)
+							.addField('Message Content:', `\`\`\`${message.content}\`\`\``)
+							.addField('Guild ID:', `\`\`\`${message.guild.id}\`\`\``);
 						await cmdhook.send(m);
 					}
 					await timestamps.set(message.author.id, Date.now());
@@ -156,8 +158,8 @@ module.exports = async (client, message) => {
 		else if (!Data) {
 
 			let prefix = config.prefix;
-			if (client.user.id == '741000865288290435') {
-				prefix = ('..');
+			if(client.user.id == '800588645006311444') {
+				prefix = ('$');
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
@@ -216,8 +218,8 @@ module.exports = async (client, message) => {
 		}
 	}
 	catch (err) {
-		// if (err.message === 'Cannot read property \'config\' of undefined') return;
-		// if (err.code == 'MODULE_NOT_FOUND') return;
+		if (err.message === 'Cannot read property \'config\' of undefined') return;
+		if (err.code == 'MODULE_NOT_FOUND') return;
 		console.error(err);
 	}
 };
