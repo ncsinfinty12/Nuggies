@@ -11,7 +11,6 @@ const cmdhook = new Discord.WebhookClient(config.cmdhookID, config.cmdhookTOKEN)
 const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN);
 
 module.exports = async (client, message) => {
-	const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
 
 	const afkData = await afk.findOne({ id: message.author.id, GuildID: message.guild.id });
 	if (afkData) {
@@ -50,11 +49,11 @@ module.exports = async (client, message) => {
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	if (Data) {
 		let prefix = Data.Prefix;
-		if(client.user.id == '800588645006311444') {
-			prefix = ('$');
-		} 
+		if (client.user.id == '741000865288290435') {
+			prefix = ('..');
+		}
 		if (message.author.bot) return;
-		if (message.content === '<@!800588645006311444>') {
+		if (message.content === '<@!779741162465525790>') {
 			const n = new Discord.MessageEmbed()
 				.setTitle('Hi, I\'m Nuggies !')
 				.setDescription('one of the most compact and easy to use bot on Discord !')
@@ -72,11 +71,11 @@ module.exports = async (client, message) => {
 	}
 	else if (!Data) {
 		let prefix = config.prefix;
-		if(client.user.id == '800588645006311444') {
-			prefix = ('$');
+		if (client.user.id == '741000865288290435') {
+			prefix = ('..');
 		}
 		if (message.author.bot) return;
-		if (message.content === prefixMention) {
+		if (message.content === '<@!779741162465525790>') {
 			const n = new Discord.MessageEmbed()
 				.setTitle('Hi, I\'m Nuggies !')
 				.setDescription('one of the most compact and easy to use bot on Discord !')
@@ -95,8 +94,8 @@ module.exports = async (client, message) => {
 	try {
 		if (Data) {
 			let prefix = Data.Prefix;
-			if(client.user.id == '800588645006311444') {
-				prefix = ('$');
+			if (client.user.id == '741000865288290435') {
+				prefix = ('..');
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
@@ -158,8 +157,8 @@ module.exports = async (client, message) => {
 		else if (!Data) {
 
 			let prefix = config.prefix;
-			if(client.user.id == '800588645006311444') {
-				prefix = ('$');
+			if (client.user.id == '741000865288290435') {
+				prefix = ('..');
 			}
 			if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
