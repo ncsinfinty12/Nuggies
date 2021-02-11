@@ -72,47 +72,44 @@ async function startUp() {
 		console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 	});
 
-	// functions
-	// eslint-disable-next-line no-async-promise-executor
-	client.bal = (id) => new Promise(async ful => {
-		const data = await currency.findOne({ id });
-		if (!data) return ful(0);
-		ful(data.coins);
-	});
-	client.add = (id, coins) => {
-		currency.findOne({ id }, async (err, data) => {
-			if (err) throw err;
-			if (data) {
-				data.coins += coins;
-			}
-			else {
-				data = new currency({ id, coins });
-			}
-			data.save();
-		});
-	};
-	client.remove = (id, coins) => {
-		currency.findOne({ id }, async (err, data) => {
-			if (err) throw err;
-			if (data) {
-				data.coins -= coins;
-			}
-			else {
-				data = new currency({ id, coins: -coins });
-			}
-			data.save();
-		});
-	};
-	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc');
-	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs
-	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc
 }
 
-startUp();
+// functions
+// eslint-disable-next-line no-async-promise-executor
+client.bal = (id) => new Promise(async ful => {
+	const data = await currency.findOne({ id });
+	if (!data) return ful(0);
+	ful(data.coins);
+});
+client.add = (id, coins) => {
+	currency.findOne({ id }, async (err, data) => {
+		if (err) throw err;
+		if (data) {
+			data.coins += coins;
+		}
+		else {
+			data = new currency({ id, coins });
+		}
+		data.save();
+	});
+};
+client.remove = (id, coins) => {
+	currency.findOne({ id }, async (err, data) => {
+		if (err) throw err;
+		if (data) {
+			data.coins -= coins;
+		}
+		else {
+			data = new currency({ id, coins: -coins });
+		}
+		data.save();
+	});
+};
 
 // For any unhandled errors
-process.on('unhandledRejection', (err) => {
-	if (client.user.id === '779741162465525790') {
+
+process.on('unhandledRejection', async (err) => {
+	if (client.user.id === '800588645006311444') {
 		const errEmbed = new Discord.MessageEmbed()
 			.setTitle('unhandledRejection Error')
 			.setDescription(err.stack, { code: 'ini' })
@@ -121,3 +118,9 @@ process.on('unhandledRejection', (err) => {
 	}
 	return console.log(err);
 });
+
+startUp();
+
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc');
+// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
+// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc
