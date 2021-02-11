@@ -72,41 +72,43 @@ async function startUp() {
 		console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 	});
 
-	// functions
-	// eslint-disable-next-line no-async-promise-executor
-	client.bal = (id) => new Promise(async ful => {
-		const data = await currency.findOne({ id });
-		if (!data) return ful(0);
-		ful(data.coins);
+}
+
+// functions
+// eslint-disable-next-line no-async-promise-executor
+client.bal = (id) => new Promise(async ful => {
+	const data = await currency.findOne({ id });
+	if (!data) return ful(0);
+	ful(data.coins);
+});
+client.add = (id, coins) => {
+	currency.findOne({ id }, async (err, data) => {
+		if (err) throw err;
+		if (data) {
+			data.coins += coins;
+		}
+		else {
+			data = new currency({ id, coins });
+		}
+		data.save();
 	});
-	client.add = (id, coins) => {
-		currency.findOne({ id }, async (err, data) => {
-			if (err) throw err;
-			if (data) {
-				data.coins += coins;
-			}
-			else {
-				data = new currency({ id, coins });
-			}
-			data.save();
-		});
-	};
-	client.remove = (id, coins) => {
-		currency.findOne({ id }, async (err, data) => {
-			if (err) throw err;
-			if (data) {
-				data.coins -= coins;
-			}
-			else {
-				data = new currency({ id, coins: -coins });
-			}
-			data.save();
-		});
-	};
+};
+client.remove = (id, coins) => {
+	currency.findOne({ id }, async (err, data) => {
+		if (err) throw err;
+		if (data) {
+			data.coins -= coins;
+		}
+		else {
+			data = new currency({ id, coins: -coins });
+		}
+		data.save();
+	});
+};
 
+// For any unhandled errors
 
-	// For any unhandled errors
-process.on('unhandledRejection', async(err) => {
+process.on('unhandledRejection', async (err) => {
 	if (client.user.id === '800588645006311444') {
 		const errEmbed = new Discord.MessageEmbed()
 			.setTitle('unhandledRejection Error')
@@ -117,9 +119,8 @@ process.on('unhandledRejection', async(err) => {
 	return console.log(err);
 });
 
-	client.login('ODAwNTg4NjQ1MDA2MzExNDQ0.YAUURw.A6ML1bfMbShSeNhgejX9gaiMzYg');
-	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
-	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qKeVTZ74GyIut_Hb8kZVGGrp4TM
-}
-
 startUp();
+
+client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc');
+// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.9l4FuhpAyjzoT7zZrjnNzreb-lk
+// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.4KGlhAqzYXkTDDADuP19-JRo1qc
