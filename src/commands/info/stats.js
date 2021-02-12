@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Global Prefix', globalprefix, true)
 			.addField('Total Servers', client.guilds.cache.size, true)
 			.addField('Total Channels', client.channels.cache.size, true)
-			.addField('Total Users', client.cache.size, true)
+			.addField('Total Users', client.users.cache.size, true)
 			.addField('Bot Version', version['version'], true)
 			.addField('Library', 'Discord.js v12', true)
 			.addField('Developers', `${config.ownername1} \n ${config.ownername2} \n ${config.ownername3} \n ${config.ownername4} \n ${config.ownername5}`, true)

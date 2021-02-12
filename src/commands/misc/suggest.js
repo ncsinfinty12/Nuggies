@@ -10,9 +10,10 @@ module.exports.run = async (client, message, args, utils) => {
 		.setTitle('Suggestion from ' + message.author.username)
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to suggest something, use ' + config.prefix + 'suggest <suggestion>');
-	e.send(embed);
-	embed.react('👍');
-	embed.react('👎');
+	e.send(embed).then(m => {
+		m.react('👍');
+		m.react('👎');
+	});
 };
 
 
