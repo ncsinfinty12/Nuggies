@@ -2,7 +2,7 @@
   "name": "nuggies",
   "version": "1.2.2",
   "description": "",
-  "main": "shard.js",
+  "main": "index.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "amethyste-api": "^1.1.4",
@@ -21,7 +21,7 @@
     "figlet": "^1.5.0",
     "fs": "0.0.1-security",
     "got": "^11.8.1",
-    "mal-scraper": "^2.11.2",
+    "mal-scraper": "^2.11.3",
     "merge-images": "^2.0.0",
     "mongoose": "^5.11.14",
     "ms": "^2.1.3",
