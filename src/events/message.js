@@ -81,6 +81,8 @@ module.exports = async (client, message) => {
 			message.channel.send(`**${pingeduser.user.username}** is currently afk for: **${Data.reason}**`);
 		}
 	}
+	const result = await blacklist.findOne({ id: message.author.id });
+	if (result) return;
 	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
 		if(err) throw err;
 		if(!message.content) return;
