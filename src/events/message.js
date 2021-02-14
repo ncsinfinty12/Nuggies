@@ -110,9 +110,11 @@ module.exports = async (client, message) => {
 		}
 	}
 
-// Chat bot functionality
+	const result = await blacklist.findOne({ id: message.author.id });
+	if (result) return;
+	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
 
-/*	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
+	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
 		if(err) throw err;
 		if(!message.content) return;
 		if(data.channelID.includes(message.channel.id)) {
@@ -122,7 +124,7 @@ module.exports = async (client, message) => {
 				message.channel.stopTyping();
 			});
 		}
-	}); */
+	});
 
 // Prefix decision / definition
 
