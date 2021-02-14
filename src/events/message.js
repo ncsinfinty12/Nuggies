@@ -130,7 +130,7 @@ module.exports = async (client, message) => {
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	try {
 		if(Data) {
-			executecode('..');
+			executecode(Data.Prefix);
 		}
 
 		else if (!Data) {
