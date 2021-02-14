@@ -24,8 +24,8 @@ module.exports.help = {
 };
 
 module.exports.config = {
+	ownerOnly: true,
 	args: true,
-	restricted: true,
 	category: 'Owner',
 	disable: false,
 	cooldown: 0,
