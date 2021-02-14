@@ -63,6 +63,16 @@ module.exports = async (client, message) => {
 		}
 	}
 	if (message.author.bot) return;
+	const afkData = await afk.findOne({ id: message.author.id, GuildID: message.guild.id });
+	if (afkData) {
+		if (afkData.GuildID == message.guild.id) {
+			await afk.findOneAndDelete({
+				id: message.author.id,
+				GuildID: message.guild.id,
+			});
+			message.channel.send('Welcome back **' + message.author.username + '**! You are no longer afk.');
+		}
+	}
 	const pingeduser = (message.mentions.members.first());
 	if (pingeduser) {
 		const Data = await afk.findOne({ id: pingeduser.id, GuildID: message.guild.id });
