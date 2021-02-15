@@ -39,7 +39,7 @@ module.exports = async (client, message) => {
 			if (!config.developers.includes(message.author.id) && !config.globalmods.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot moderators / owners.');
 		}
 
-		if (client.commands.get(command).config.ownerOnly == true) {
+		if (client.commands.get(command).config.developers == true) {
 			if (!config.developers.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners.');
 		}
 
