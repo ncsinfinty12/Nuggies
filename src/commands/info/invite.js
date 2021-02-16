@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
 
 module.exports.help = {
 	aliases: [],
-	name: 'Information',
+	name: 'invite',
 	description: 'invite the bot to your server !',
 	usage: '.invite',
 };
@@ -22,7 +22,7 @@ module.exports.help = {
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'misc',
+	category: 'Information',
 	disable: false,
 	cooldown: 0,
 };
