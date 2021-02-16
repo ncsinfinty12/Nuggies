@@ -88,6 +88,22 @@ module.exports = async (client, message) => {
 		}
 	}
 
+	// nuggies x pwetzel chat
+
+	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
+		setTimeout(async function() {
+			message.channel.startTyping();
+			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+				message.inlineReply(Discord.Util.removeMentions(reply));
+				// The module will reply with the based on stimulus (1st parameter of the chat function!)
+				message.channel.stopTyping();
+			}).catch(error => {
+				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
+				message.channel.stopTyping();
+			});
+		}, 2000);
+	}
+
 	// Some basic command checks again and AFK function
 
 	if (message.author.bot) return;
