@@ -6,15 +6,42 @@ const muteRoleModel = require('../../../models/muteRoleSchema');
 const prefixModel = require('../../../models/prefixSchema');
 
 module.exports.run = async (client, message, args) => {
+	const errEmbed = new Discord.MessageEmbed()
+	.setAuthor(`⚠️ Please pull the role up in the hierarchy for it to work properly`)
+	.setDescription(`:exclamation: To set a custom mute role, delete the current one and use \`$muterole <@​role>\`! :exclamation:`)
+	.setFooter(`Please re-run the command to mute the user!`)
+
 	if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE ROLES` permission');
-	const prefixdata = await prefixModel.findOne({ GuildID: message.guild.id });
+	const Prefix = await prefixModel.findOne({ GuildID: message.guild.id });
 	const data = await muteRoleModel.findOne({ GuildID: message.guild.id });
 
 	let muteRoleId;
-	if (data.MuteRole) muteRoleId = message.guild.roles.cache.find(r => r.id === data.MuteRole);
-	if (!data.MuteRole) muteRoleId = message.guild.roles.cache.find(r => r.name === 'Muted');
+	if(!data) {
+	muteRoleId = message.guild.roles.cache.find(r => r.name === 'Muted')
+	} else if(data) muteRoleId = message.guild.roles.cache.find(r => r.id === data.MuteRole);
 
-	if (!muteRoleId) return message.channel.send(`Sorry but this guild doesn't have a Muted role created nor is it assigned to a different role.\nUse \`${prefixdata.Prefix}muterole @role or RoleID\` to assign a muted role`);
+	if(!muteRoleId)
+	try {
+		role = await message.guild.roles.create({
+			data: { name: 'Muted',
+					color: '#484848',
+					permissions: [],
+		},
+			reason: 'No mute role existed on the guild. [ Nuggies ]'
+		});
+
+		message.guild.channels.cache.forEach(async (channel) => {
+			await channel.updateOverwrite(role, {
+				SEND_MESSAGES: false,
+				ADD_REACTIONS: false,
+			});
+		});
+	message.channel.send(`The guild did not have a **Mute** role nor was it assigned to a different role`)
+	return message.channel.send(errEmbed)
+	}
+	catch (e) {
+		console.log(e.stack);
+	};
 
 	const member = message.mentions.members.first();
 	if (!member) {return message.channel.send('Please mention a user or provide a valid user ID');}
@@ -27,11 +54,11 @@ module.exports.run = async (client, message, args) => {
 
 	if(member.roles.highest.position > message.guild.me.roles.highest.position) {return message.channel.send('My highest role is lower than the mentioned user\'s role');}
 
-	if (!args[1]) {return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)');}
+	if (!args[1]) {return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)\n`$mute @user 1m <reason>');}
 
 	const time = ms(args[1]);
 	if (!time || time > 1209600000) {
-		return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)');
+		return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)\n`$mute @user 1m <reason>`');
 	}
 	// Cap at 14 days, larger than 24.8 days causes integer overflow
 
