@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+require('./utils/ExtendedMessage');
 const Discord = require('discord.js');
 const fs = require('fs');
 const util = require('util');
