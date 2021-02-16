@@ -7,6 +7,13 @@ const fs = require('fs');
 const config = require('../../../utils/config.json');
 const settings = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils) => {
+	let totalUsers = 0;
+	function sum() {
+		client.guilds.cache.forEach(guild => {
+			totalUsers += guild.memberCount;
+		});
+	}
+	sum();
 	// eslint-disable-next-line prefer-const
 	let milliseconds = parseInt((client.uptime % 1000) / 100);
 	let	seconds = parseInt((client.uptime / 1000) % 60);
@@ -29,9 +36,9 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Nuggies', 'Show the bot\'s stats.')
 			.addField('-------------------------------------------------------------------------------', '----------------------------------------------------------------------------')
 			.addField('Global Prefix', globalprefix, true)
-			.addField('Total Servers', client.guilds.cache.size, true)
-			.addField('Total Channels', client.channels.cache.size, true)
-			.addField('Total Users', client.users.cache.size, true)
+			.addField('Total Servers', `${client.guilds.cache.size.toLocaleString()}`, true)
+			.addField('Total Channels', `${client.channels.cache.size.toLocaleString()}`, true)
+			.addField('Total Users', `${totalUsers.toLocaleString()}`, true)
 			.addField('Bot Version', version['version'], true)
 			.addField('Library', 'Discord.js v12', true)
 			.addField('Developers', `${config.ownername1} \n ${config.ownername2} \n ${config.ownername3} \n ${config.ownername4} \n ${config.ownername5}`, true)
