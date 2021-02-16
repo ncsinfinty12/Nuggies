@@ -18,23 +18,22 @@ module.exports = async (client, message) => {
 	async function executecode(prefix) {
 		if(message.author.bot) return;
 
-// Ping Embed
+		// Ping Embed
 
 		if(message.content === `<@!${client.user.id}>`) {
 			const m = new Discord.MessageEmbed().setTitle('Hi, I\'m Nuggies !').setDescription('one of the most compact and easy to use bot on Discord !').addField('Prefix and Usage', 'The default prefix is `.` \n *Tip: Run .help` to get started! | use .setprefix <prefix> to change prefix!*').addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands)').setColor('RANDOM');
 			message.channel.send(m);
 		}
-// Basic command checks and argument definitions
+		// Basic command checks and argument definitions
 
 		if (message.content.indexOf(prefix) !== 0) return;
 
 		const args = message.content.slice(prefix.length).trim().split(/ +/g);
 		let command = args.shift().toLowerCase();
 
-// Command Handler Dynamic Checks
+		// Command Handler Dynamic Checks
 
-		if (client.aliases.has(command)) 
-			command = client.commands.get(client.aliases.get(command)).help.name;
+		if (client.aliases.has(command)) {command = client.commands.get(client.aliases.get(command)).help.name;}
 
 		if (client.commands.get(command).config.restricted == true) {
 			if (!config.developers.includes(message.author.id) && !config.globalmods.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot moderators / owners.');
@@ -52,7 +51,7 @@ module.exports = async (client, message) => {
 			if (!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${prefix + 'help ' + client.commands.get(command).help.name}`);
 		}
 
-// Core Command Handler and Cooldown Checks
+		// Core Command Handler and Cooldown Checks
 
 		const commandFile = client.commands.get(command);
 		const cooldown = client.commands.get(command).config.cooldown;
@@ -65,7 +64,7 @@ module.exports = async (client, message) => {
 			}
 		}
 
-// Command Logs
+		// Command Logs
 
 		if (commandFile) {
 			try{
@@ -77,7 +76,8 @@ module.exports = async (client, message) => {
 				await timestamps.set(message.author.id, Date.now());
 				setTimeout(async () => await timestamps.delete(message.author.id), cooldown);
 				await commandFile.run(client, message, args, utils);
-			} // Command Errors
+			}
+			// Command Errors
 			catch (error) {
 				if (client.user.id === '779741162465525790') {
 					const errEmbed = new Discord.MessageEmbed().setTitle(`Command error in ${message.guild.name}`).addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false).setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``).setTimestamp();
@@ -88,9 +88,35 @@ module.exports = async (client, message) => {
 		}
 	}
 
-// Some basic command checks again and AFK function
+	// nuggies x pwetzel chat
+
+	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
+		setTimeout(async function() {
+			message.channel.startTyping();
+			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+				message.inlineReply(Discord.Util.removeMentions(reply));
+				// The module will reply with the based on stimulus (1st parameter of the chat function!)
+				message.channel.stopTyping();
+			}).catch(error => {
+				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
+				message.channel.stopTyping();
+			});
+		}, 2000);
+	}
+
+	// Some basic command checks again and AFK function
 
 	if (message.author.bot) return;
+	const afkData = await afk.findOne({ id: message.author.id, GuildID: message.guild.id });
+	if (afkData) {
+		if (afkData.GuildID == message.guild.id) {
+			await afk.findOneAndDelete({
+				id: message.author.id,
+				GuildID: message.guild.id,
+			});
+			message.channel.send('Welcome back **' + message.author.username + '**! You are no longer afk.');
+		}
+	}
 	const pingeduser = (message.mentions.members.first());
 	if (pingeduser) {
 		const Data = await afk.findOne({ id: pingeduser.id, GuildID: message.guild.id });
@@ -100,9 +126,10 @@ module.exports = async (client, message) => {
 		}
 	}
 
-// Chat bot functionality
+	const result = await blacklist.findOne({ id: message.author.id });
+	if (result) return;
 
-/*	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
+	chat.findOne({ _id: '6023f079f935032c19dd341a' }, async (err, data) => {
 		if(err) throw err;
 		if(!message.content) return;
 		if(data.channelID.includes(message.channel.id)) {
@@ -112,9 +139,9 @@ module.exports = async (client, message) => {
 				message.channel.stopTyping();
 			});
 		}
-	}); */
+	});
 
-// Prefix decision / definition
+	// Prefix decision / definition
 
 	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
 	try {

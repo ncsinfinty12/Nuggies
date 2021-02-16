@@ -1,11 +1,9 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
-
 const blacklist = require('../../../models/blacklistSchema');
 module.exports.run = async (client, message, args, utils) => {
-
-	if(!args) return message.channel.send('Please provide a user ID to blacklist !');
+	if(!config.globalmods.includes(message.author.id) || !config.globalmods.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners.');
 	const User = args[0];
 
 	blacklist.findOne({ id : User }, async (err, data) => {
@@ -33,7 +31,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	restricted: true,
+	restricted: false,
 	args: true,
 	category: 'Owner',
 	disable: false,

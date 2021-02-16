@@ -7,6 +7,13 @@ const config = require('../../../utils/config.json');
 const settings = require('../../../utils/config.json');
 const prefixData = require('../../../models/prefixSchema');
 module.exports.run = async (client, message, args, utils) => {
+	let totalUsers = 0;
+	function sum() {
+		client.guilds.cache.forEach(guild => {
+			totalUsers += guild.memberCount;
+		});
+	}
+	sum();
 	// eslint-disable-next-line prefer-const
 	let milliseconds = parseInt((client.uptime % 1000) / 100);
 	let	seconds = parseInt((client.uptime / 1000) % 60);
