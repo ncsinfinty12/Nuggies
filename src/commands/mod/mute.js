@@ -2,46 +2,45 @@
 const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 const ms = require('ms');
-const muteRoleModel = require('../../../models/muteRoleSchema');
-const prefixModel = require('../../../models/prefixSchema');
 
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, utils, data) => {
 	const errEmbed = new Discord.MessageEmbed()
-	.setAuthor(`⚠️ Please pull the role up in the hierarchy for it to work properly`)
-	.setDescription(`:exclamation: To set a custom mute role, delete the current one and use \`$muterole <@​role>\`! :exclamation:`)
-	.setFooter(`Please re-run the command to mute the user!`)
+		.setAuthor('⚠️ Please pull the role up in the hierarchy for it to work properly')
+		.setDescription(':exclamation: To set a custom mute role, delete the current one and use `$muterole <@​role>`! :exclamation:')
+		.setFooter('Please re-run the command to mute the user!');
 
 	if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE ROLES` permission');
-	const Prefix = await prefixModel.findOne({ GuildID: message.guild.id });
-	const data = await muteRoleModel.findOne({ GuildID: message.guild.id });
 
 	let muteRoleId;
-	if(!data) {
-	muteRoleId = message.guild.roles.cache.find(r => r.name === 'Muted')
-	} else if(data) muteRoleId = message.guild.roles.cache.find(r => r.id === data.MuteRole);
 
-	if(!muteRoleId)
-	try {
-		role = await message.guild.roles.create({
-			data: { name: 'Muted',
+	if(data.guild.mute_role == 'null') {
+		muteRoleId = message.guild.roles.cache.find(r => r.name === 'Muted');
+	}
+	else { muteRoleId = message.guild.roles.cache.find(r => r.id === data.guild.mute_role); }
+
+	if(!muteRoleId) {
+		try {
+			muteRoleId = await message.guild.roles.create({
+				data: { name: 'Muted',
 					color: '#484848',
 					permissions: [],
-		},
-			reason: 'No mute role existed on the guild. [ Nuggies ]'
-		});
-
-		message.guild.channels.cache.forEach(async (channel) => {
-			await channel.updateOverwrite(role, {
-				SEND_MESSAGES: false,
-				ADD_REACTIONS: false,
+				},
+				reason: 'No mute role existed on the guild. [ Nuggies ]',
 			});
-		});
-	message.channel.send(`The guild did not have a **Mute** role nor was it assigned to a different role`)
-	return message.channel.send(errEmbed)
+
+			message.guild.channels.cache.forEach(async (channel) => {
+				await channel.updateOverwrite(muteRoleId, {
+					SEND_MESSAGES: false,
+					ADD_REACTIONS: false,
+				});
+			});
+			message.channel.send('The guild did not have a **Mute** role nor was it assigned to a different role');
+			return message.channel.send(errEmbed);
+		}
+		catch (e) {
+			console.log(e.stack);
+		}
 	}
-	catch (e) {
-		console.log(e.stack);
-	};
 
 	const member = message.mentions.members.first();
 	if (!member) {return message.channel.send('Please mention a user or provide a valid user ID');}
