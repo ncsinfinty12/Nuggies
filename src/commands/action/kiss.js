@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('https://nekos.life/api/kiss');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
+		.setColor('RANDOM')
 		.setTitle(`${message.mentions.users.first().username}, you got a kiss from ${message.author.username}!`)
 		.setImage(body.url)
 		.setFooter('kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss kiss');

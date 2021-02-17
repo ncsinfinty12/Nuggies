@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('https://nekos.life/api/v2/img/feed');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
+		.setColor('RANDOM')
 		.setTitle(`${message.mentions.users.first().username}, you got a feed from ${message.author.username}!`)
 		.setImage(body.url)
 		.setFooter('you look cute :)');
