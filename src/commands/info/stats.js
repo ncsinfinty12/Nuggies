@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const superagent = require('superagent');
@@ -5,8 +7,8 @@ const osutils = require('os-utils');
 const fs = require('fs');
 const config = require('../../../utils/config.json');
 const settings = require('../../../utils/config.json');
-const prefixData = require('../../../models/prefixSchema');
-module.exports.run = async (client, message, args, utils) => {
+
+module.exports.run = async (client, message, args, utils, data) => {
 	let totalUsers = 0;
 	function sum() {
 		client.guilds.cache.forEach(guild => {
@@ -26,10 +28,10 @@ module.exports.run = async (client, message, args, utils) => {
 	minutes = (minutes < 10) ? '0' + minutes : minutes;
 	seconds = (seconds < 10) ? '0' + seconds : seconds;
 	const globalprefix = settings.prefix;
-	const serverPrefix = await prefixData.findOne({ GuildID: message.guild.id });
+	const serverPrefix = data.guild.prefix;
 
 	let Prefix;
-	if(serverPrefix !== null) Prefix = serverPrefix.Prefix;
+	if(serverPrefix !== null) Prefix = serverPrefix;
 	if(serverPrefix == null) Prefix = globalprefix;
 	osutils.cpuUsage(function(v) {
 		const embed = new Discord.MessageEmbed()
@@ -53,7 +55,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Ping', `\`\`\`${Math.round(client.ws.ping)}` + 'ms\`\`\`', true)
 			.addField('Uptime', `\`\`\`${days + 'd ' + hours + 'h ' + minutes + 'm'}\`\`\``, true)
 			.addField('-----------------------------------------------------------------', '---------------------------------------------------------------')
-			.addField('Developers', `**${config.ownername1}**‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‎‎‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎**${config.ownername2}**‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‎‎‎‎‎**${config.ownername3}**‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‎‎‎‎‎**${config.ownername4}**‎‎‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ **‎${config.ownername5}**`, true)
+			.addField('Developers', `**${config.ownername1}**‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‎‎‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎**${config.ownername2}**‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‎‎‎‎‎**${config.ownername3}**‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‎‎‎‎‎**${config.ownername4}**‎‎‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ **‎${config.ownername5}**`, true);
 		message.channel.send({ embed });
 	});
 
