@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('https://nekos.life/api/v2/img/hug');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
+		.setColor('RANDOM')
 		.setTitle(`${message.mentions.users.first().username}, you got hugged by ${message.author.username}`)
 		.setImage(body.url)
 		.setFooter('that hugss');
