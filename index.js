@@ -62,7 +62,7 @@ async function startUp() {
 	// const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI', client);
 
 	// mongoose connect
-	client.data.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_IYA').then(() => {
+	client.data.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main').then(() => {
 		// If it connects log the following
 		console.log('Connected to MongoDB database!');
 	}).catch((err) => {
@@ -103,7 +103,7 @@ async function startUp() {
 	};
 
 
-	client.login('NzQyMjMxOTU4MTk2NTg0NTIx.XzDHYA.xIAjaUvwnluVa9BcVZuEfYoyZbI');
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU');
 }
 startUp();
 

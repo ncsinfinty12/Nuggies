@@ -11,6 +11,7 @@ const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN)
 module.exports = async (client, message) => {
 //                                               -- Message Event Function --
 	if (!message.guild) return;
+
 	// nuggies x pwetzel chat
 
 	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
@@ -87,14 +88,15 @@ module.exports = async (client, message) => {
 	if(message.author.bot) return;
 
 	// Ping Embed
+	// Get prefix from guild else get from config file
+	const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
 
 	if(!message.author.bot && message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
-		const m = new Discord.MessageEmbed().setTitle('Hi, I\'m Nuggies !').setDescription('one of the most compact and easy to use bot on Discord !').addField('Prefix and Usage', 'The default prefix is `.` \n *Tip: Run .help` to get started! | use .setprefix <prefix> to change prefix!*').addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands)').setColor('RANDOM');
+		const m = new Discord.MessageEmbed().setTitle('Hi, I\'m Nuggies !').setDescription('one of the most compact and easy to use bot on Discord !').addField('Prefix and Usage', 'My current prefixes are ' + `\`${prefixx}\` and <@${client.user.id}>` + '\n *Tip: Run .help` to get started! | use .setprefix <prefix> to change prefix!*').addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands)').setColor('RANDOM');
 		message.channel.send(m);
 	}
 	// Basic command checks and argument definitions
-	// Get prefix from guild else get from config file
-	const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
+
 
 	const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
 	const prefix = !message.author.bot && message.content.match(prefixMention) ? !message.author.bot && message.content.match(prefixMention)[0] : prefixx;
