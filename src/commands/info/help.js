@@ -2,8 +2,6 @@
 const Discord = require('discord.js');
 // const help = require('../../../data/helpmessages.json');
 const config = require('../../../utils/config.json');
-const PrefiX = require('../../../models/prefixSchema');
-
 
 module.exports.help = {
 	aliases: ['halp'],
@@ -21,15 +19,8 @@ module.exports.config = {
 };
 
 
-module.exports.run = async (client, message, args, utils) => {
-	let prefix;
-	const Data = await PrefiX.findOne({ GuildID: message.guild.id });
-	if (Data) {
-		prefix = Data.Prefix;
-	}
-	if (!Data) {
-		prefix = config.prefix;
-	}
+module.exports.run = async (client, message, args, utils, data) => {
+	const prefix = data.guild.prefix;
 	if (!args[0]) {
 		const a = new Discord.MessageEmbed()
 			.setTitle('Hello! I\'m Nuggies!')
