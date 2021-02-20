@@ -1,19 +1,19 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
-const superagent = require('superagent');
+const axios = require('axios');
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-
-	(async () => {
-		const body = await superagent('https://meme-api.herokuapp.com/gimme');
-		const embed = new Discord.MessageEmbed()
-			.setColor(0xab4aff)
-			.setTitle(body.body.title)
-			.setImage(body.body.url)
-			.setURL(body.body.postLink);
-		message.channel.send(embed);
-	})();
+	axios.get('https://api.nuggies.tech/api/meme')
+		.then(function(response) {
+			const embed = new Discord.MessageEmbed()
+				.setTitle(`${response.data.title}`)
+				.setURL(`${response.data.url}`)
+				.setImage(response.data.image)
+				.setColor('RANDOM')
+				.setFooter(`👍 ${response.data.upvotes} 👎 ${response.data.downvotes} 💬 ${response.data.comments}`);
+			message.channel.send(embed);
+		});
 };
 
 
