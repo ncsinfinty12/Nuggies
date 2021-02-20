@@ -7,8 +7,8 @@ module.exports.run = async (client, message, args, utils) => {
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor('#2c2f33')
-		.setTitle('Suggestion from ' + message.author.username)
-		.setDescription('**' + suggestion + '**\n\n\n ')
+		.setTitle('Suggestion from ' + message.author.username + '#' + message.author.tag + `[${message.author.id}]`)
+		.setDescription(suggestion)
 		.setFooter('if you want to suggest something, use ' + config.prefix + 'suggest <suggestion>');
 	e.send(embed).then(m => {
 		m.react('👍');

@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 		)
 		.addField('Before', msg.oldContent, false)
 		.addField('After', msg.newContent, false)
-		.setFooter(`Date: ${msg.date} | ${args[0] || 1}/${esnipes.length}`);
+		.setFooter(`at ${msg.date} | page ${args[0] || 1}/${esnipes.length}`);
 	if (msg.attachment) Embed.setImage(msg.attachment);
 	message.channel.send(Embed);
 };

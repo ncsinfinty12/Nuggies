@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args, utils) => {
 			msg.author.displayAvatarURL({ dynamic: true, size: 256 }),
 		)
 		.setDescription(msg.content)
-		.setFooter(`Date: ${msg.date} | page ${args[0] || 1}/${snipes.length}`);
+		.setFooter(`at ${msg.date} | page ${args[0] || 1}/${snipes.length}`);
 	if (msg.image) Embed.setImage(msg.image);
 	message.channel.send(Embed);
 };
