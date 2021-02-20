@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setAuthor(member.user.tag, member.user.displayAvatarURL())
 		.setColor('RANDOM')
 		.setThumbnail(member.user.displayAvatarURL({ dynamic : true }))
-		.addField('status', presence[member.presence.status], true)
+		// .addField('status', presence[member.presence.status], true)
 		.addField('ID 🆔', member.id, true)
 		.addField('Display Name 🤔', member.displayName, true)
 		.addField('Highest Role 🔝', member.roles.highest.name, true)
