@@ -6,6 +6,7 @@ const movie = require('node-movie');
 module.exports.run = async (client, message, args, utils) => {
 
 	const saymessage = args.join(' ');
+	if(!saymessage) return message.reply('Please provide something to search!');
 	movie(saymessage, data => {
 		if(!data) return message.channel.send('No movie or show found with that name 😿');
 		const embed = new Discord.MessageEmbed()
