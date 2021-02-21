@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils) => {
 			const gifurl = response.data.url;
 			const embed = new Discord.MessageEmbed()
 				.setTitle(`${message.mentions.users.first().username} ! ${message.author.username} is staring at you angrily!`)
-				.setFooter('so cutee')
+				.setFooter('sheesh')
 				.setColor('RANDOM')
 				.setImage(gifurl);
 			message.channel.send(embed);
