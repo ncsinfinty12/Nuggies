@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor(0xff75c6)
-		.setTitle('reported by ' + message.author.username + '#' + message.author.tag + `[${message.author.id}]`)
+		.setTitle('reported by ' + message.author.tag + ` [${message.author.id}]`)
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to report a bug, use ' + config.prefix + 'bug <bug>');
 	message.channel.send('bug report submitted. Join discord.gg/zzURhQGpRY to view your report !');
