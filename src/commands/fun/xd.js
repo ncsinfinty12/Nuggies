@@ -3,20 +3,20 @@ const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils, data) => {
-// code here
+	message.channel.send('xd');
 };
 
 module.exports.help = {
-	aliases: ['aliases'],
-	name: 'name',
-	description: 'description',
-	usage: config.prefix + 'usage',
+	aliases: [],
+	name: 'xd',
+	description: 'xd',
+	usage: config.prefix + 'xd',
 };
 
 module.exports.config = {
 	args: false,
 	restricted: false,
-	category: 'category',
+	category: 'fun',
 	disable: false,
 	cooldown: 1000,
 };
