@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
-const muteRoleModel = require('../../../models/muteRoleSchema.js');
 
-module.exports.run = async (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils, data) => {
 
 	const muteRole = message.mentions.roles.first();
 
@@ -14,8 +13,8 @@ module.exports.run = async (client, message, args, utils) => {
 		.setColor('#FF0000')
 		.setAuthor('Error executing the command')
 		.setDescription('You need the ``Manage Server`` permission to run this command!');
-		
-		if(!muteRole) return message.channel.send(errEmbed);
+
+	if(!muteRole) return message.channel.send(errEmbed);
 
 	const success = new Discord.MessageEmbed()
 		.setColor('#00FF00')
@@ -31,35 +30,10 @@ module.exports.run = async (client, message, args, utils) => {
 		.setDescription('Please provide a role to set as muterole!');
 
 	if(!args) return message.channel.send(argcheck);
-	
+
 	if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(perms);
-
-	const data = await muteRoleModel.findOne({
-		GuildID: message.guild.id,
-	});
-
-	if (data) {
-		await muteRoleModel.findOneAndRemove({
-			GuildID: message.guild.id,
-		});
-		message.channel.send(success);
-
-		const newData = new muteRoleModel({
-			MuteRole: muteRole.id,
-			GuildID: message.guild.id,
-		});
-		newData.save();
-	}
-
-	else if (!data) {
-		message.channel.send(success2);
-
-		const newData = new muteRoleModel({
-			MuteRole: muteRole.id,
-			GuildID: message.guild.id,
-		});
-		newData.save();
-	}
+	await client.data.setmute_role(message.guild.id, muteRole.id);
+	message.channel.send(success);
 };
 module.exports.help = {
 	aliases: ['mutedrole'],

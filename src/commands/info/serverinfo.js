@@ -63,13 +63,13 @@ module.exports.run = async (client, message, args, utils) => {
 			`** <:boostbadge:785122045951344701> Boost Count:** ${message.guild.premiumSubscriptionCount || '0'}`,
 			'\u200b',
 		])
-		.addField('Members', [
-			`**<:online:785124353628045362> Online:** ${members.filter(member => member.presence.status === 'online').size}`,
-			`**<:statusidle:751227734239477780>Idle:** ${members.filter(member => member.presence.status === 'idle').size}`,
-			`**<:dnd:785124430912290846> Do Not Disturb:** ${members.filter(member => member.presence.status === 'dnd').size}`,
-			`**<:statusoffline:785124410063323136> Offline:** ${members.filter(member => member.presence.status === 'offline').size}`,
-			'\u200b',
-		])
+		// .addField('Members', [
+		// 	`**<:online:785124353628045362> Online:** ${members.filter(member => member.presence.status === 'online').size}`,
+		// 	`**<:statusidle:751227734239477780>Idle:** ${members.filter(member => member.presence.status === 'idle').size}`,
+		// 	`**<:dnd:785124430912290846> Do Not Disturb:** ${members.filter(member => member.presence.status === 'dnd').size}`,
+		// 	`**<:statusoffline:785124410063323136> Offline:** ${members.filter(member => member.presence.status === 'offline').size}`,
+		// 	'\u200b',
+		// ])
 		.setTimestamp();
 	message.channel.send(embed);
 };

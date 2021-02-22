@@ -24,8 +24,8 @@ module.exports.help = {
 
 module.exports.config = {
 	args: false,
-	restricted: false,
-	category: 'Fun',
+	restricted: true,
+	category: 'Onwer',
 	disable: false,
 	cooldown: 2000,
 

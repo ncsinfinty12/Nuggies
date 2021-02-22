@@ -4,7 +4,7 @@ function clean(text) {
 	else {return text;}
 }
 
-module.exports.run = async (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils, data) => {
 	args = args.join(' ');
 	try {
 		let evaled = eval(args);
@@ -24,7 +24,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	ownerOnly: true,
+	developers: true,
 	args: true,
 	category: 'Owner',
 	disable: false,
