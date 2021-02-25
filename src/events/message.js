@@ -25,7 +25,7 @@ module.exports = async (client, message) => {
 				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
 				message.channel.stopTyping();
 			});
-		}, 2000);
+		}, 3000);
 	}
 
 	if (message.author.bot) return;
