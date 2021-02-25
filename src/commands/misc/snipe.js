@@ -5,6 +5,7 @@ const config = require('../../../utils/config.json');
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
+	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE MESSAGES` permission');
 	const snipes = message.client.snipes.get(message.channel.id) || [];
 	const msg = snipes[args[0] - 1 || 0];
 	if (!msg) return message.channel.send('theres nothing to be sniped');
