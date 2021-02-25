@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
 
 	// nuggies x pwetzel chat
 
-	if (message.channel.id === '799671677888757830' && message.author.id == '723112579584491571') {
+	if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
 		setTimeout(async function() {
 			message.channel.startTyping();
 			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
@@ -25,7 +25,7 @@ module.exports = async (client, message) => {
 				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
 				message.channel.stopTyping();
 			});
-		}, 2000);
+		}, 3000);
 	}
 
 	if (message.author.bot) return;
