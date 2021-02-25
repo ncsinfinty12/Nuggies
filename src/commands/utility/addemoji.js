@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const { parse } = require('superagent');
 
 module.exports.run = async (client, message, args, utils, data) => {
+	if (!message.guild.member(client.user).hasPermission('ADD_EMOJIS')) return message.reply('❌**Error:** I don\'t have the **Manage Roles** permission!');
+	if (!message.member.hasPermission('ADD_EMOJIS')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `ADD EMOJIS` permission.');
 	if(!args.length) return message.reply('please give some emojis to add!');
 
 	for(const rawEmoji of args) {
