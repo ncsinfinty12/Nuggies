@@ -4,7 +4,6 @@ const config = require('../../../utils/config.json');
 const ms = require('ms');
 
 module.exports.run = async (client, message, args, utils, data) => {
-	if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE ROLES` permission');
 
 	let muteRoleId;
 
@@ -45,5 +44,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'Moderation',
 	disable: false,
-	cooldown: 3600000 * 5,
+	cooldown: 360000 * 5,
 };
