@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const { GooseCache } = require('goosecache');
+const cachegoose = new GooseCache(mongoose, {
+	engine: 'memory',
+});
 mongoose.set('useFindAndModify', false);
 const usersDB = require('../models/users');
 const guildsDB = require('../models/guilds');
@@ -19,7 +23,7 @@ module.exports = {
      */
 	async getGuildDB(guildID) {
 		if (!guildID) throw new Error('Please Provide a Guild ID');
-		const guild = await guildsDB.findOne({ id: guildID });
+		const guild = await guildsDB.findOne({ id: guildID }).cache(60);
 		if (!guild) {
 			const newG = new guildsDB({ id: guildID });
 			const {
@@ -66,7 +70,7 @@ module.exports = {
    */
 	async getUserDB(userID) {
 		if (!userID) throw new Error('Please Provide a User ID');
-		const user = await usersDB.findOne({ id: userID });
+		const user = await usersDB.findOne({ id: userID }).cache(60);
 		if (!user) {
 			const newUs = new usersDB({ id: userID });
 			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason } = newUs;
@@ -99,6 +103,7 @@ module.exports = {
 			user.is_afk = true;
 			user.afkReason = reason;
 			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
 			return { reason };
 		}
 	},
@@ -117,6 +122,7 @@ module.exports = {
 			user.is_afk = false;
 			user.afkReason = null;
 			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
 			return { userID };
 		}
 	},
@@ -141,6 +147,7 @@ module.exports = {
 				user.blacklisted_reason = null;
 			}
 			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
 			return { reason };
 		}
 		else {
@@ -153,6 +160,7 @@ module.exports = {
 				user.blacklisted_reason = null;
 			}
 			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
 			return { reason };
 		}
 	},
@@ -178,6 +186,7 @@ module.exports = {
 		}
 		guild.prefix = prefix;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { prefix };
 	},
 	/**
@@ -197,6 +206,7 @@ module.exports = {
 		if (toggle == 'false') toggle = false;
 		guild.chatbot_enabled = toggle;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { toggle };
 	},
 	/**
@@ -214,6 +224,7 @@ module.exports = {
 		}
 		guild.chatbot_channel = channel;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { channel };
 	},
 	/**
@@ -233,6 +244,7 @@ module.exports = {
 		if (toggle == 'false') toggle = false;
 		guild.automeme_enabled = toggle;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { toggle };
 	},
 	/**
@@ -250,6 +262,7 @@ module.exports = {
 		}
 		guild.automeme_channel = channel;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { channel };
 	},
 	/**
@@ -267,6 +280,7 @@ module.exports = {
 		}
 		guild.mute_role = role;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { role };
 	},
 	/**
@@ -286,6 +300,7 @@ module.exports = {
 		if (toggle == 'false') toggle = false;
 		guild.afk_enabled = toggle;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { toggle };
 	},
 	/**
@@ -303,6 +318,7 @@ module.exports = {
 		}
 		guild.afk_role = role;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
 		return { role };
 	},
 
