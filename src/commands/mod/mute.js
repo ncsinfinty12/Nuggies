@@ -57,7 +57,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 
 	const time = ms(args[1]);
 	if (!time || time > 1209600000) {
-		return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)\n`$mute @user 1m <reason>`');
+		return message.channel.send('Please enter a length of time of 14 days or less (1s/m/h/d)\n`.mute @user 1m <reason>`');
 	}
 	// Cap at 14 days, larger than 24.8 days causes integer overflow
 

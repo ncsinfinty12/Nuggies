@@ -6,14 +6,14 @@ module.exports.run = async (client, message, args, utils, data) => {
 	if(args[1] === 'true') {
 		if(!channel) {
 			const m = new MessageEmbed()
-				.setColor('red')
+				.setColor('RED')
 				.addField('Error', 'Please mention a channel');
 			message.channel.send(m);
 			return;
 		}
 		if(data.guild.chatbot_channel == channel.id) {
 			return message.channel.send(new MessageEmbed()
-				.setColor('red')
+				.setColor('RED')
 				.addField('Error', `chatbot is already \`true\` in <#${channel.id}>`));
 		}
 		await client.data.setchatbot_enabled(message.guild.id, 'true');
@@ -26,14 +26,14 @@ module.exports.run = async (client, message, args, utils, data) => {
 	else if (args[1] === 'false') {
 		if(!channel) {
 			const m = new MessageEmbed()
-				.setColor('red')
+				.setColor('RED')
 				.addField('Error', 'Please mention a channel');
 			message.channel.send(m);
 			return;
 		}
 		if(data.guild.chatbot_channel !== channel.id) {
 			const n = new MessageEmbed()
-				.setColor('red')
+				.setColor('RED')
 				.addField('Error', `chatbot is already \`false\` in <#${channel.id}>`);
 			message.channel.send(n);
 			return;

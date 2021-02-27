@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('https://nekos.life/api/v2/img/smug');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
+		.setColor('RANDOM')
 		.setTitle(`${message.author.username} smugs`)
 		.setImage(body.url)
 		.setFooter('smugs 😳');
