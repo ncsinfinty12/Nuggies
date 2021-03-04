@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 
 	await client.data.blacklist(target.id, 'false', 'null');
 
-	target.send("You have been whitelisted from using the bot!\n**Don't break the rules again!**");
+	target.send(`**You have been whitelisted from using the bot!**\n \n Moderator: ${message.author.tag} **Don't break the rules again!** \n join nuggies support: https://discord.gg/ut7PxgNdef`);
 	message.reply(
 		`Whitelisted **${target.username + '#' + target.discriminator}**`,
 	);

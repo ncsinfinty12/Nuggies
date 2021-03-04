@@ -16,11 +16,12 @@ module.exports.run = async (client, message, [target, ...args], utils, data) => 
 
 	const blacklist = await client.data.blacklist(target.id, 'true', reason);
 
-	target.send('You have been blacklisted from using the bot! \n \n **Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef');
+	target.send(`You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`);
 	message.reply(
 		`Blacklisted **${target.username + '#' + target.discriminator}**\n` +
-			`Reason: \`${blacklist.reason}\``,
+			`Reason: \`${blacklist.reason}\``, +`Moderator: \`${message.author.tag}\``,
 	);
+	message.delete();
 };
 
 
