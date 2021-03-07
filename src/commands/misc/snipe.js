@@ -5,6 +5,7 @@ const config = require('../../../utils/config.json');
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (client, message, args, utils) => {
+	if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE MESSAGES` permission');
 	const snipes = message.client.snipes.get(message.channel.id) || [];
 	const msg = snipes[args[0] - 1 || 0];
 	if (!msg) return message.channel.send('theres nothing to be sniped');
@@ -15,7 +16,7 @@ module.exports.run = async (client, message, args, utils) => {
 			msg.author.displayAvatarURL({ dynamic: true, size: 256 }),
 		)
 		.setDescription(msg.content)
-		.setFooter(`Date: ${msg.date} | page ${args[0] || 1}/${snipes.length}`);
+		.setFooter(`at ${msg.date} | page ${args[0] || 1}/${snipes.length}`);
 	if (msg.image) Embed.setImage(msg.image);
 	message.channel.send(Embed);
 };

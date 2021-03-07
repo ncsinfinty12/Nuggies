@@ -5,6 +5,7 @@ module.exports = async (client, oldMessage, newMessage) => {
 		esnipes.unshift({
 			oldContent: oldMessage.content,
 			newContent: newMessage.content,
+			link: newMessage.url,
 			author: newMessage.author,
 			image: newMessage.attachments.first()
 				? newMessage.attachments.first().proxyURL

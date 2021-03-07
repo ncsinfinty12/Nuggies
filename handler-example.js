@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
-const config = require('../../utils/config.json');
+const config = require('../../../utils/config.json');
 
-module.exports.run = async (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils, data) => {
 // code here
 };
 
@@ -18,4 +18,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'category',
 	disable: false,
+	cooldown: 1000,
 };
