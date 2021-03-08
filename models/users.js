@@ -25,6 +25,10 @@ const usersDB = new Schema({
 		type: String,
 		default: 'null',
 	},
+	premium: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 module.exports = mongoose.model('usersDB', usersDB);
