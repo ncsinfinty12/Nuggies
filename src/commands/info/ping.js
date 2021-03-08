@@ -27,13 +27,13 @@ module.exports.run = async (client, message, args, utils) => {
 
 		// Send the results in an embed.
 		const embed = new Discord.MessageEmbed()
-			.setTitle('Test complete')
 			.setColor('RANDOM')
-			.setDescription(`**Message Send:** ${sendPing} ms\n\
-        **Message Edit:** ${editPing} ms\n\
-        **Message React:** ${reactPing} ms\n\
-        **Message Delete:** ${deletePing} ms\n\
-        **Total:** ${sendPing + editPing + reactPing + deletePing} ms\n`);
+			.setAuthor('Test complete!', message.author.avatarURL())
+			.setDescription(`**Message Send Latency:** ${sendPing} ms\n\
+**Message Edit Latency:** ${editPing} ms\n\
+**Message React Latency:** ${reactPing} ms\n\
+**Message Delete Latency:** ${deletePing} ms\n\
+**Total Latency:** ${sendPing + editPing + reactPing + deletePing} ms\n`);
 		return message.channel.send(embed);
 	}
 	else{
