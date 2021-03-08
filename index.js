@@ -10,7 +10,6 @@ const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
-
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -23,7 +22,6 @@ client.data = require('./functions/mongo');
 const unhhook = new Discord.WebhookClient(config.unhhookID, config.unhhookTOKEN);
 
 async function startUp() {
-
 	// Handlers
 
 	// load all events

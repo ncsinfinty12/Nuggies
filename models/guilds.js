@@ -32,6 +32,10 @@ const guildsDB = new Schema({
 		type: String,
 		default: 'null',
 	},
+	premium: {
+		type: Boolean,
+		default: false,
+	},
 
 });
 
