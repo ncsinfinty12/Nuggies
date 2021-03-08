@@ -30,10 +30,10 @@ module.exports.run = async (client, message, args, utils) => {
 			.setTitle('Test complete')
 			.setColor('RANDOM')
 			.setDescription(`**Message Send:** ${sendPing} ms\n\
-            **Message Edit:** ${editPing} ms\n\
-            **Message React:** ${reactPing} ms\n\
-            **Message Delete:** ${deletePing} ms\n\
-            **Total:** ${sendPing + editPing + reactPing + deletePing} ms\n`);
+        **Message Edit:** ${editPing} ms\n\
+        **Message React:** ${reactPing} ms\n\
+        **Message Delete:** ${deletePing} ms\n\
+        **Total:** ${sendPing + editPing + reactPing + deletePing} ms\n`);
 		return message.channel.send(embed);
 	}
 	else{
