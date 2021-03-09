@@ -52,7 +52,7 @@ async function startUp() {
 	// load music events
 	const musicEvents = fs.readdirSync('./src/musicevents').filter(file => file.endsWith('.js'));
 	console.log(`Loading a total of ${musicEvents.length} events.`);
-	for (const file of eventFiles) {
+	for (const file of musicEvents) {
 		const musicEvent = require(`./src/musicevents/${file}`);
 		const musicEventName = file.split('.')[0];
 		client.manager.on(musicEventName, musicEvent.bind(null, client));
