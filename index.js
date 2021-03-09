@@ -10,7 +10,9 @@ const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
+const MusicManager = require('./functions/MusicManager');
 
+client.music = new MusicManager(client);
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
