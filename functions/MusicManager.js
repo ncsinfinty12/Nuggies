@@ -1,19 +1,26 @@
-const { Manager } = require('lavacord');
-
-const nodes = [
-    { id: "1", host: "localhost", port: 4000, password: "idots" }
-];
+const { Manager } = require('erela.js');
 
 module.exports = class MusicManager {
     constructor(client) {
-        this.manager = new Manager(nodes, {
-            user: client.user.id,
-            shards: client.shard.count,
-            send: (packet) => {
-                // shrug
+        this.manager = new Manager({
+            [
+                {
+                    host: 'localhost',
+                    password: 'idots',
+                    port: 4000
+                }
+            ],
+            send: (id, payload) => {
+                const guild = client.guilds.cache.get(id);
+                
+                if (guild) guild.shard.send(payload);
             }
         });
         
-        await this.manager.connect();
+        this.manager.on("nodeConnect", node => {
+            console.log(`Node ${node.options.identifier} connected.`);
+        });
+        
+        client.on("raw", d => this.manager.updateVoiceState(d));
     }
 }
