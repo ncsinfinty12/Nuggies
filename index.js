@@ -10,9 +10,32 @@ const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
-const MusicManager = require('./functions/MusicManager');
+const { Manager } = require('erela.js');
+const nodes = [
+  {
+    host: "localhost",
+    password: "idots",
+    port: 4000,
+  }
+];
 
-client.music = new MusicManager(client);
+client.manager = new Manager({
+    nodes,
+    send: (id, payload) => {
+        const guild = client.guilds.cache.get(id);
+	    
+        if (guild) guild.shard.send(payload);
+    }
+});
+        
+client.manager.on("nodeConnect", node => {
+    console.log(`Node ${node.options.identifier} connected.`);
+});        
+client.on("raw", d => this.manager.updateVoiceState(d));
+client.once('ready', () => {
+    client.manager.init(client.user.id);
+});
+
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
