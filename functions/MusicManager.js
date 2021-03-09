@@ -1,15 +1,17 @@
 const { Manager } = require('erela.js');
 
+const nodes = [
+  {
+    host: "localhost",
+    password: "idots",
+    port: 4000,
+  }
+];
+
 module.exports = class MusicManager {
     constructor(client) {
         this.manager = new Manager({
-            [
-                {
-                    host: 'localhost',
-                    password: 'idots',
-                    port: 4000
-                }
-            ],
+            nodes,
             send: (id, payload) => {
                 const guild = client.guilds.cache.get(id);
                 
