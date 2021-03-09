@@ -136,7 +136,7 @@ async function startUp() {
 	};
 
 
-	client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs');
+	client.login('ODEwMzg1OTExNDU5NzQxNzg2.YCi4sQ.SklpWB5btgbU-POfy4puzCr5pN0');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs
 	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU
 }
