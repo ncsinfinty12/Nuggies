@@ -48,7 +48,7 @@ client.data = require('./functions/mongo');
 const unhhook = new Discord.WebhookClient(config.unhhookID, config.unhhookTOKEN);
 
 async function startUp() {
-,
+
 	// load music events
 	const musicEvents = fs.readdirSync('./src/musicevents').filter(file => file.endsWith('.js'));
 	console.log(`Loading a total of ${musicEvents.length} events.`);
