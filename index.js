@@ -11,6 +11,11 @@ const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
 const { Manager } = require('erela.js');
+
+client.on('debug', async (data) => {
+	console.log(data);
+});
+
 const nodes = [
 	{
 		host: 'localhost',
