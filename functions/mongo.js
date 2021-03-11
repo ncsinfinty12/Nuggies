@@ -328,9 +328,9 @@ module.exports = {
 	},
 	/**
 	* @param {string} guildID - ID of the User
-	* @param {string} toggle - automeme_enabled
+	* @param {string} toggle - premium toggle
 	*/
-	async premium(guildID, toggle) {
+	async premiumGuild(guildID, toggle) {
 		if (!guildID) throw new Error('Please Provide a Guild ID');
 		if (!toggle) throw new Error('Please Provide a toggle!');
 		const guild = await guildsDB.findOne({ id: guildID });
@@ -342,6 +342,20 @@ module.exports = {
 		toggle = true;
 		guild.premium = toggle;
 		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
+		return { toggle };
+	},
+	/**
+	* @param {string} guildID - ID of the User
+	* @param {string} toggle - premium toggle
+	*/
+	async premiumUser(user, toggle) {
+		if(!user) throw new Error('Please provide a user.');
+		if(!toggle) throw new Error('Toggle not provided.');
+		const userindb = await usersDB.findOne({ id: user });
+		if (!userindb) throw new Error('User not found.');
+		userindb.premium = toggle;
+		await userindb.save().catch(error => console.log(error));
 		cachegoose.clearCache();
 		return { toggle };
 	},
