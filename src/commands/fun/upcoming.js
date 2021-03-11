@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 		const items = body.body.results;
 		const random = items[Math.floor(Math.random() * items.length)];
 		const embed = new Discord.MessageEmbed()
-			.setAuthor('Trending Movies', message.author.displayAvatarURL())
+			.setAuthor('Upcoming Movies', message.author.displayAvatarURL())
 			.setTitle(random.original_title || random.name || random.original_name)
 			.setDescription(random.overview)
 			.addField('Score', random.vote_average, true)
