@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args, utils) => {
 			.addField('Popularity', random.popularity, true)
 			.setImage(`https://image.tmdb.org/t/p/w500${random.profile_path}` || `https://image.tmdb.org/t/p/w500${random.backdrop_path}`);
 		message.channel.send(embed);
-	}).catch(err => console.log(err));
+	}).catch(err => message.channel.send('Person not found'));
 };
 
 
