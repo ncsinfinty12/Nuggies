@@ -8,32 +8,27 @@ module.exports.run = async (client, message, args, utils) => {
 	const randompronoun = pronouns[Math.floor(Math.random() * (pronouns.length - 1 + 1) + 1)];
 	if (!args.join(' ')) return message.channel.send(`${randompronoun}, gimme something to search`);
 	const toSearch = args.join(' ');
-	superagent(`https://api.themoviedb.org/3/search/person?api_key=65773cfbab93a4b947736543e8dd740c&language=en-US&query=${toSearch}`).then(body => {
+	superagent(`https://api.themoviedb.org/3/search/tv?api_key=65773cfbab93a4b947736543e8dd740c&query=${toSearch}`).then(body => {
 		const items = body.body.results;
 		const random = items[0];
-		let gender;
-		if (random.gender === 2) {
-			gender = 'Male';
-		}
-		if (random.gender === 1) {
-			gender = 'Female';
-		}
 		const embed = new Discord.MessageEmbed()
 			.setTitle(random.original_title || random.name || random.original_name)
-			.addField('Gender', gender, true)
-			.addField('Known For', random.known_for_department, true)
-			.addField('Popularity', random.popularity, true)
-			.setImage(`https://image.tmdb.org/t/p/w500${random.profile_path}` || `https://image.tmdb.org/t/p/w500${random.backdrop_path}`);
+			.setDescription(random.overview)
+			.addField('Score', random.vote_average, true)
+			.addField('Vote Count', random.vote_count, true)
+			.addField('Original Language', random.original_language)
+			.addField('Release Date', random.first_air_date || random.release_date)
+			.setImage(`https://image.tmdb.org/t/p/w500${random.poster_path}` || `https://image.tmdb.org/t/p/w500${random.backdrop_path}`);
 		message.channel.send(embed);
-	}).catch(err => message.channel.send('Person not found'));
+	});
 };
 
 
 module.exports.help = {
 	aliases: [],
-	name: 'people',
-	description: 'Get information about actors, directors, etc',
-	usage: config.prefix + 'people',
+	name: 'show',
+	description: 'Get information about shows',
+	usage: config.prefix + 'show',
 };
 
 module.exports.config = {
