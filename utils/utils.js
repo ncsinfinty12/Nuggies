@@ -37,10 +37,10 @@ module.exports.timer = function(timestamp) {
 	const seconds = Math.floor(timeLeft / 1000) - (days * 86400) - (hours * 3600) - (minutes * 60);
 	const mseconds = (timeLeft / 1000) - (days * 86400) - (hours * 3600) - (minutes * 60);
 	let string = '';
-	if (days) string = string + `${days} ${days == 1 ? 'day' : 'days'}`;
-	if (hours) string = string + `${hours} ${hours == 1 ? 'hour' : 'hours'}`;
-	if (minutes) string = string + `${minutes} ${minutes == 1 ? 'minute' : 'minutes'}`;
-	if (seconds) string = string + `${seconds} ${seconds == 1 ? 'second' : 'seconds'}`;
+	if (days) string = string + `${days} ${days == 1 ? 'day ' : 'days '}`;
+	if (hours) string = string + `${hours} ${hours == 1 ? 'hour ' : 'hours '}`;
+	if (minutes) string = string + `${minutes} ${minutes == 1 ? 'minute ' : 'minutes '}`;
+	if (seconds) string = string + `${seconds} ${seconds == 1 ? 'second ' : 'seconds '}`;
 	if (!string.length) string = `${mseconds.toFixed(1)} second`;
 	return string;
 };

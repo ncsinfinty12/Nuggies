@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('http://api.nekos.fun:8080/api/lick');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
+		.setColor('RANDOM')
 		.setTitle(`${message.mentions.users.first().username}, you got licked by ${message.author.username}!`)
 		.setImage(body.image)
 		.setFooter('yum yum 😋');

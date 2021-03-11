@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.setTitle(`${message.author.username} is laughing !`)
 		.setImage(body.image)
 		.setFooter('HaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHa')
-		.setColor('BLACK');
+		.setColor('RANDOM');
 	message.channel.send(m);
 
 };

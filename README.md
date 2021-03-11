@@ -1,2 +1,4 @@
 # Nuggies
-## The code repository for the Nuggies Discord bot
+## Please push to your own branch!
+
+### contact the head developers to merge pull requests

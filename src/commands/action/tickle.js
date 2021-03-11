@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('https://nekos.life/api/v2/img/tickle');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('BLACK')
+		.setColor('RANDOM')
 		.setTitle(`${message.mentions.users.first().username}, you got tickled by ${message.author.username}`)
 		.setImage(body.url)
 		.setFooter('that tickless');

@@ -8,16 +8,11 @@ module.exports.run = async (client, message, args, utils) => {
 	const suggestion = args.join(' ');
 	const embed = new Discord.MessageEmbed()
 		.setColor(0xff75c6)
-		.setTitle('Reported by ' + message.author.username)
+		.setTitle('reported by ' + message.author.tag + ` [${message.author.id}]`)
 		.setDescription('**' + suggestion + '**\n\n\n ')
 		.setFooter('if you want to report a bug, use ' + config.prefix + 'bug <bug>');
 	message.channel.send('bug report submitted. Join discord.gg/zzURhQGpRY to view your report !');
-	client.shard.broadcastEval(`
-		const e = this.channels.cache.get('783160016173531176');
-		if(e) {
-			e.send({embed: ${JSON.stringify(embed)}})
-		}
-	`);
+	channel1.send(embed);
 	message.delete();
 };
 

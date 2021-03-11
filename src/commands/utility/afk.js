@@ -1,15 +1,9 @@
 /* eslint-disable no-unused-vars */
-const afkSchema = require('../../../models/afkSchema');
-
+const Discord = require('discord.js');
 module.exports.run = async (client, message, args, utils) => {
 	const afkreason = args.join(' ') || 'AFK';
-	const newData = new afkSchema({
-		id: message.author.id,
-		GuildID: message.guild.id,
-		reason: afkreason,
-	});
-	newData.save();
-	message.channel.send(`You are now afk for: **\`${afkreason}\`**`);
+	await client.data.setAfk(message.author.id, afkreason);
+	message.channel.send(Discord.utils.removeMentions(`You are now afk for: **\`${afkreason}\`**`));
 };
 
 

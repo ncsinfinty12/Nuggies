@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, utils) => {
 	let number = args.join(' ');
 	if(isNaN(number)) return message.channel.send('That is not a number');
 	number = parseInt(number);
-	if(number < 1) return message.reply('please provide a number larger than 1');
+	if(number < 1) return message.reply('Please provide a number larger than 1');
 	if(number > 99) {
 		return message.reply('Please provide a number smaller than 100 !').then(m =>{
 			setTimeout(() =>{
@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args, utils) => {
 	message.channel.send(number + ' messages have been deleted').then(m =>{
 		setTimeout(() =>{
 			m.delete();
-		}, 5000);
+		}, 1500);
 	});
 };
 
