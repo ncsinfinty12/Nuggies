@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 		.get('https://nekos.life/api/v2/img/cuddle');
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('#ff9900')
+		.setColor('RANDOM')
 		.setTitle(`${message.author.username} cuddled ${message.mentions.users.first().username} OwO`)
 		.setImage(body.url)
 		.setFooter('cuddles uwu');

@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args, utils) => {
 		}, time * 1000 * 60 * 60);
 	}
 	if(!all.includes(unit)) {
-		message.channel.send('Please send a valid time :-\n```$timer 30 seconds Like this```');
+		message.channel.send('Please send a valid time :-\n```.timer 30 seconds Like this```');
 	}
 };
 

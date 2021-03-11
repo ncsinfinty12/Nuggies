@@ -8,6 +8,8 @@ module.exports.run = async (client, message, args, utils) => {
 		const pp = '=';
 		const hmmm = new Discord.MessageEmbed()
 			.setTitle('peepee size machine')
+			.setColor('RANDOM')
+			.setFooter('smol pp bro')
 			.setDescription(message.author.username + '\'s penis\n8' + (pp.repeat(number)) + 'D');
 		message.channel.send(hmmm);
 	}

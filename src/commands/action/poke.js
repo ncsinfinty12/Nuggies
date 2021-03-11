@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args, utils) => {
 		});
 
 	const embed = new Discord.MessageEmbed()
-		.setColor('#ff9900')
+		.setColor('RANDOM')
 		.setTitle(`${message.mentions.users.first().username}, you got poked by ${message.author.username}`)
 		.setImage(body.url)
 		.setFooter('poke');

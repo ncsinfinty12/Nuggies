@@ -1,39 +1,15 @@
 /* eslint-disable no-unused-vars */
-const prefixModel = require('../../../models/prefixSchema');
 
-module.exports.run = async (client, message, args, utils) => {
+module.exports.run = async (client, message, args, utils, data) => {
 	if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply('You need the ``manage server`` permission to run this command !');
-
-	const data = await prefixModel.findOne({
-		GuildID: message.guild.id,
-	});
 
 	if (!args[0]) return message.reply('Please provide a new prefix !');
 
 	if (args[0].length > 5) return message.channel.send('Your new prefix must be under ``5`` characters!');
 
-	if (data) {
-		await prefixModel.findOneAndRemove({
-			GuildID: message.guild.id,
-		});
+	await client.data.setPrefix(message.guild.id, args[0]);
 
-		message.channel.send(`The new prefix is **\`${args[0]}\`**`);
-
-		const newData = new prefixModel({
-			Prefix: args[0],
-			GuildID: message.guild.id,
-		});
-		newData.save();
-	}
-	else if (!data) {
-		message.channel.send(`The new prefix is **\`${args[0]}\`**`);
-
-		const newData = new prefixModel({
-			Prefix: args[0],
-			GuildID: message.guild.id,
-		});
-		newData.save();
-	}
+	message.channel.send(`The new prefix is **\`${args[0]}\`**`);
 
 };
 
