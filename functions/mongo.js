@@ -345,18 +345,4 @@ module.exports = {
 		cachegoose.clearCache();
 		return { toggle };
 	},
-	/**
-	* @param {string} guildID - ID of the User
-	* @param {string} toggle - premium toggle
-	*/
-	async premiumUser(user, toggle) {
-		if(!user) throw new Error('Please provide a user.');
-		if(!toggle) throw new Error('Toggle not provided.');
-		const userindb = await usersDB.findOne({ id: user });
-		if (!userindb) throw new Error('User not found.');
-		userindb.premium = toggle;
-		await userindb.save().catch(error => console.log(error));
-		cachegoose.clearCache();
-		return { toggle };
-	},
 };
