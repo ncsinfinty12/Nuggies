@@ -46,7 +46,7 @@ module.exports = async (client, message) => {
 
 	if (userDB.is_afk) {
 		await client.data.removeAfk(message.author.id);
-		message.channel.send(Discord.utils.removeMentions('Welcome back **' + message.author.username + '**! You are no longer afk.'))
+		message.channel.send(Discord.Util.removeMentions('Welcome back **' + message.author.username + '**! You are no longer afk.'))
 			// eslint-disable-next-line no-unused-vars
 			.catch(error => {
 				return true;
