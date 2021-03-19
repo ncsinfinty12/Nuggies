@@ -67,11 +67,30 @@ module.exports = async (client, message) => {
 	// Chatbot thingy
 
 	if (data.guild.chatbot_enabled && data.guild.chatbot_channel == message.channel.id) {
+		const badwords = ['nigger', 'nigga', 'nig', 'nibba', 'nibber'];
+		const bl_log_channel = client.channels.cache.get('809317042058035241');
+		const reason = 'saying a blacklisted word.';
+		if(badwords.some(word => message.content.toLowerCase().includes(word))) {
+			const blacklist = await client.data.blacklist(message.author.id, 'true', reason);
+			const logEmbed = new Discord.MessageEmbed()
+				.setTitle('<a:9689_tick:785181267758809120> User Blacklisted')
+				.setDescription(`**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}**`)
+				.setFooter('Blacklist registered')
+				.setColor('RED')
+				.setTimestamp();
+			bl_log_channel.send(logEmbed);
+			message.author.send(`You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`).catch(err => {
+				message.channel.send(`${message.author.username} has DM's disabled. I was unable to send him a message - but blacklist has been registered!`);
+				console.log(err);
+				return;
+
+			});
+		}
+
 		const channel = data.guild.chatbot_channel;
 		if (!channel) return;
 		const sChannel = message.guild.channels.cache.get(channel);
 		if (message.author.bot || sChannel.id !== message.channel.id) return;
-
 		sChannel.startTyping();
 
 		if (!message.content) return;
