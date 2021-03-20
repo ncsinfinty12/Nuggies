@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@discordjs/opus": "^0.5.0",
     "amethyste-api": "^1.1.5",
     "ascii-table": "0.0.9",
     "axios": "^0.21.1",
@@ -22,8 +23,10 @@
     "newsapi": "^2.4.1",
     "node-fetch": "^2.6.1",
     "node-movie": "^3.0.0",
+    "node-superfetch": "^0.1.11",
     "one-liner-joke": "^1.2.0",
     "os-utils": "0.0.14",
+    "smartestchatbot": "^1.0.5",
     "superagent": "^6.1.0",
     "urban": "^0.3.2"
   },

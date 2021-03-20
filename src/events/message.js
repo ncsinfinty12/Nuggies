@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
-const chatcord = require('chatcord');
+const chatcord = require('smartestchatbot');
 const chatting = new chatcord.Client();
 const cmdhook = new Discord.WebhookClient(config.cmdhookID, config.cmdhookTOKEN);
 const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN);
@@ -17,7 +17,7 @@ module.exports = async (client, message) => {
 	if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
 		setTimeout(async function() {
 			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+			await chatting.chat({ message: message.content, name:'Nuggies', owner:'AssassiN', user: message.author.id, language: 'auto' }).then(reply => {
 				message.inlineReply(Discord.Util.removeMentions(reply));
 				// The module will reply with the based on stimulus (1st parameter of the chat function!)
 				message.channel.stopTyping();
@@ -95,7 +95,7 @@ module.exports = async (client, message) => {
 
 		if (!message.content) return;
 
-		await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+		await chatting.chat({ message: message.content, name:'Nuggies', owner:'AssassiN', user: message.author.id, language: 'auto' }).then(reply => {
 			return message.inlineReply(Discord.Util.removeMentions(reply));
 			// The module will reply with the based on stimulus (1st parameter of the chat function!)
 		}).catch(error => {
