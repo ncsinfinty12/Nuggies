@@ -14,19 +14,18 @@ module.exports = async (client, message) => {
 
 	// nuggies x pwetzel chat
 
-	if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
-		setTimeout(async function() {
-			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-				message.inlineReply(Discord.Util.removeMentions(reply));
-				// The module will reply with the based on stimulus (1st parameter of the chat function!)
-				message.channel.stopTyping();
-			}).catch(error => {
-				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
-				message.channel.stopTyping();
-			});
-		}, 3000);
-	}
+	// if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
+	// 	setTimeout(async function() {
+	// 		message.channel.startTyping();
+	// 		await chatting.chat({ message:encodeURIComponent(message.content), name:'Nuggies', owner:'AssassiN', user: message.author.id, language: 'en' }).then(reply => {
+	// 			message.inlineReply(Discord.Util.removeMentions(reply));
+	// 			message.channel.stopTyping();
+	// 		}).catch(error => {
+	// 			message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
+	// 			message.channel.stopTyping();
+	// 		});
+	// 	}, 3000);
+	// }
 
 	if (message.author.bot) return;
 
@@ -87,22 +86,22 @@ module.exports = async (client, message) => {
 			});
 		}
 
-		const channel = data.guild.chatbot_channel;
-		if (!channel) return;
-		const sChannel = message.guild.channels.cache.get(channel);
-		if (message.author.bot || sChannel.id !== message.channel.id) return;
-		sChannel.startTyping();
+		// 	const channel = data.guild.chatbot_channel;
+		// 	if (!channel) return;
+		// 	const sChannel = message.guild.channels.cache.get(channel);
+		// 	if (message.author.bot || sChannel.id !== message.channel.id) return;
+		// 	sChannel.startTyping();
 
-		if (!message.content) return;
+		// 	if (!message.content) return;
 
-		await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
-			return message.inlineReply(Discord.Util.removeMentions(reply));
-			// The module will reply with the based on stimulus (1st parameter of the chat function!)
-		}).catch(error => {
-			return message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
-		});
-		sChannel.stopTyping();
-	}
+	// 	await chatting.chat({ message: message.content, name:'Nuggies', owner:'AssassiN', user: message.author.id, language: 'auto' }).then(reply => {
+	// 		return message.inlineReply(Discord.Util.removeMentions(reply));
+	// 		// The module will reply with the based on stimulus (1st parameter of the chat function!)
+	// 	}).catch(error => {
+	// 		return message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
+	// 	});
+	// 	sChannel.stopTyping();
+	 }
 
 	if(message.author.bot) return;
 
