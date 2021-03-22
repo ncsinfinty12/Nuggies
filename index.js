@@ -10,7 +10,6 @@ const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
-
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -23,7 +22,6 @@ client.data = require('./functions/mongo');
 const unhhook = new Discord.WebhookClient(config.unhhookID, config.unhhookTOKEN);
 
 async function startUp() {
-
 	// Handlers
 
 	// load all events
@@ -104,7 +102,7 @@ async function startUp() {
 
 
 	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU');
-	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs
+	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.deoXvo_y4jo7M89X2uh-Drz0WLU
 	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU
 }
 startUp();

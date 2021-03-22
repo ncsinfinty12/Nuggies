@@ -113,7 +113,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 		if (args[0] === 'slash-commands') {
 			const slashCmdsembed = new Discord.MessageEmbed()
 				.setTitle('Slash Commands')
-				.setDescription('`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register')
+				.setDescription('`/meme`, `/cat`, `/8ball`, `/echo`, `/support` (use @Nuggies register) to register')
 				.setColor('RANDOM')
 				.setFooter('Page 1/1');
 			return message.channel.send(slashCmdsembed);

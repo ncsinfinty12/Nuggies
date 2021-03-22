@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
-const chatcord = require('chatcord');
+const chatcord = require('smartestchatbot');
 const chatting = new chatcord.Client();
 const cmdhook = new Discord.WebhookClient(config.cmdhookID, config.cmdhookTOKEN);
 const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN);
@@ -17,9 +17,8 @@ module.exports = async (client, message) => {
 	if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
 		setTimeout(async function() {
 			message.channel.startTyping();
-			await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+			await chatting.chat({ message:encodeURIComponent(message.content), name:'Nuggies', owner:'AssassiN', user: message.author.id, language: 'en' }).then(reply => {
 				message.inlineReply(Discord.Util.removeMentions(reply));
-				// The module will reply with the based on stimulus (1st parameter of the chat function!)
 				message.channel.stopTyping();
 			}).catch(error => {
 				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${(error)}\n\`\`\``);
@@ -46,7 +45,7 @@ module.exports = async (client, message) => {
 
 	if (userDB.is_afk) {
 		await client.data.removeAfk(message.author.id);
-		message.channel.send(Discord.utils.removeMentions('Welcome back **' + message.author.username + '**! You are no longer afk.'))
+		message.channel.send(Discord.Util.removeMentions('Welcome back **' + message.author.username + '**! You are no longer afk.'))
 			// eslint-disable-next-line no-unused-vars
 			.catch(error => {
 				return true;
@@ -67,16 +66,35 @@ module.exports = async (client, message) => {
 	// Chatbot thingy
 
 	if (data.guild.chatbot_enabled && data.guild.chatbot_channel == message.channel.id) {
+		const badwords = ['nigger', 'nigga', 'nig', 'nibba', 'nibber'];
+		const bl_log_channel = client.channels.cache.get('809317042058035241');
+		const reason = 'saying a blacklisted word.';
+		if(badwords.some(word => message.content.toLowerCase().includes(word))) {
+			const blacklist = await client.data.blacklist(message.author.id, 'true', reason);
+			const logEmbed = new Discord.MessageEmbed()
+				.setTitle('<a:9689_tick:785181267758809120> User Blacklisted')
+				.setDescription(`**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}**`)
+				.setFooter('Blacklist registered')
+				.setColor('RED')
+				.setTimestamp();
+			bl_log_channel.send(logEmbed);
+			message.author.send(`You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`).catch(err => {
+				message.channel.send(`${message.author.username} has DM's disabled. I was unable to send him a message - but blacklist has been registered!`);
+				console.log(err);
+				return;
+
+			});
+		}
+
 		const channel = data.guild.chatbot_channel;
 		if (!channel) return;
 		const sChannel = message.guild.channels.cache.get(channel);
 		if (message.author.bot || sChannel.id !== message.channel.id) return;
-
 		sChannel.startTyping();
 
 		if (!message.content) return;
 
-		await chatting.chat(`${encodeURIComponent(message.content)}`).then(reply => {
+		await chatting.chat({ message: message.content, name:'Nuggies', owner:'AssassiN', user: message.author.id, language: 'en' }).then(reply => {
 			return message.inlineReply(Discord.Util.removeMentions(reply));
 			// The module will reply with the based on stimulus (1st parameter of the chat function!)
 		}).catch(error => {
