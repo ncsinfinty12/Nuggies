@@ -11,6 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 	superagent(`https://api.themoviedb.org/3/search/person?api_key=65773cfbab93a4b947736543e8dd740c&language=en-US&query=${toSearch}`).then(body => {
 		const items = body.body.results;
 		const random = items[0];
+		if(!random) return message.channel.send('couldnt find a person with that name!');
 		let gender;
 		if (random.gender === 2) {
 			gender = 'Male';

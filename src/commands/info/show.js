@@ -11,6 +11,7 @@ module.exports.run = async (client, message, args, utils) => {
 	superagent(`https://api.themoviedb.org/3/search/tv?api_key=65773cfbab93a4b947736543e8dd740c&query=${toSearch}`).then(body => {
 		const items = body.body.results;
 		const random = items[0];
+		if(!random) return message.channel.send('couldnt find a show with that name!');
 		const embed = new Discord.MessageEmbed()
 			.setTitle(random.original_title || random.name || random.original_name)
 			.setDescription(random.overview)
