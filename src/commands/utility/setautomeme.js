@@ -7,14 +7,14 @@ module.exports.run = async (client, message, args, utils, data) => {
 	if(args[1] === 'true') {
 		if(!channel) {
 			const m = new MessageEmbed()
-				.setColor('red')
+				.setColor('RED')
 				.addField('Error', 'Please mention a channel');
 			message.channel.send(m);
 			return;
 		}
 		if(data.guild.automeme_channel == channel.id) {
 			return message.channel.send(new MessageEmbed()
-				.setColor('red')
+				.setColor('RED')
 				.addField('Error', `automeme is already \`true\` in <#${channel.id}>`));
 		}
 		await client.data.setautomeme_enabled(message.guild.id, 'true');
@@ -66,6 +66,6 @@ module.exports.config = {
 	args: true,
 	restricted: false,
 	category: 'Utility',
-	disable: true,
+	disable: false,
 	cooldown: 10000,
 };
