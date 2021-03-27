@@ -34,7 +34,6 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
-				premium,
 			} = newG;
 			await newG.save().catch(error => console.log(error));
 			return {
@@ -45,7 +44,6 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
-				premium,
 			};
 		}
 		else {
@@ -56,7 +54,6 @@ module.exports = {
 			const automeme_enabled = guild.automeme_enabled;
 			const automeme_channel = guild.automeme_channel;
 			const mute_role = guild.mute_role;
-			const premium = guild.premium;
 			return {
 				prefix,
 				registeredAt,
@@ -65,7 +62,6 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
-				premium,
 			};
 		}
 	},
@@ -77,9 +73,9 @@ module.exports = {
 		const user = await usersDB.findOne({ id: userID }).cache(60);
 		if (!user) {
 			const newUs = new usersDB({ id: userID });
-			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium } = newUs;
+			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason } = newUs;
 			await newUs.save().catch(error => console.log(error));
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium };
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason };
 		}
 		else {
 			const registeredAt = user.registeredAt;
@@ -87,8 +83,7 @@ module.exports = {
 			const blacklisted_reason = user.blacklisted_reason;
 			const is_afk = user.is_afk;
 			const afkReason = user.afkReason;
-			const premium = user.premium;
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium };
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason };
 		}
 	},
 	/**
@@ -326,23 +321,5 @@ module.exports = {
 		cachegoose.clearCache();
 		return { role };
 	},
-	/**
-	* @param {string} guildID - ID of the User
-	* @param {string} toggle - premium toggle
-	*/
-	async premiumGuild(guildID, toggle) {
-		if (!guildID) throw new Error('Please Provide a Guild ID');
-		if (!toggle) throw new Error('Please Provide a toggle!');
-		const guild = await guildsDB.findOne({ id: guildID });
-		if (!guild) {
-			const newU = new guildsDB({ id: guildID });
-			await newU.save().catch(error => console.log(error));
-			return { toggle };
-		}
-		toggle = true;
-		guild.premium = toggle;
-		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache();
-		return { toggle };
-	},
+
 };
