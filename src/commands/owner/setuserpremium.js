@@ -4,7 +4,9 @@ const users = require('../../../models/users');
 module.exports.run = async (client, message, args, utils, data) => {
 	const target = args[0];
 	const toggle = args[1];
+	let tier = args[2];
 	await client.users.fetch(target);
+	if(!tier) tier = 0;
 	if(!target) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a user!').setColor('RED'));
 	if(!toggle) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a toggle!').setColor('RED'));
 	// if(toggle != 'true' || 'false') return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a valid toggle!'));
@@ -12,15 +14,16 @@ module.exports.run = async (client, message, args, utils, data) => {
 		if(err) throw err;
 		if(!Data) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('user not found').setColor('RED'));
 		Data.premium = toggle;
+		Data.tier = tier;
 		Data.save();
-		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium set to \`${toggle.toLowerCase()}\` for **${client.users.cache.get(target).tag}** `).setColor('GREEN'));
+		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium \`tier ${tier}\` set to \`${toggle.toLowerCase()}\` for **${client.users.cache.get(target).tag}** `).setColor('GREEN'));
 	});
 };
 module.exports.help = {
 	aliases: ['setuserp', 'userp'],
 	name: 'setuserpremium',
 	description: 'set a user premium',
-	usage: '.setuserpremium <ID> <toggle>',
+	usage: '.setuserpremium <ID> <toggle> <tier>',
 };
 
 module.exports.config = {
