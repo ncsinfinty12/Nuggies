@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils, data) => {
-	message.delete()
+	message.delete();
 	message.channel.send('xd');
 };
 

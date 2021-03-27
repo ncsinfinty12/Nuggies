@@ -2,7 +2,6 @@
 const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, [target, ...args], utils, data) => {
-	if(!config.globalmods.includes(message.author.id) || !config.developers.includes(message.author.id)) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners.');
 	target = await client.users.fetch(target);
 
 	if(!target) return utils.errorEmbed(message, ':warning: Invalid user.');
@@ -44,7 +43,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	restricted: false,
+	restricted: true,
 	args: true,
 	category: 'Owner',
 	disable: false,
