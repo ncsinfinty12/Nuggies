@@ -4,6 +4,7 @@ const users = require('../../../models/users');
 module.exports.run = async (client, message, args, utils, data) => {
 	const target = args[0];
 	const toggle = args[1];
+	await client.users.fetch(target);
 	if(!target) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a user!').setColor('RED'));
 	if(!toggle) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a toggle!').setColor('RED'));
 	// if(toggle != 'true' || 'false') return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a valid toggle!'));
@@ -12,7 +13,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 		if(!Data) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('user not found').setColor('RED'));
 		Data.premium = toggle;
 		Data.save();
-		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium set to \`${toggle.toLowerCase()}\` for **${client.users.cache.get(target).tag}** `));
+		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium set to \`${toggle.toLowerCase()}\` for **${client.users.cache.get(target).tag}** `).setColor('GREEN'));
 	});
 };
 module.exports.help = {

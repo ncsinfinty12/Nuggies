@@ -77,9 +77,9 @@ module.exports = {
 		const user = await usersDB.findOne({ id: userID }).cache(60);
 		if (!user) {
 			const newUs = new usersDB({ id: userID });
-			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium } = newUs;
+			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers } = newUs;
 			await newUs.save().catch(error => console.log(error));
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium };
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers };
 		}
 		else {
 			const registeredAt = user.registeredAt;
@@ -88,7 +88,9 @@ module.exports = {
 			const is_afk = user.is_afk;
 			const afkReason = user.afkReason;
 			const premium = user.premium;
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium };
+			const tier = user.tier;
+			const premiumservers = user.premiumservers;
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers };
 		}
 	},
 	/**
