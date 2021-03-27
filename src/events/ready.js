@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
-const automeme = require('../../models/guilds');
+const automeme = require('../../models/users');
 const axios = require('axios');
 module.exports = async (client) => {
 	// status
@@ -27,4 +27,5 @@ module.exports = async (client) => {
 			}
 		}, 10000);
 	});
+	// await automeme.updateMany({ premium: true }, { premiumservers: [] });
 };
