@@ -4,9 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
-const mongoose = require('mongoose');
 const currency = require('./models/currencySchema');
-const { table } = require('console');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
@@ -102,7 +100,7 @@ async function startUp() {
 
 
 	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU');
-	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.cKxvxEcyPI3HCd9-jcqVYgghgGs
+	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.deoXvo_y4jo7M89X2uh-Drz0WLU
 	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU
 }
 startUp();

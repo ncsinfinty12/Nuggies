@@ -23,7 +23,7 @@ module.exports.help = {
 
 module.exports.config = {
 	args: false,
-	restricted: false,
+	restricted: true,
 	category: 'Fun',
 	disable: false,
 	cooldown: 5000,
