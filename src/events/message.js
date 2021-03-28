@@ -107,7 +107,7 @@ module.exports = async (client, message) => {
 	const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
 
 	if (!message.author.bot && message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
-		const m = new Discord.MessageEmbed().setTitle('Hi, I\'m Nuggies !').setDescription('one of the most compact and easy to use bot on Discord !').addField('Prefix and Usage', 'My current prefixes are ' + `\`${prefixx}\` and <@${client.user.id}>` + `\n *Tip: Run \`${prefixx}help\` to get started! | use \`${prefixx}setprefix <prefix>\` to change prefix!*').addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands)`).setColor('RANDOM');
+		const m = new Discord.MessageEmbed().setTitle('Hi, I\'m Nuggies !').setDescription('one of the most compact and easy to use bot on Discord !').addField('Prefix and Usage', 'My current prefixes are ' + `\`${prefixx}\` and <@${client.user.id}>` + `\n *Tip: Run \`${prefixx}help\` to get started! | use \`${prefixx}setprefix <prefix>\` to change prefix!*'`).addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands').setColor('RANDOM');
 		message.channel.send(m);
 	}
 	// Basic command checks and argument definitions
