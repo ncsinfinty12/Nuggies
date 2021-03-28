@@ -38,7 +38,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.setColor(0x7289DA)
 			.setThumbnail(client.user.avatarURL({ format: 'png', dynamic: true, size: 2048 }))
 			.setTitle(`Bot Statistics`)
-			.addField('Global Prefix <:VerifiedBotDeveloper:801694881726332998>', `\`\`\`yaml\n${globalprefix}\`\`\``, true)
+			.addField('Global Prefix <:verifiedDeveloper:785064713389080576>', `\`\`\`yaml\n${globalprefix}\`\`\``, true)
 			.addField('Total Servers <a:9689_tick:785181267758809120>', `\`\`\`yaml\n ${client.guilds.cache.size}\`\`\``, true)
 			.addField('Support Server <:SupportThumb:811209722883473430>', "[Click To Join](https://discord.gg/BxZUrr3a3u)", true)
 			.addField('Library <:nodeJS:785064545013858334>', '```yaml\nDiscord.js v12```', true)
