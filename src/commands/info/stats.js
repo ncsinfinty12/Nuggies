@@ -55,7 +55,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('Ping', `\`\`\`yaml\n${Math.round(client.ws.ping)}` + 'ms\`\`\`', true)
 			.addField('Uptime', `\`\`\`yaml\n${days + 'd ' + hours + 'h ' + minutes + 'm'}\`\`\``, true)
 			.addField('-----------------------------------------------------------------', '---------------------------------------------------------------')
-			.addField('Developers', `**${config.ownername1}**‏‏‎, **${config.ownername2}**‏‏, ‎‎‎‎‎‎**${config.ownername3}**, **${config.ownername4}**, **‎${config.ownername5}**, **Birb**, **Mafia**, , **Swagger**`, true);
+			.addField('Developers', `**${config.ownername1}**‏‏‎, **${config.ownername2}**‏‏, ‎‎‎‎‎‎**${config.ownername3}**, **${config.ownername4}**, **‎${config.ownername5}**, **Birb**, **Mafia**, **Swagger**`, true);
 		message.channel.send({ embed });
 	});
 
