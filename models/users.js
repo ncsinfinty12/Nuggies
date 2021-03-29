@@ -29,14 +29,6 @@ const usersDB = new Schema({
 		type: Boolean,
 		default: false,
 	},
-	tier: {
-		type: Number,
-		defualt: 0,
-	},
-	premiumservers: {
-		type: Array,
-		default: [],
-	},
 });
 
 module.exports = mongoose.model('usersDB', usersDB);

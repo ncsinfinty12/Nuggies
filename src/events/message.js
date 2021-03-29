@@ -7,6 +7,7 @@ const chatcord = require('chatcord');
 const chatting = new chatcord.Client();
 const cmdhook = new Discord.WebhookClient(config.cmdhookID, config.cmdhookTOKEN);
 const errhook = new Discord.WebhookClient(config.errhookID, config.errhookTOKEN);
+
 module.exports = async (client, message) => {
 	//                                               -- Message Event Function --
 	if (!message.guild) return;
@@ -66,12 +67,12 @@ module.exports = async (client, message) => {
 	// Chatbot thingy
 
 	if (data.guild.chatbot_enabled && data.guild.chatbot_channel == message.channel.id) {
-		const badwords = ['nigger', 'nigga', 'nig', 'nibba', 'nibber'];
+		const badwords = ['nigger', 'nigga', 'nibba', 'nibber'];
 		const bl_log_channel = client.channels.cache.get('809317042058035241');
 		const reason = 'saying a blacklisted word.';
 		if (badwords.some((word) => message.content.toLowerCase().includes(word))) {
 			const blacklist = await client.data.blacklist(message.author.id, 'true', reason);
-			const logEmbed = new Discord.MessageEmbed().setTitle('<a:9689_tick:785181267758809120> User Blacklisted').setDescription(`**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}**`).setFooter('Blacklist registered').setColor('RED').setTimestamp();
+			const logEmbed = new Discord.MessageEmbed().setTitle('<a:9689_tick:785181267758809120> User Blacklisted').setDescription(`**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}** \n **message**: ${message.content}`).setFooter('Blacklist registered').setColor('RED').setTimestamp();
 			bl_log_channel.send(logEmbed);
 			message.author.send(`You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`).catch((err) => {
 				message.channel.send(`${message.author.username} has DM's disabled. I was unable to send him a message - but blacklist has been registered!`);
@@ -103,10 +104,18 @@ module.exports = async (client, message) => {
 
 	// Ping Embed
 	// Get prefix from guild else get from config file
-	const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
+	let prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
+	if (client.user.id == '810385911459741786') {
+		prefixx = '..';
+	}
 
 	if (!message.author.bot && message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
-		const m = new Discord.MessageEmbed().setTitle('Hi, I\'m Nuggies !').setDescription('one of the most compact and easy to use bot on Discord !').addField('Prefix and Usage', 'My current prefixes are ' + `\`${prefixx}\` and <@${client.user.id}>` + `\n *Tip: Run \`${prefixx}help\` to get started! | use \`${prefixx}setprefix <prefix>\` to change prefix!*').addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands)`).setColor('RANDOM');
+		const m = new Discord.MessageEmbed()
+			.setTitle('Hi, I\'m Nuggies !')
+			.setDescription('one of the most compact and easy to use bot on Discord !')
+			.addField('Prefix and Usage', 'My current prefixes are ' + `\`${prefixx}\` and <@${client.user.id}>` + `\n *Tip: Run \`${prefixx}help\` to get started! | use \`${prefixx}setprefix <prefix>\` to change prefix!*`)
+			.addField('Invites :', '[Support server](https://discord.gg/ut7PxgNdef) | [Bot invite](https://discord.com/oauth2/authorize?client_id=779741162465525790&permissions=1609952503&scope=bot%20applications.commands)')
+			.setColor('RANDOM');
 		message.channel.send(m);
 	}
 	// Basic command checks and argument definitions
@@ -154,22 +163,12 @@ module.exports = async (client, message) => {
 	// Core Command Handler and Cooldown Checks
 
 	const cooldown = client.commands.get(command).config.cooldown;
-	const pcooldown = client.commands.get(command).config.cooldown / 2;
 	const timestamps = client.cooldowns.get(command);
 	if (timestamps.has(message.author.id)) {
-		if(data.user.premium == true) {
-			const expirationTime = timestamps.get(message.author.id) + pcooldown;
-			if (Date.now() < expirationTime) {
-				const timeLeft = utils.timer(expirationTime);
-				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but since you are a donator, you only need to wait for **\`${utils.timer(pcooldown + Date.now())}!\`**`).setColor('RED'));
-			}
-		}
-		else {
-			const expirationTime = timestamps.get(message.author.id) + cooldown;
-			if (Date.now() < expirationTime) {
-				const timeLeft = utils.timer(expirationTime);
-				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but for donators, its only **\`${utils.timer(pcooldown + Date.now())}\` !**`).setColor('RED'));
-			}
+		const expirationTime = timestamps.get(message.author.id) + cooldown;
+		if (Date.now() < expirationTime) {
+			const timeLeft = utils.timer(expirationTime);
+			return message.channel.send(`**\`${message.author.username}\`** | ⏰ Hold up! Command in cooldown for **\`${timeLeft}\`**`);
 		}
 	}
 
