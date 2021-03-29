@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const userDB = require('../../../models/users');
 const guildDB = require('../../../models/guilds');
-const { premiumGuild } = require('../../../functions/mongo');
+const { premiumGuild, pushguild } = require('../../../functions/mongo');
 const config = require('../../../utils/config.json');
 module.exports.run = async (client, message, args, utils, data) => {
 	// check if the server is already premium or not
@@ -13,16 +13,16 @@ module.exports.run = async (client, message, args, utils, data) => {
 	if(data.guild.premium == true) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('This server is already premium!').setColor('RED'));
 	if(data.user.tier == 1 && data.user.premiumservers.length == 1 || data.user.tier == 2 && data.user.premiumservers.length == 3 || data.user.tier == 3 && data.user.premiumservers.length == 5 || data.user.tier == 4 && data.premiumservers.length == 2) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('You cannot add premium to any guilds. Please remove premium from a guild to add it!').setColor('RED'));
 	// making the guild premium.
-	premiumGuild(message.guild.id, true);
+	try {
+		premiumGuild(message.guild.id, true);
+		pushguild(message.author.id, message.guild.id);
+	}
+	catch (e) {
+		console.log(e);
+		return message.channel.send(`command failed \`\`\`${e}\`\`\``);
+	}
 	message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium set to \`true\` in ${message.guild.name}! \n \n`).setFooter('thanks for being a donor :)').setColor('GREEN'));
-	// data.user.premiumservers.push(message.guild.id);
-	// data.save();
 
-
-	// if(args[1] === 'false') {
-	// 	if(data.guild.premium == false) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('This server doesnt have premium!').setColor('RED'));
-
-	// }
 };
 
 module.exports.help = {
