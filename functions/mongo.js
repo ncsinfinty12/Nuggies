@@ -341,7 +341,6 @@ module.exports = {
 			await newU.save().catch(error => console.log(error));
 			return { toggle };
 		}
-		toggle = true;
 		guild.premium = toggle;
 		await guild.save().catch(error => console.log(error));
 		cachegoose.clearCache();
@@ -351,16 +350,23 @@ module.exports = {
 	* @param {string} guildID - ID of the User
 	* @param {string} toggle - premium toggle
 	*/
-	async pushguild(user, guildID) {
+	async pushguild(user, guildID, method) {
+		if(!method) return new Error('please provide a method');
 		usersDB.findOne({ id: user }, async (err, data) => {
 			if(err) throw err;
 			if(!data) return new Error('user not found.');
-			await data.premiumservers.push(guildID);
-			await data.save().catch(error => console.log(error));
+			if(method === 'push') {
+				await data.premiumservers.push(guildID);
+				await data.save().catch(error => console.log(error));
+				data.save();
+			}
+			if(method === 'splice') {
+				const index = data.premiumservers.indexOf(guildID);
+				data.premiumservers.splice(index, 1);
+				data.save();
+			}
 			cachegoose.clearCache();
 			return { user };
 		});
 	},
-
-
 };
