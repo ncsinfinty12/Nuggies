@@ -11,6 +11,7 @@ module.exports = async (client) => {
 		.setTitle('Nuggies was restarted!')
 		.setDescription('Nuggies just got restarted!')
 		.setColor('e03854')
+		.setFooter(client.user.id)
 		.setTimestamp();
 	Webhook.send(restartEmbed);
 	// await automeme.updateMany({ automeme_enabled: true }, { premium: false });
