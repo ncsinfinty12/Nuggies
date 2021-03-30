@@ -5,6 +5,7 @@ const utils = require("../../utils/utils");
 const config = require("../../utils/config.json");
 const chatcord = require("chatcord");
 const chatting = new chatcord.Client();
+const staff = require("../../models/nuggiesStaff");
 const cmdhook = new Discord.WebhookClient(
   config.cmdhookID,
   config.cmdhookTOKEN
