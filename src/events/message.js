@@ -3,8 +3,7 @@
 const Discord = require("discord.js");
 const utils = require("../../utils/utils");
 const config = require("../../utils/config.json");
-const chatcord = require("smartestchatbot");
-const staff = require("../../models/nuggiesStaff");
+const chatcord = require("chatcord");
 const chatting = new chatcord.Client();
 const cmdhook = new Discord.WebhookClient(
   config.cmdhookID,
@@ -28,13 +27,7 @@ module.exports = async (client, message) => {
     setTimeout(async function () {
       message.channel.startTyping();
       await chatting
-        .chat({
-          message: encodeURIComponent(message.content),
-          name: "Nuggies",
-          owner: "AssassiN",
-          user: message.author.id,
-          language: "en",
-        })
+        .chat(message.content)
         .then((reply) => {
           message.inlineReply(Discord.Util.removeMentions(reply));
           message.channel.stopTyping();
@@ -96,9 +89,9 @@ module.exports = async (client, message) => {
     data.guild.chatbot_enabled &&
     data.guild.chatbot_channel == message.channel.id
   ) {
-    const badwords = ["nigger", "nigga", "nig", "nibba", "nibber"];
+    const badwords = ["nigger", "nigga", "nibba", "nibber"];
     const bl_log_channel = client.channels.cache.get("809317042058035241");
-    const reason = "saying a blacklisted word.";
+    const reason = "Used a blacklisted word";
     if (badwords.some((word) => message.content.toLowerCase().includes(word))) {
       const blacklist = await client.data.blacklist(
         message.author.id,
@@ -108,7 +101,7 @@ module.exports = async (client, message) => {
       const logEmbed = new Discord.MessageEmbed()
         .setTitle("<a:9689_tick:785181267758809120> User Blacklisted")
         .setDescription(
-          `**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}**`
+          `**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : Automatic Blacklist Made By **Nuggies**\n\nReason : **${blacklist.reason}** \n **Message**: ${message.content}`
         )
         .setFooter("Blacklist registered")
         .setColor("RED")
@@ -116,7 +109,7 @@ module.exports = async (client, message) => {
       bl_log_channel.send(logEmbed);
       message.author
         .send(
-          `You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`
+          `You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** Automatic Blacklist Made By *Nuggies* \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef\n\n**Message Content:** ${message.content}`
         )
         .catch((err) => {
           message.channel.send(
@@ -136,13 +129,7 @@ module.exports = async (client, message) => {
     if (!message.content) return;
 
     await chatting
-      .chat({
-        message: message.content,
-        name: "Nuggies",
-        owner: "AssassiN",
-        user: message.author.id,
-        language: "en",
-      })
+      .chat(message.content)
       .then((reply) => {
         return message.inlineReply(Discord.Util.removeMentions(reply));
         // The module will reply with the based on stimulus (1st parameter of the chat function!)
@@ -159,7 +146,10 @@ module.exports = async (client, message) => {
 
   // Ping Embed
   // Get prefix from guild else get from config file
-  const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
+  let prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
+  if (client.user.id == "810385911459741786") {
+    prefixx = "..";
+  }
 
   if (
     !message.author.bot &&
@@ -174,7 +164,7 @@ module.exports = async (client, message) => {
         "Prefix and Usage",
         "My current prefixes are " +
           `\`${prefixx}\` and <@${client.user.id}>` +
-          "\n *Tip: Run `.help` to get started! | use `.setprefix <prefix>` to change prefix!*"
+          `\n *Tip: Run \`${prefixx}help\` to get started! | use \`${prefixx}setprefix <prefix>\` to change prefix!*`
       )
       .addField(
         "Invites :",
@@ -233,21 +223,15 @@ module.exports = async (client, message) => {
       );
   }
 
-  if (client.commands.get(command).config.disable == true) {
-    return utils.errorEmbed(
-      message,
-      ":warning: This command is disabled for a short period of time! :warning:"
-    );
-  }
-
   if (client.commands.get(command).config.args == true) {
-    if (!args[0])
+    if (!args[0]) {
       return utils.errorEmbed(
         message,
         `Invalid arguments. Use: ${
           prefix + "help " + client.commands.get(command).help.name
         }`
       );
+    }
   }
 
   // Core Command Handler and Cooldown Checks
