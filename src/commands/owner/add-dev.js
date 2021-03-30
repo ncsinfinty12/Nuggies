@@ -99,7 +99,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-  developers: false,
+  developers: true,
   args: true,
   category: "Owner",
   disable: false,
