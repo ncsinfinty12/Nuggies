@@ -72,6 +72,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
+  developers: true,
   args: true,
   category: "Owner",
   disable: false,
