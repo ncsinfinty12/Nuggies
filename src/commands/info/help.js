@@ -32,6 +32,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('<a:distraction:807647150438744064> Actions', `\`${prefix}help actions\``, true)
 			.addField('<a:Loading:785190101105508373> More', `\`${prefix}help more\``, true)
 			.addField('⚙ Utility', `\`${prefix}help utility\``, true)
+			.addField('<a:music_disc:826830791115931719>', `\`${prefix}help music\``, true)
 			.setFooter('Check out our website: https://nuggies.tech')
 			.setThumbnail(client.user.avatarURL({ type:  'png' }))
 			.setColor('RANDOM');
@@ -69,6 +70,14 @@ module.exports.run = async (client, message, args, utils, data) => {
 				.setColor('RANDOM')
 				.setFooter('Page 1/1');
 			return message.channel.send(infoCmdsembed);
+		}
+		if (args[0] === 'music') {
+			const musicembed = new Discord.MessageEmbed()
+				.setTitle('Info Commands')
+				.setDescription('`disconnect`, `loop`, `nowplaying`, `pause`, `play`, `queue`, `resume`, `skip`, `volume`')
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(musicembed);
 		}
 		if (args[0] === 'fun') {
 			const funCmdsembed = new Discord.MessageEmbed()
