@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('<a:Loading:785190101105508373> More', `\`${prefix}help more\``, true)
 			.addField('⚙ Utility', `\`${prefix}help utility\``, true)
 			.addField('<a:music_disc:826830791115931719>', `\`${prefix}help music\``, true)
-			.setFooter('Check out our website: https://nuggies.tech')
+			.setFooter('Check out our website:  https://nuggetdev.com/')
 			.setThumbnail(client.user.avatarURL({ type:  'png' }))
 			.setColor('RANDOM');
 		message.channel.send(a);
