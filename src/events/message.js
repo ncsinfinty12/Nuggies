@@ -184,7 +184,7 @@ module.exports = async (client, message) => {
 			const expirationTime = timestamps.get(message.author.id) + cooldown;
 			if (Date.now() < expirationTime) {
 				const timeLeft = utils.timer(expirationTime);
-				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but for donators, its only **\`${utils.timer(pcooldown + Date.now())}\` !**`).setColor('RED'));
+				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but for [__**donators**__](https://bot.nuggetdev.com/premium), its only **\`${utils.timer(pcooldown + Date.now())}\` !**`).setColor('RED'));
 			}
 		}
 	}
