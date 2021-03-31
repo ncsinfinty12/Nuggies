@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require("discord.js");
 const config = require("../../../utils/config.json");
-const staff = require("../../../models/nuggiesStaff");
+const user = require("../../../models/users");
 
 module.exports.run = async (client, message, args) => {
   const target =
@@ -12,13 +12,24 @@ module.exports.run = async (client, message, args) => {
         m.user.tag.startsWith(args[0]) ||
         m.displayName.startsWith(args[0])
     );
-  const GuildID = "780334622164254720";
 
-  const nuggiesStaff = await staff.findOne({
-    _id: GuildID,
+    const superMods = ["555064829946232832", "734006373343297557", "460078206326800434"]
+    if(!superMods.includes(message.author.id)) {
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle(`:warning: Failed`)
+          .setDescription(
+            `You do not have enough privileges to execute this command`
+          )
+          .setColor(`RED`)
+      );
+    }
+
+  const nuggiesStaff = await user.findOne({
+    id: target.id,
   });
 
-  if (!nuggiesStaff.Moderators.includes(target.id)) {
+  if (!nuggiesStaff.moderator) {
     return message.channel.send(
       new Discord.MessageEmbed()
         .setTitle(`:warning: Error`)
@@ -26,17 +37,10 @@ module.exports.run = async (client, message, args) => {
         .setColor(`RED`)
     );
   } else {
-    const arr = nuggiesStaff.Moderators;
 
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === target.id) {
-        arr.splice(i, 1);
-      }
-    }
-
-    await staff.findOneAndUpdate({
-      _id: GuildID,
-      Moderatirs: arr,
+    await user.findOneAndUpdate({
+      id: target.id,
+      moderator: false,
     });
 
     message.channel.send(
@@ -68,7 +72,6 @@ module.exports.help = {
 };
 
 module.exports.config = {
-  developers: true,
   args: true,
   category: "Owner",
   disable: false,
