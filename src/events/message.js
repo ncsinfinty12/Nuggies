@@ -163,12 +163,23 @@ module.exports = async (client, message) => {
 	// Core Command Handler and Cooldown Checks
 
 	const cooldown = client.commands.get(command).config.cooldown;
+	const pcooldown = client.commands.get(command).config.cooldown / 2;
+
 	const timestamps = client.cooldowns.get(command);
 	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.author.id) + cooldown;
-		if (Date.now() < expirationTime) {
-			const timeLeft = utils.timer(expirationTime);
-			return message.channel.send(`**\`${message.author.username}\`** | ⏰ Hold up! Command in cooldown for **\`${timeLeft}\`**`);
+		if(data.user.premium == true) {
+			const expirationTime = timestamps.get(message.author.id) + pcooldown;
+			if (Date.now() < expirationTime) {
+				const timeLeft = utils.timer(expirationTime);
+				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but since you are a donator, you only need to wait for **\`${utils.timer(pcooldown + Date.now())}!\`**`).setColor('RED'));
+			}
+		}
+		else {
+			const expirationTime = timestamps.get(message.author.id) + cooldown;
+			if (Date.now() < expirationTime) {
+				const timeLeft = utils.timer(expirationTime);
+				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but for donators, its only **\`${utils.timer(pcooldown + Date.now())}\` !**`).setColor('RED'));
+			}
 		}
 	}
 
