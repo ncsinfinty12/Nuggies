@@ -50,7 +50,10 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     } else {
-      nuggiesStaff.moderator = true;
+      await user.findOneAndUpdate({
+        id: `${target.id}`,
+        moderator: `true`
+      })
       await nuggiesStaff.save().catch((error) => console.log(error));
 
       message.channel.send(

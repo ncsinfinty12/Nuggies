@@ -39,8 +39,8 @@ module.exports.run = async (client, message, args) => {
   } else {
 
     await user.findOneAndUpdate({
-      id: target.id,
-      developer: false,
+      id: `${target.id}`,
+      developer: `false`,
     });
 
     message.channel.send(

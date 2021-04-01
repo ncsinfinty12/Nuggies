@@ -50,7 +50,10 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     } else {
-      nuggiesStaff.developer = true;
+      await user.findOneAndUpdate({
+        id: `${target.id}`,
+        developer: `true`,
+      });
       await nuggiesStaff.save().catch((error) => console.log(error));
 
       message.channel.send(
@@ -74,8 +77,8 @@ module.exports.run = async (client, message, args) => {
     }
   } else if (!nuggiesStaff) {
     const newE = new user({
-      id: target.id,
-      developer: true,
+      id: `${target.id}`,
+      developer: `true`,
     });
 
     await newE.save().catch((error) => console.log(error));
@@ -109,7 +112,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-  developers: true,
+  developers: false,
   args: true,
   category: "Owner",
   disable: false,
