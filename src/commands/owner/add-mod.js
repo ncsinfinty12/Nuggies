@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require("discord.js");
 const config = require("../../../utils/config.json");
-const staff = require("../../../models/nuggiesStaff");
+const user = require("../../../models/users");
 
 module.exports.run = async (client, message, args) => {
   const target =
@@ -12,7 +12,18 @@ module.exports.run = async (client, message, args) => {
         m.user.tag.startsWith(args[0]) ||
         m.displayName.startsWith(args[0])
     );
-  const GuildID = "780334622164254720";
+
+    const superMods = ["555064829946232832", "734006373343297557", "460078206326800434"]
+    if(!superMods.includes(message.author.id)) {
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle(`:warning: Failed`)
+          .setDescription(
+            `You do not have enough privileges to execute this command`
+          )
+          .setColor(`RED`)
+      );
+    }
 
   const checkTarget = message.guild.members.cache.get(`${target.id}`);
   if (!checkTarget) {
@@ -26,12 +37,12 @@ module.exports.run = async (client, message, args) => {
     );
   }
 
-  const nuggiesStaff = await staff.findOne({
-    _id: GuildID,
+  const nuggiesStaff = await user.findOne({
+    id: target.id,
   });
 
   if (nuggiesStaff) {
-    if (nuggiesStaff.Moderators.includes(target.id)) {
+    if (nuggiesStaff.moderator) {
       return message.channel.send(
         new Discord.MessageEmbed()
           .setTitle(`:warning: Error`)
@@ -39,8 +50,7 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     } else {
-      nuggiesStaff.Moderators.addToSet(`${target.id}`);
-
+      nuggiesStaff.moderator = true;
       await nuggiesStaff.save().catch((error) => console.log(error));
 
       message.channel.send(
@@ -63,9 +73,9 @@ module.exports.run = async (client, message, args) => {
         );
     }
   } else if (!nuggiesStaff) {
-    const newE = new staff({
-      _id: GuildID,
-      Moderators: [`${target.id}`],
+    const newE = new user({
+      id: target.id,
+      moderator: true,
     });
 
     await newE.save().catch((error) => console.log(error));

@@ -4,8 +4,8 @@ const Discord = require("discord.js");
 const utils = require("../../utils/utils");
 const config = require("../../utils/config.json");
 const chatcord = require("chatcord");
+const user = require("../../models/users");
 const chatting = new chatcord.Client();
-const staff = require("../../models/nuggiesStaff");
 const cmdhook = new Discord.WebhookClient(
   config.cmdhookID,
   config.cmdhookTOKEN
@@ -198,11 +198,10 @@ module.exports = async (client, message) => {
   if (!commandFile) return;
 
   if (client.commands.get(command).config.developers == true) {
-    const nuggiesStaff = await staff.findOne({
-      _id: message.guild.id,
-    });
-
-    if (!nuggiesStaff.Developers.includes(message.author.id))
+    const fetch = await user.findOne({
+      id: message.author.id
+    })
+    if (!fetch.developer)
       return utils.errorEmbed(
         message,
         ":warning: This command is restricted only to bot owners."
@@ -210,14 +209,10 @@ module.exports = async (client, message) => {
   }
 
   if (client.commands.get(command).config.restricted == true) {
-    const nuggiesStaff = await staff.findOne({
-      _id: message.guild.id,
-    });
-
-    if (
-      !nuggiesStaff.Developers.includes(message.author.id) &&
-      !nuggiesStaff.Moderators.includes(message.author.id)
-    )
+    const fetch = await user.findOne({
+      id: message.author.id
+    })
+    if (!fetch.developer && !fetch.moderator)
       return utils.errorEmbed(
         message,
         ":warning: This command is restricted only to bot moderators / owners."
