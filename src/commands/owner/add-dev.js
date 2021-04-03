@@ -24,25 +24,24 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     }
+    if(!target) return message.channel.send(`You did not mention a user to grant privileges to.`)
+    
+    const checkTarget = message.guild.members.cache.get(`${target.id}`);
+    if (!checkTarget) {
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle(`:warning: Error`)
+          .setDescription(
+            `${target} is not a valid user. Not even sure what you're on about`
+          )
+          .setColor(`RED`)
+      );
+    }
 
-  const checkTarget = message.guild.members.cache.get(`${target.id}`);
-  if (!checkTarget) {
-    return message.channel.send(
-      new Discord.MessageEmbed()
-        .setTitle(`:warning: Error`)
-        .setDescription(
-          `That user doesn't even exist. Not even sure what you're on about`
-        )
-        .setColor(`RED`)
-    );
-  }
+  const fetch = await client.data.getUserDB(target.id)
 
-  const nuggiesStaff = await user.findOne({
-    id: target.id,
-  });
 
-  if (nuggiesStaff) {
-    if (nuggiesStaff.developer) {
+    if (fetch.developer) {
       return message.channel.send(
         new Discord.MessageEmbed()
           .setTitle(`:warning: Error`)
@@ -50,11 +49,7 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     } else {
-      await user.findOneAndUpdate({
-        id: `${target.id}`,
-        developer: `true`,
-      });
-      await nuggiesStaff.save().catch((error) => console.log(error));
+      await client.data.developer(target.id, 'true')
 
       message.channel.send(
         new Discord.MessageEmbed()
@@ -75,33 +70,6 @@ module.exports.run = async (client, message, args) => {
             .setColor(`GREEN`)
         );
     }
-  } else if (!nuggiesStaff) {
-    const newE = new user({
-      id: `${target.id}`,
-      developer: `true`,
-    });
-
-    await newE.save().catch((error) => console.log(error));
-
-    message.channel.send(
-      new Discord.MessageEmbed()
-        .setTitle(`<a:9689_tick:785181267758809120> Success!`)
-        .setDescription(
-          `**<@${target.id}>** was successfully given developer permissions`
-        )
-        .setColor(`GREEN`)
-    );
-    message.guild.members.cache
-      .get(target.id)
-      .send(
-        new Discord.MessageEmbed()
-          .setTitle(`:warning: Alert`)
-          .setDescription(
-            `You were granted developer permissions by **${message.author.tag}** for **Nuggies**`
-          )
-          .setColor(`GREEN`)
-      );
-  }
 };
 
 module.exports.help = {
@@ -112,8 +80,6 @@ module.exports.help = {
 };
 
 module.exports.config = {
-  developers: false,
-  args: true,
   category: "Owner",
   disable: false,
   cooldown: 2000,
