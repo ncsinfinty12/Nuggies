@@ -198,9 +198,8 @@ module.exports = async (client, message) => {
   if (!commandFile) return;
 
   if (client.commands.get(command).config.developers == true) {
-    const fetch = await user.findOne({
-      id: message.author.id
-    })
+    const fetch = await client.data.getUserDB(message.author.id)
+
     if (!fetch.developer)
       return utils.errorEmbed(
         message,
@@ -209,9 +208,8 @@ module.exports = async (client, message) => {
   }
 
   if (client.commands.get(command).config.restricted == true) {
-    const fetch = await user.findOne({
-      id: message.author.id
-    })
+    const fetch = await client.data.getUserDB(message.author.id)
+
     if (!fetch.developer && !fetch.moderator)
       return utils.errorEmbed(
         message,

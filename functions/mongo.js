@@ -73,9 +73,9 @@ module.exports = {
 		const user = await usersDB.findOne({ id: userID }).cache(60);
 		if (!user) {
 			const newUs = new usersDB({ id: userID });
-			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason } = newUs;
+			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, developer, moderator } = newUs;
 			await newUs.save().catch(error => console.log(error));
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason };
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, developer, moderator };
 		}
 		else {
 			const registeredAt = user.registeredAt;
@@ -83,7 +83,9 @@ module.exports = {
 			const blacklisted_reason = user.blacklisted_reason;
 			const is_afk = user.is_afk;
 			const afkReason = user.afkReason;
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason };
+			const developer = user.developer;
+			const moderator = user.moderator;
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, developer, moderator };
 		}
 	},
 	/**
@@ -188,6 +190,70 @@ module.exports = {
 		await guild.save().catch(error => console.log(error));
 		cachegoose.clearCache();
 		return { prefix };
+	},
+	/**
+	* @param {string} userID - ID of the User
+	* @param {string} toggle - blacklist toggle
+	*/
+	async developer(userID, toggle) {
+		if (!userID) throw new Error('Please Provide a User ID');
+		if (!toggle) throw new Error('Please Provide a toggle');
+		const user = await usersDB.findOne({ id: userID });
+		if (!user) {
+			const newUs = new usersDB({ id: userID });
+			if (toggle == 'true') {
+				user.developer = true;
+			}
+			else {
+				user.developer = false;
+			}
+			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+		else {
+			if (toggle == 'true') {
+				user.developer = true;
+			}
+			else {
+				user.developer = false;
+			}
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+	},
+	/**
+	* @param {string} userID - ID of the User
+	* @param {string} toggle - blacklist toggle
+	*/
+	async moderator(userID, toggle) {
+		if (!userID) throw new Error('Please Provide a User ID');
+		if (!toggle) throw new Error('Please Provide a toggle');
+		const user = await usersDB.findOne({ id: userID });
+		if (!user) {
+			const newUs = new usersDB({ id: userID });
+			if (toggle == 'true') {
+				user.moderator = true;
+			}
+			else {
+				user.moderator = false;
+			}
+			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+		else {
+			if (toggle == 'true') {
+				user.moderator = true;
+			}
+			else {
+				user.moderator = false;
+			}
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
 	},
 	/**
      * @param {string} guildID - ID of the User

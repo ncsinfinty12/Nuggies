@@ -24,34 +24,34 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     }
+    if(!target) return message.channel.send(`You did not mention a user to grant privileges to.`)
+    
+    const checkTarget = message.guild.members.cache.get(`${target.id}`);
+    if (!checkTarget) {
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle(`:warning: Error`)
+          .setDescription(
+            `${target} is not a valid user. Not even sure what you're on about`
+          )
+          .setColor(`RED`)
+      );
+    }
 
-  const nuggiesStaff = await user.findOne({
-    id: target.id,
-  });
+  const fetch = await client.data.getUserDB(target.id)
 
-  if (!nuggiesStaff.moderator) {
-    return message.channel.send(
-      new Discord.MessageEmbed()
-        .setTitle(`:warning: Error`)
-        .setDescription(`This user doesn't have moderator permissions`)
-        .setColor(`RED`)
-    );
-  } else {
+  if (fetch.moderator) {
 
-    await user.findOneAndUpdate({
-      id: `${target.id}`,
-      moderator: `false`,
-    });
-
+    await client.data.moderator(target.id, 'false')
     message.channel.send(
       new Discord.MessageEmbed()
         .setTitle(`<a:9689_tick:785181267758809120> Success!`)
         .setDescription(
           `Successfully revoked **<@${target.id}>'s** moderator permissions`
         )
-        .setColor(`GREEN`)
+        .setColor(`RED`)
     );
-    message.guild.members.cache
+    return message.guild.members.cache
       .get(target.id)
       .send(
         new Discord.MessageEmbed()
@@ -61,6 +61,13 @@ module.exports.run = async (client, message, args) => {
           )
           .setColor(`RED`)
       );
+  } else {
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle(`:warning: Error`)
+        .setDescription(`This user doesn't have moderator permissions`)
+        .setColor(`RED`)
+    );
   }
 };
 
@@ -72,8 +79,6 @@ module.exports.help = {
 };
 
 module.exports.config = {
-  developers: true,
-  args: true,
   category: "Owner",
   disable: false,
   cooldown: 2000,
