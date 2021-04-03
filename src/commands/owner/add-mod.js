@@ -25,24 +25,23 @@ module.exports.run = async (client, message, args) => {
       );
     }
 
-  const checkTarget = message.guild.members.cache.get(`${target.id}`);
-  if (!checkTarget) {
-    return message.channel.send(
-      new Discord.MessageEmbed()
-        .setTitle(`:warning: Error`)
-        .setDescription(
-          `That user doesn't even exist. Not even sure what you're on about`
-        )
-        .setColor(`RED`)
-    );
-  }
+    if(!target) return message.channel.send(`You did not mention a user to grant privileges to.`)
+    
+    const checkTarget = message.guild.members.cache.get(`${target.id}`);
+    if (!checkTarget) {
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle(`:warning: Error`)
+          .setDescription(
+            `${target} is not a valid user. Not even sure what you're on about`
+          )
+          .setColor(`RED`)
+      );
+    }
 
-  const nuggiesStaff = await user.findOne({
-    id: target.id,
-  });
+  const fetch = await client.data.getUserDB(target.id);
 
-  if (nuggiesStaff) {
-    if (nuggiesStaff.moderator) {
+    if (fetch.moderator) {
       return message.channel.send(
         new Discord.MessageEmbed()
           .setTitle(`:warning: Error`)
@@ -50,11 +49,7 @@ module.exports.run = async (client, message, args) => {
           .setColor(`RED`)
       );
     } else {
-      await user.findOneAndUpdate({
-        id: `${target.id}`,
-        moderator: `true`
-      })
-      await nuggiesStaff.save().catch((error) => console.log(error));
+      await client.data.moderator(target.id, 'true')
 
       message.channel.send(
         new Discord.MessageEmbed()
@@ -64,34 +59,7 @@ module.exports.run = async (client, message, args) => {
           )
           .setColor(`GREEN`)
       );
-      message.guild.members.cache
-        .get(target.id)
-        .send(
-          new Discord.MessageEmbed()
-            .setTitle(`:warning: Alert`)
-            .setDescription(
-              `You were granted moderator permissions by **${message.author.tag}** for **Nuggies**`
-            )
-            .setColor(`GREEN`)
-        );
-    }
-  } else if (!nuggiesStaff) {
-    const newE = new user({
-      id: target.id,
-      moderator: true,
-    });
-
-    await newE.save().catch((error) => console.log(error));
-
-    message.channel.send(
-      new Discord.MessageEmbed()
-        .setTitle(`<a:9689_tick:785181267758809120> Success!`)
-        .setDescription(
-          `**<@${target.id}>** was successfully given moderator permissions`
-        )
-        .setColor(`GREEN`)
-    );
-    message.guild.members.cache
+    return message.guild.members.cache
       .get(target.id)
       .send(
         new Discord.MessageEmbed()
@@ -112,8 +80,6 @@ module.exports.help = {
 };
 
 module.exports.config = {
-  developers: true,
-  args: true,
   category: "Owner",
   disable: false,
   cooldown: 2000,
