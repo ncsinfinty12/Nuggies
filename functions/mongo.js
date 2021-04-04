@@ -73,9 +73,9 @@ module.exports = {
 		const user = await usersDB.findOne({ id: userID }).cache(60);
 		if (!user) {
 			const newUs = new usersDB({ id: userID });
-			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers } = newUs;
+			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, developer, moderator } = newUs;
 			await newUs.save().catch(error => console.log(error));
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers };
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, developer, moderator };
 		}
 		else {
 			const registeredAt = user.registeredAt;
@@ -83,10 +83,9 @@ module.exports = {
 			const blacklisted_reason = user.blacklisted_reason;
 			const is_afk = user.is_afk;
 			const afkReason = user.afkReason;
-			const premium = user.premium;
-			const tier = user.tier;
-			const premiumservers = user.premiumservers;
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers };
+			const developer = user.developer;
+			const moderator = user.moderator;
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, developer, moderator };
 		}
 	},
 	/**
@@ -191,6 +190,70 @@ module.exports = {
 		await guild.save().catch(error => console.log(error));
 		cachegoose.clearCache();
 		return { prefix };
+	},
+	/**
+	* @param {string} userID - ID of the User
+	* @param {string} toggle - blacklist toggle
+	*/
+	async developer(userID, toggle) {
+		if (!userID) throw new Error('Please Provide a User ID');
+		if (!toggle) throw new Error('Please Provide a toggle');
+		const user = await usersDB.findOne({ id: userID });
+		if (!user) {
+			const newUs = new usersDB({ id: userID });
+			if (toggle == 'true') {
+				user.developer = true;
+			}
+			else {
+				user.developer = false;
+			}
+			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+		else {
+			if (toggle == 'true') {
+				user.developer = true;
+			}
+			else {
+				user.developer = false;
+			}
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+	},
+	/**
+	* @param {string} userID - ID of the User
+	* @param {string} toggle - blacklist toggle
+	*/
+	async moderator(userID, toggle) {
+		if (!userID) throw new Error('Please Provide a User ID');
+		if (!toggle) throw new Error('Please Provide a toggle');
+		const user = await usersDB.findOne({ id: userID });
+		if (!user) {
+			const newUs = new usersDB({ id: userID });
+			if (toggle == 'true') {
+				user.moderator = true;
+			}
+			else {
+				user.moderator = false;
+			}
+			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+		else {
+			if (toggle == 'true') {
+				user.moderator = true;
+			}
+			else {
+				user.moderator = false;
+			}
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
 	},
 	/**
      * @param {string} guildID - ID of the User
@@ -324,45 +387,5 @@ module.exports = {
 		cachegoose.clearCache();
 		return { role };
 	},
-	/**
-	* @param {string} guildID - ID of the User
-	* @param {string} toggle - premium toggle
-	*/
-	async premiumGuild(guildID, toggle) {
-		if (!guildID) throw new Error('Please Provide a Guild ID');
-		if (!toggle) throw new Error('Please Provide a toggle!');
-		const guild = await guildsDB.findOne({ id: guildID });
-		if (!guild) {
-			const newU = new guildsDB({ id: guildID });
-			await newU.save().catch(error => console.log(error));
-			return { toggle };
-		}
-		guild.premium = toggle;
-		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache();
-		return { toggle };
-	},
-	/**
-	* @param {string} guildID - ID of the User
-	* @param {string} toggle - premium toggle
-	*/
-	async pushguild(user, guildID, method) {
-		if(!method) return new Error('please provide a method');
-		usersDB.findOne({ id: user }, async (err, data) => {
-			if(err) throw err;
-			if(!data) return new Error('user not found.');
-			if(method === 'push') {
-				await data.premiumservers.push(guildID);
-				await data.save().catch(error => console.log(error));
-				data.save();
-			}
-			if(method === 'splice') {
-				const index = data.premiumservers.indexOf(guildID);
-				data.premiumservers.splice(index, 1);
-				data.save();
-			}
-			cachegoose.clearCache();
-			return { user };
-		});
-	},
+
 };
