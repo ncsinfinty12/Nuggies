@@ -63,15 +63,14 @@ async function startUp() {
 	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI', client);
 
 	// mongoose connect
-	client.data.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main').then(() => {
-		console.log('Connected to MongoDB database!');
-	}).catch((err) => {
-		// If it doesn't connect log the following
-		console.log(
-			'Unable to connect Economy to the Mongodb database. Error:' + err,
-		);
-	});
-
+	client.data.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main')
+		.then(() => {
+			// If it connects log the following
+			console.log('Connected to MongoDB database!');
+		}).catch((err) => {
+			// If it doesn't connect log the following
+			console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
+		});
 
 	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.deoXvo_y4jo7M89X2uh-Drz0WLU
@@ -84,10 +83,7 @@ startUp();
 process.on('unhandledRejection', async (err) => {
 	if (client.user) {
 		if (client.user.id === '800588645006311444') {
-			const errEmbed = new Discord.MessageEmbed()
-				.setTitle('unhandledRejection Error')
-				.setDescription(err.stack, { code: 'ini' })
-				.setTimestamp();
+			const errEmbed = new Discord.MessageEmbed().setTitle('unhandledRejection Error').setDescription(err.stack, { code: 'ini' }).setTimestamp();
 			unhhook.send(errEmbed);
 		}
 	}
