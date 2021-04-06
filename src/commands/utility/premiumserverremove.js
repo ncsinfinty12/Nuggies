@@ -30,5 +30,5 @@ module.exports.config = {
 	restricted: false,
 	category: 'Utility',
 	disable: false,
-	cooldown: 1000 * 60 * 12,
+	cooldown: 1000 * 60,
 };
