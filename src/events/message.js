@@ -110,7 +110,6 @@ module.exports = async (client, message) => {
 
 	// Ping Embed
 	// Get prefix from guild else get from config file
-	!message.author.bot && message.content.match(prefixMention);
 	const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
 	if (!message.author.bot && message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
 		const m = new Discord.MessageEmbed()
@@ -174,7 +173,7 @@ module.exports = async (client, message) => {
 			const expirationTime = timestamps.get(message.author.id) + pcooldown;
 			if (Date.now() < expirationTime) {
 				const timeLeft = utils.timer(expirationTime);
-				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but since you are a donator, you only need to wait for **\`${utils.timer(pcooldown + Date.now())}!\`**`).setColor('RED'));
+				return message.channel.send(new Discord.MessageEmbed().setTitle(`${message.author.username}, ⏰ Hold up!`).setDescription(`This command is on cooldown for **${timeLeft}** \n \n the default cooldown for this command is **\`${utils.timer(cooldown + Date.now())}\`** but since you are a [donator](https://bot.nuggetdev.com/premium), you only need to wait for **\`${utils.timer(pcooldown + Date.now())}!\`**`).setColor('RED'));
 			}
 		}
 		else {
