@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 		return message.channel.send(`command failed \`\`\`${e}\`\`\``);
 	}
 	message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium added to **${message.guild.name}**! \n \n`).setFooter('thanks for being a donor :)').setColor('GREEN'));
-
+	client.channels.cache.get('828923022869004328').send(new Discord.MessageEmbed().setTitle(`Premium added to ${message.guild.name} [${message.guild.id}] by ${message.author.tag}`).setColor('GREEN'));
 };
 
 module.exports.help = {
