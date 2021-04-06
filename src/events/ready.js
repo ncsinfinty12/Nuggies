@@ -6,7 +6,7 @@ const config = require('../../utils/config.json');
 const axios = require('axios');
 module.exports = async (client) => {
 	console.log(`${client.user.username} is now online!`);
-	client.user.setActivity(`to ${client.guilds.cache.size} servers!`, { type: 'STREAMING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
+	client.user.setActivity(`PREMIUM GIVEAWAY IN SUPPORT SERVER!`, { type: 'WATCHING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
 	const Webhook = new Discord.WebhookClient(config.restarthookID, config.restarthookTOKEN);
 	const restartEmbed = new Discord.MessageEmbed()
 		.setTitle('Nuggies was restarted!')
