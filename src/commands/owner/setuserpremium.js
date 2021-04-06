@@ -2,21 +2,19 @@
 const Discord = require('discord.js');
 const users = require('../../../models/users');
 module.exports.run = async (client, message, args, utils, data) => {
-	const target = args[0];
-	const toggle = args[1];
-	let tier = args[2];
-	await client.users.fetch(target);
-	if(!tier) tier = 0;
+	const target = message.mentions.members.first() || message.guild.members.cache.find((m) => m.user.id === args[0] || m.user.tag.startsWith(args[0]) || m.displayName.startsWith(args[0]));
+	if(!target) return message.channel.send('bruh fartpoop poop specify a user');
+	const tier = args[1];
+	await client.users.fetch(target.id);
 	if(!target) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a user!').setColor('RED'));
-	if(!toggle) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a toggle!').setColor('RED'));
 	// if(toggle != 'true' || 'false') return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('Please provide a valid toggle!'));
-	users.findOne({ id: args[0] }, async (err, Data) => {
+	users.findOne({ id: target.id }, async (err, Data) => {
 		if(err) throw err;
 		if(!Data) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('user not found').setColor('RED'));
-		Data.premium = toggle;
 		Data.tier = tier;
 		Data.save();
-		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium \`tier ${tier}\` set to \`${toggle.toLowerCase()}\` for **${client.users.cache.get(target).tag}** `).setColor('GREEN'));
+		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium set to \`tier ${tier}\` for **${client.users.cache.get(target.id).tag}** `).setColor('GREEN'));
+		client.channels.cache.get('828996803855777882').send(new Discord.MessageEmbed().setTitle(`Premium tier ${tier} added to ${target.user.username}`).setColor('GREEN'));
 	});
 };
 module.exports.help = {
