@@ -34,6 +34,7 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
+				premium,
 			} = newG;
 			await newG.save().catch(error => console.log(error));
 			return {
@@ -44,6 +45,7 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
+				premium,
 			};
 		}
 		else {
@@ -54,6 +56,7 @@ module.exports = {
 			const automeme_enabled = guild.automeme_enabled;
 			const automeme_channel = guild.automeme_channel;
 			const mute_role = guild.mute_role;
+			const premium = guild.premium;
 			return {
 				prefix,
 				registeredAt,
@@ -62,6 +65,7 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
+				premium,
 			};
 		}
 	},
