@@ -67,6 +67,6 @@ module.exports.config = {
 	args: true,
 	restricted: false,
 	category: 'Utility',
-	disable: true,
+	disable: false,
 	cooldown: 10000,
 };
