@@ -25,6 +25,6 @@ module.exports.config = {
 	args: false,
 	restricted: false,
 	category: 'Actions',
-	disable: true,
+	disable: false,
 	cooldown: 1000,
 };
