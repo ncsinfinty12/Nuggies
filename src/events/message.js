@@ -110,11 +110,8 @@ module.exports = async (client, message) => {
 
 	// Ping Embed
 	// Get prefix from guild else get from config file
-	let prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
-	if (client.user.id == '810385911459741786') {
-		prefixx = '..';
-	}
-
+	!message.author.bot && message.content.match(prefixMention);
+	const prefixx = !guildDB.prefix ? config.prefix : guildDB.prefix;
 	if (!message.author.bot && message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
 		const m = new Discord.MessageEmbed()
 			.setTitle('Hi, I\'m Nuggies !')
@@ -145,13 +142,13 @@ module.exports = async (client, message) => {
 	if (!commandFile) return;
 
 	if (client.commands.get(command).config.developers == true) {
-		if (!config.developers.includes(message.author.id)) {
+		if (data.user.developer == false) {
 			return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners.');
 		}
 	}
 
 	if (client.commands.get(command).config.restricted == true) {
-		if (!config.globalmods.includes(message.author.id) && !config.developers.includes(message.author.id)) {
+		if (data.user.moderator == false) {
 			return utils.errorEmbed(message, ':warning: This command is restricted only to bot moderators / owners.');
 		}
 	}
