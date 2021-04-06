@@ -45,9 +45,7 @@ async function startUp() {
 	const folders = await readdir('./src/commands/');
 	console.log(`Loading a total of ${folders.length} categories.`);
 	folders.forEach((direct) => {
-		const commandFiles = fs
-			.readdirSync('./src/commands/' + direct + '/')
-			.filter((file) => file.endsWith('.js'));
+		const commandFiles = fs.readdirSync('./src/commands/' + direct + '/').filter((file) => file.endsWith('.js'));
 		for (const file of commandFiles) {
 			const props = require(`./src/commands/${direct}/${file}`);
 			props.fileName = file;
@@ -62,59 +60,17 @@ async function startUp() {
 
 	console.log(tble.toString());
 	const DBL = require('dblapi.js');
-	const dbl = new DBL(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI',
-		client,
-	);
+	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI', client);
 
 	// mongoose connect
-	client.data
-		.connect(
-			'mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main',
-		)
+	client.data.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main')
 		.then(() => {
 			// If it connects log the following
 			console.log('Connected to MongoDB database!');
-		})
-		.catch((err) => {
+		}).catch((err) => {
 			// If it doesn't connect log the following
-			console.log(
-				'Unable to connect Economy to the Mongodb database. Error:' + err,
-			);
+			console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 		});
-
-	// functions
-	// eslint-disable-next-line no-async-promise-executor
-	client.bal = (id) =>
-		new Promise(async (ful) => {
-			const data = await currency.findOne({ id });
-			if (!data) return ful(0);
-			ful(data.coins);
-		});
-	client.add = (id, coins) => {
-		currency.findOne({ id }, async (err, data) => {
-			if (err) throw err;
-			if (data) {
-				data.coins += coins;
-			}
-			else {
-				data = new currency({ id, coins });
-			}
-			data.save();
-		});
-	};
-	client.remove = (id, coins) => {
-		currency.findOne({ id }, async (err, data) => {
-			if (err) throw err;
-			if (data) {
-				data.coins -= coins;
-			}
-			else {
-				data = new currency({ id, coins: -coins });
-			}
-			data.save();
-		});
-	};
 
 	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.deoXvo_y4jo7M89X2uh-Drz0WLU
@@ -127,10 +83,7 @@ startUp();
 process.on('unhandledRejection', async (err) => {
 	if (client.user) {
 		if (client.user.id === '800588645006311444') {
-			const errEmbed = new Discord.MessageEmbed()
-				.setTitle('unhandledRejection Error')
-				.setDescription(err.stack, { code: 'ini' })
-				.setTimestamp();
+			const errEmbed = new Discord.MessageEmbed().setTitle('unhandledRejection Error').setDescription(err.stack, { code: 'ini' }).setTimestamp();
 			unhhook.send(errEmbed);
 		}
 	}

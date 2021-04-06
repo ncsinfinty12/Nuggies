@@ -2,6 +2,7 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (client, message, args, utils, data) => {
+	if(data.user.premium == false) return message.channel.send(new MessageEmbed().setTitle('Error').setDescription('This command is only for donors, please [__**click here**__](https://bot.nuggetdev.com/premium) to donate!').setColor('RED'));
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE CHANNELS` permission.');
 	const channel = message.mentions.channels.first();
 	if(args[1] === 'true') {

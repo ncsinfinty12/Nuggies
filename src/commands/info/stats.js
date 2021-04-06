@@ -43,7 +43,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('Support Server <:SupportThumb:811209722883473430>', "[Click To Join](https://discord.gg/BxZUrr3a3u)", true)
 			.addField('Library <:nodeJS:785064545013858334>', '```yaml\nDiscord.js v12```', true)
 			.addField('Server Prefix 🔗', `\`\`\`yaml\n${Prefix}\`\`\``, true)
-			.addField('Visit Website <:chrome:811217850173227040>', "[Click To Visit](https://nuggies.tech)", true)
+			.addField('Visit Website <:chrome:811217850173227040>', "[Click To Visit]( https://nuggetdev.com/)", true)
 			.addField('-----------------------------------------------------------------', '---------------------------------------------------------------')
 			// .addField('Platform', `\`\`\`yaml\n${osutils.platform()}\`\`\``, true)
 			.addField('VPS CPU Cores', `\`\`\`yaml\n${osutils.cpuCount()}` + ' Cores```', true)
