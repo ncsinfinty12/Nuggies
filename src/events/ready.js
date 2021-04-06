@@ -30,6 +30,6 @@ module.exports = async (client) => {
 						client.channels.cache.get(data[i].automeme_channel).send(embed);
 					});
 			}
-		}, 10000);
+		}, 30000);
 	});
 };
