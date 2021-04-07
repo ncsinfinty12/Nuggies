@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 require('./utils/ExtendedMessage');
+const ExtendedGiveawayManager = require('./utils/ExtendedGiveawayManager');
 const Discord = require('discord.js');
 const fs = require('fs');
 const util = require('util');
@@ -14,7 +15,18 @@ client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
 client.data = require('./functions/mongo');
-
+const manager = new ExtendedGiveawayManager(client, {
+	updateCountdownEvery: 5000,
+	default: {
+		botsCanWin: false,
+		exemptPermissions: [],
+		embedColor: '#FF0000',
+		reaction: '🎉',
+	},
+});
+client.giveawaysManager = manager;
+// We now have a giveawaysManager property to access the manager everywhere!
+client.giveawaysManager = manager;
 const unhhook = new Discord.WebhookClient(
 	config.unhhookID,
 	config.unhhookTOKEN,
