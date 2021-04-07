@@ -7,13 +7,15 @@ const axios = require('axios');
 module.exports = async (client) => {
 	console.log(`${client.user.username} is now online!`);
 	client.user.setActivity('PREMIUM GIVEAWAY IN SUPPORT SERVER!', { type: 'WATCHING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
-	const Webhook = new Discord.WebhookClient(config.restarthookID, config.restarthookTOKEN);
-	const restartEmbed = new Discord.MessageEmbed()
-		.setTitle('Nuggies was restarted!')
-		.setDescription('Nuggies just got restarted!')
-		.setColor('e03854')
-		.setTimestamp();
-	Webhook.send(restartEmbed);
+	if (!client.user.id == '779741162465525790') {
+		const Webhook = new Discord.WebhookClient(config.restarthookID, config.restarthookTOKEN);
+		const restartEmbed = new Discord.MessageEmbed()
+			.setTitle('Nuggies was restarted!')
+			.setDescription('Nuggies just got restarted!')
+			.setColor('e03854')
+			.setTimestamp();
+		Webhook.send(restartEmbed);
+	}
 
 	// automeme
 	automeme.find({ automeme_enabled: true }, async (err, data) => {
