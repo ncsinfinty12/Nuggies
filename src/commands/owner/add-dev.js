@@ -39,6 +39,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
+	developers: true,
 	category: 'Owner',
 	disable: false,
 	cooldown: 2000,

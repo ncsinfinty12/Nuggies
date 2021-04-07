@@ -24,7 +24,7 @@ module.exports.help = {
 };
 
 module.exports.config = {
-	restricted: true,
+	developers: true,
 	args: true,
 	category: 'Owner',
 	disable: false,
