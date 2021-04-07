@@ -70,9 +70,9 @@ async function startUp() {
 			console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 		});
 
-	client.login('NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.rdK2AAQVdmd05w77NlGvhumSNKI');
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.CGEXKH0dgjJ2cv8PE479FtTEJy8');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.rdK2AAQVdmd05w77NlGvhumSNKI
-	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU
+	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.CGEXKH0dgjJ2cv8PE479FtTEJy8
 }
 startUp();
 
