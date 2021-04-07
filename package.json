@@ -11,6 +11,7 @@
     "canvas": "^2.7.0",
     "chatcord": "0.0.5",
     "dblapi.js": "^2.4.1",
+    "discord-giveaways": "git+https://github.com/Nuggies-bot/discord-giveaways.git",
     "discord.js": "github:monbrey/discord.js#inline-replies",
     "eslint": "^7.23.0",
     "figlet": "^1.5.0",
@@ -26,6 +27,7 @@
     "node-superfetch": "^0.1.11",
     "one-liner-joke": "^1.2.0",
     "os-utils": "0.0.14",
+    "quickmongo": "^3.0.2",
     "superagent": "^6.1.0",
     "urban": "^0.3.2"
   },
