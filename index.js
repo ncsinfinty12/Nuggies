@@ -4,7 +4,6 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
-const currency = require('./models/currencySchema');
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const ascii = require('ascii-table');
 const config = require('./utils/config.json');
@@ -14,7 +13,6 @@ client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
-client.economy = require('./utils/economy');
 client.data = require('./functions/mongo');
 
 const unhhook = new Discord.WebhookClient(
@@ -72,9 +70,9 @@ async function startUp() {
 			console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 		});
 
-	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU');
+	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.CGEXKH0dgjJ2cv8PE479FtTEJy8');
 	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.rdK2AAQVdmd05w77NlGvhumSNKI
-	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.qNuxbT2n0ce8FnMMCdmmP-VjcRU
+	// token for nuggies - Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.CGEXKH0dgjJ2cv8PE479FtTEJy8
 }
 startUp();
 

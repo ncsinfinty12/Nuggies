@@ -75,6 +75,7 @@ module.exports.help = {
 
 module.exports.config = {
 	category: 'Owner',
+	developers: true,
 	disable: false,
 	cooldown: 2000,
 
