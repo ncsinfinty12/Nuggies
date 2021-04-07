@@ -6,7 +6,7 @@ const client = new Client();
 const db = new Database('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main');
 class extendedGiveawaysManager extends GiveawaysManager {
 	async refreshStorage() {
-		return client.shard.broadcastEval(() => this.giveawaysManager.getAllGiveaways());
+		return this.giveawaysManager.getAllGiveaways();
 	}
 
 	async getAllGiveaways() {
