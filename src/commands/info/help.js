@@ -135,6 +135,9 @@ module.exports.run = async (client, message, args, utils, data) => {
 				.addField('``Description:``', cmd.help.description, true)
 				.addField('``Usage:``', cmd.help.usage, true)
 				.setColor('RANDOM');
+			if (cmd.help.aliases) {
+				b.addField('``Aliases:``', cmd.help.aliases, true);
+			}
 			message.channel.send(b);
 			return;
 

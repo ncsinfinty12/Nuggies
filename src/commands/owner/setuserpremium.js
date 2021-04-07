@@ -11,6 +11,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 		if(err) throw err;
 		if(!Data) return message.channel.send(new Discord.MessageEmbed().setTitle('Error').setDescription('user not found').setColor('RED'));
 		Data.tier = tier;
+		Data.premium = true;
 		Data.save();
 		message.channel.send(new Discord.MessageEmbed().setTitle('Success!').setDescription(`premium set to \`tier ${tier}\` for **${client.users.cache.get(target).tag}** `).setColor('GREEN'));
 		client.channels.cache.get('828996803855777882').send(new Discord.MessageEmbed().setTitle(`Premium tier ${tier} added to ${client.users.cache.get(target).username}`).setColor('GREEN'));
