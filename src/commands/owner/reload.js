@@ -40,7 +40,7 @@ module.exports.help = {
 
 module.exports.config = {
 	args: false,
-	ownerOnly: true,
+	restricted: true,
 	category: 'Owner',
 	disable: false,
 	cooldown: 0,
