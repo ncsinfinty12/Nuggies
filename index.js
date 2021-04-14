@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+require('dotenv').config();
 require('./utils/ExtendedMessage');
 const Discord = require('discord.js');
 const fs = require('fs');
@@ -70,8 +71,7 @@ async function startUp() {
 			console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
 		});
 
-	client.login('Nzc5NzQxMTYyNDY1NTI1Nzkw.X7k8jA.u5-u3z9NVI-xTH93CZPGMRu_7aA');
-	// token for beta - NzQxMDAwODY1Mjg4MjkwNDM1.XyxM1Q.rdK2AAQVdmd05w77NlGvhumSNKI
+	client.login(process.env.token);
 }
 startUp();
 
