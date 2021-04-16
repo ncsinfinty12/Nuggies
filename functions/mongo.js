@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const { GooseCache } = require('goosecache')
+const { GooseCache } = require('goosecache');
 const cachegoose = new GooseCache(mongoose, {
-  engine: 'memory'
+	engine: 'memory',
 });
 mongoose.set('useFindAndModify', false);
 const usersDB = require('../models/users');
@@ -34,6 +34,7 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
+				premium,
 			} = newG;
 			await newG.save().catch(error => console.log(error));
 			return {
@@ -44,6 +45,7 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
+				premium,
 			};
 		}
 		else {
@@ -54,6 +56,7 @@ module.exports = {
 			const automeme_enabled = guild.automeme_enabled;
 			const automeme_channel = guild.automeme_channel;
 			const mute_role = guild.mute_role;
+			const premium = guild.premium;
 			return {
 				prefix,
 				registeredAt,
@@ -62,6 +65,7 @@ module.exports = {
 				automeme_enabled,
 				automeme_channel,
 				mute_role,
+				premium,
 			};
 		}
 	},
@@ -73,9 +77,9 @@ module.exports = {
 		const user = await usersDB.findOne({ id: userID }).cache(60);
 		if (!user) {
 			const newUs = new usersDB({ id: userID });
-			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason } = newUs;
+			const { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers, developer, moderator } = newUs;
 			await newUs.save().catch(error => console.log(error));
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason };
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers, developer, moderator };
 		}
 		else {
 			const registeredAt = user.registeredAt;
@@ -83,7 +87,12 @@ module.exports = {
 			const blacklisted_reason = user.blacklisted_reason;
 			const is_afk = user.is_afk;
 			const afkReason = user.afkReason;
-			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason };
+			const premium = user.premium;
+			const tier = user.tier;
+			const premiumservers = user.premiumservers;
+			const developer = user.developer;
+			const moderator = user.moderator;
+			return { registeredAt, blacklisted, blacklisted_reason, is_afk, afkReason, premium, tier, premiumservers, developer, moderator };
 		}
 	},
 	/**
@@ -103,7 +112,7 @@ module.exports = {
 			user.is_afk = true;
 			user.afkReason = reason;
 			await user.save().catch(error => console.log(error));
-			cachegoose.clearCache()
+			cachegoose.clearCache();
 			return { reason };
 		}
 	},
@@ -121,8 +130,8 @@ module.exports = {
 		else {
 			user.is_afk = false;
 			user.afkReason = null;
-			await user.save().catch(error => console.log(error))
-			cachegoose.clearCache()
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
 			return { userID };
 		}
 	},
@@ -147,7 +156,7 @@ module.exports = {
 				user.blacklisted_reason = null;
 			}
 			await newUs.save().catch(error => console.log(error));
-			cachegoose.clearCache()
+			cachegoose.clearCache();
 			return { reason };
 		}
 		else {
@@ -160,7 +169,7 @@ module.exports = {
 				user.blacklisted_reason = null;
 			}
 			await user.save().catch(error => console.log(error));
-			cachegoose.clearCache()
+			cachegoose.clearCache();
 			return { reason };
 		}
 	},
@@ -186,8 +195,72 @@ module.exports = {
 		}
 		guild.prefix = prefix;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { prefix };
+	},
+	/**
+	* @param {string} userID - ID of the User
+	* @param {string} toggle - blacklist toggle
+	*/
+	async developer(userID, toggle) {
+		if (!userID) throw new Error('Please Provide a User ID');
+		if (!toggle) throw new Error('Please Provide a toggle');
+		const user = await usersDB.findOne({ id: userID });
+		if (!user) {
+			const newUs = new usersDB({ id: userID });
+			if (toggle == 'true') {
+				user.developer = true;
+			}
+			else {
+				user.developer = false;
+			}
+			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+		else {
+			if (toggle == 'true') {
+				user.developer = true;
+			}
+			else {
+				user.developer = false;
+			}
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+	},
+	/**
+	* @param {string} userID - ID of the User
+	* @param {string} toggle - blacklist toggle
+	*/
+	async moderator(userID, toggle) {
+		if (!userID) throw new Error('Please Provide a User ID');
+		if (!toggle) throw new Error('Please Provide a toggle');
+		const user = await usersDB.findOne({ id: userID });
+		if (!user) {
+			const newUs = new usersDB({ id: userID });
+			if (toggle == 'true') {
+				user.moderator = true;
+			}
+			else {
+				user.moderator = false;
+			}
+			await newUs.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
+		else {
+			if (toggle == 'true') {
+				user.moderator = true;
+			}
+			else {
+				user.moderator = false;
+			}
+			await user.save().catch(error => console.log(error));
+			cachegoose.clearCache();
+			return;
+		}
 	},
 	/**
      * @param {string} guildID - ID of the User
@@ -206,7 +279,7 @@ module.exports = {
 		if (toggle == 'false') toggle = false;
 		guild.chatbot_enabled = toggle;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { toggle };
 	},
 	/**
@@ -224,7 +297,7 @@ module.exports = {
 		}
 		guild.chatbot_channel = channel;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { channel };
 	},
 	/**
@@ -244,7 +317,7 @@ module.exports = {
 		if (toggle == 'false') toggle = false;
 		guild.automeme_enabled = toggle;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { toggle };
 	},
 	/**
@@ -262,7 +335,7 @@ module.exports = {
 		}
 		guild.automeme_channel = channel;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { channel };
 	},
 	/**
@@ -280,7 +353,7 @@ module.exports = {
 		}
 		guild.mute_role = role;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { role };
 	},
 	/**
@@ -300,7 +373,7 @@ module.exports = {
 		if (toggle == 'false') toggle = false;
 		guild.afk_enabled = toggle;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { toggle };
 	},
 	/**
@@ -318,8 +391,48 @@ module.exports = {
 		}
 		guild.afk_role = role;
 		await guild.save().catch(error => console.log(error));
-		cachegoose.clearCache()
+		cachegoose.clearCache();
 		return { role };
 	},
-
+	/**
+	* @param {string} guildID - ID of the User
+	* @param {string} toggle - premium toggle
+	*/
+	async premiumGuild(guildID, toggle) {
+		if (!guildID) throw new Error('Please Provide a Guild ID');
+		if (!toggle) throw new Error('Please Provide a toggle!');
+		const guild = await guildsDB.findOne({ id: guildID });
+		if (!guild) {
+			const newU = new guildsDB({ id: guildID });
+			await newU.save().catch(error => console.log(error));
+			return { toggle };
+		}
+		guild.premium = toggle;
+		await guild.save().catch(error => console.log(error));
+		cachegoose.clearCache();
+		return { toggle };
+	},
+	/**
+	* @param {string} guildID - ID of the User
+	* @param {string} toggle - premium toggle
+	*/
+	async pushguild(user, guildID, method) {
+		if(!method) return new Error('please provide a method');
+		usersDB.findOne({ id: user }, async (err, data) => {
+			if(err) throw err;
+			if(!data) return new Error('user not found.');
+			if(method === 'push') {
+				await data.premiumservers.push(guildID);
+				await data.save().catch(error => console.log(error));
+				data.save();
+			}
+			if(method === 'splice') {
+				const index = data.premiumservers.indexOf(guildID);
+				data.premiumservers.splice(index, 1);
+				data.save();
+			}
+			cachegoose.clearCache();
+			return { user };
+		});
+	},
 };

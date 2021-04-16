@@ -32,7 +32,9 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('<a:distraction:807647150438744064> Actions', `\`${prefix}help actions\``, true)
 			.addField('<a:Loading:785190101105508373> More', `\`${prefix}help more\``, true)
 			.addField('⚙ Utility', `\`${prefix}help utility\``, true)
-			.setFooter('Check out our website: https://nuggies.tech')
+			.addField('🎙 Soundboard', `\`${prefix}help soundboard\``, true)
+		//  .addField('<a:music_disc:826830791115931719>', `\`${prefix}help music\``, true)
+			.setFooter('Check out our website:  https://nuggetdev.com/')
 			.setThumbnail(client.user.avatarURL({ type:  'png' }))
 			.setColor('RANDOM');
 		message.channel.send(a);
@@ -62,6 +64,10 @@ module.exports.run = async (client, message, args, utils, data) => {
 		message.client.commands.forEach(command => {
 			if (command.config.category == 'Utility') {utilityCmds += `\`${command.help.name}\`, `;}
 		});
+		let Soundboard = '';
+		message.client.commands.forEach(command => {
+			if (command.config.category == 'Soundboard') {Soundboard += `\`${command.help.name}\`, `;}
+		});
 		if (args[0] === 'info') {
 			const infoCmdsembed = new Discord.MessageEmbed()
 				.setTitle('Info Commands')
@@ -69,6 +75,22 @@ module.exports.run = async (client, message, args, utils, data) => {
 				.setColor('RANDOM')
 				.setFooter('Page 1/1');
 			return message.channel.send(infoCmdsembed);
+		}
+		if (args[0] === 'soundboard') {
+			const SoundEmbed = new Discord.MessageEmbed()
+				.setTitle('Soundboard Commands')
+				.setDescription(Soundboard.slice(0))
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(SoundEmbed);
+		}
+		if (args[0] === 'music') {
+			const musicembed = new Discord.MessageEmbed()
+				.setTitle('Info Commands')
+				.setDescription('`disconnect`, `loop`, `nowplaying`, `pause`, `play`, `queue`, `resume`, `skip`, `volume`')
+				.setColor('RANDOM')
+				.setFooter('Page 1/1');
+			return message.channel.send(musicembed);
 		}
 		if (args[0] === 'fun') {
 			const funCmdsembed = new Discord.MessageEmbed()
@@ -113,7 +135,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 		if (args[0] === 'slash-commands') {
 			const slashCmdsembed = new Discord.MessageEmbed()
 				.setTitle('Slash Commands')
-				.setDescription('`/meme`, `/cat`, `/8ball`, `/echo` (use @Nuggies register) to register')
+				.setDescription('`/meme`, `/cat`, `/8ball`, `/echo`, `/support`, `/activities` (use @Nuggies register) to register')
 				.setColor('RANDOM')
 				.setFooter('Page 1/1');
 			return message.channel.send(slashCmdsembed);
