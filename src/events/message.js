@@ -139,7 +139,7 @@ module.exports = async (client, message) => {
 	const commandFile = client.commands.get(command);
 
 	if (!commandFile) return;
-	if(client.commands.get(command).config.category === 'Actions') return message.channel.send('due to some difficulties, Actions commands are disabled for atleast a day, please join discord.gg/d98jT3mgxf for updates (we also do premium giveaways)');
+	// if(client.commands.get(command).config.category === 'Actions') return message.channel.send('due to some difficulties, Actions commands are disabled for atleast a day, please join discord.gg/d98jT3mgxf for updates (we also do premium giveaways)');
 	if (client.commands.get(command).config.developers == true) {
 		if (data.user.developer == false) {
 			return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners.');
