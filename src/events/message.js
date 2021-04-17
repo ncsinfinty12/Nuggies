@@ -73,9 +73,9 @@ module.exports = async (client, message) => {
 	// Chatbot thingy
 
 	if (data.guild.chatbot_enabled && data.guild.chatbot_channel == message.channel.id) {
-			return message.channel.send(
-				`\`❌ Chatbot has been disabled due to issues with our API\``,
-			);
+		return message.channel.send(
+			'`❌ Chatbot has been disabled due to issues with our API`',
+		);
 		// const badwords = ['nigger', 'nigga', 'nibba', 'nibber'];
 		// const bl_log_channel = client.channels.cache.get('809317042058035241');
 		// const reason = 'saying a blacklisted word.';
