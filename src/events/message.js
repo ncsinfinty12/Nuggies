@@ -3,8 +3,8 @@
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
-const chatcord = require('chatcord');
-const chatting = new chatcord.Client();
+const chatbase = 'https://api.affiliateplus.xyz/api';
+const fetch = require('node-fetch');
 const cmdhook = new Discord.WebhookClient(
 	config.cmdhookID,
 	config.cmdhookTOKEN,
@@ -73,42 +73,38 @@ module.exports = async (client, message) => {
 	// Chatbot thingy
 
 	if (data.guild.chatbot_enabled && data.guild.chatbot_channel == message.channel.id) {
-		return message.channel.send(
-			'`❌ Chatbot has been disabled due to issues with our API`',
-		);
-		// const badwords = ['nigger', 'nigga', 'nibba', 'nibber'];
-		// const bl_log_channel = client.channels.cache.get('809317042058035241');
-		// const reason = 'saying a blacklisted word.';
-		// if (badwords.some((word) => message.content.toLowerCase().includes(word))) {
-		// 	const blacklist = await client.data.blacklist(message.author.id, 'true', reason);
-		// 	const logEmbed = new Discord.MessageEmbed().setTitle('<a:9689_tick:785181267758809120> User Blacklisted').setDescription(`**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}** \n **message**: ${message.content}`).setFooter('Blacklist registered').setColor('RED').setTimestamp();
-		// 	bl_log_channel.send(logEmbed);
-		// 	message.author.send(`You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`).catch((err) => {
-		// 		message.channel.send(`${message.author.username} has DM's disabled. I was unable to send him a message - but blacklist has been registered!`);
-		// 		console.log(err);
-		// 		return;
-		// 	});
-		// }
+		const badwords = ['nigger', 'nigga', 'nibba', 'nibber'];
+		const bl_log_channel = client.channels.cache.get('809317042058035241');
+		const reason = 'saying a blacklisted word.';
+		if (badwords.some((word) => message.content.toLowerCase().includes(word))) {
+			const blacklist = await client.data.blacklist(message.author.id, 'true', reason);
+			const logEmbed = new Discord.MessageEmbed().setTitle('<a:9689_tick:785181267758809120> User Blacklisted').setDescription(`**${message.author.username}#${message.author.discriminator}** was blacklisted from using the bot.\n\nResponsible Moderator : **${message.author.username}**\n\nReason : **${blacklist.reason}** \n **message**: ${message.content}`).setFooter('Blacklist registered').setColor('RED').setTimestamp();
+			bl_log_channel.send(logEmbed);
+			message.author.send(`You have been blacklisted from using the bot! \n **Reason:** ${reason}\n **Moderator:** ${message.author.tag} \n**Join Nuggies Support to appeal:** https://discord.gg/ut7PxgNdef`).catch((err) => {
+				message.channel.send(`${message.author.username} has DM's disabled. I was unable to send him a message - but blacklist has been registered!`);
+				console.log(err);
+				return;
+			});
+		}
 
-		// const channel = data.guild.chatbot_channel;
-		// if (!channel) return;
-		// const sChannel = message.guild.channels.cache.get(channel);
-		// if (message.author.bot || sChannel.id !== message.channel.id) return;
-		// sChannel.startTyping();
-
-		// if (!message.content) return;
-
-		// await chatting.chat(message.content).then((reply) => {
-		// 	return message.inlineReply(Discord.Util.removeMentions(reply));
-		// 	// The module will reply with the based on stimulus (1st parameter of the chat function!)
-		// }).catch((error) => {
-		// 	return message.channel.send(
-		// 		`\`❌ CHAT ERROR\` \`\`\`xl\n${error}\n\`\`\``,
-		// 	);
-		// });
-		// sChannel.stopTyping();
+		const channel = data.guild.chatbot_channel;
+		if (!channel) return;
+		const sChannel = message.guild.channels.cache.get(channel);
+		if (message.author.bot || sChannel.id !== message.channel.id) return;
+		sChannel.startTyping();
+		if(!message.content) return sChannel.stopTyping();
+		try {
+			const basefetch = await fetch(`${chatbase}/chatbot?message=${encodeURIComponent(message.content)}&botname=${encodeURIComponent('Nuggies')}&ownername=${encodeURIComponent('AssassiN#1234')}&user=${message.author.id}`, {});
+			const response = await basefetch.json();
+			message.reply(response.message);
+		}
+		catch (e) {
+			message.reply('something went wrong! please report it on our support server discord.gg/d98jT3mgxf');
+			console.log(e);
+			return sChannel.stopTyping;
+		}
+		sChannel.stopTyping();
 	}
-
 	if (message.author.bot) return;
 
 	// Ping Embed
@@ -208,7 +204,7 @@ module.exports = async (client, message) => {
 				const errEmbed = new Discord.MessageEmbed().setTitle(`Command error in ${message.guild.name}`).addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false).setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``).setTimestamp();
 				errhook.send(errEmbed);
 			}
-			return message.channel.send(`\`❌ COMMAND ERROR\` \`\`\`xl\n${error.message}\n\`\`\``);
+			return message.channel.send(new Discord.MessageEmbed().setTitle('Something went wrong!').setDescription('please report it in our [support server](https://discord.gg/ut7PxgNdef)'.setColor('RED')));
 		}
 	}
 };

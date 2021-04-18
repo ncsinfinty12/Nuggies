@@ -9,7 +9,6 @@
     "ascii-table": "0.0.9",
     "axios": "^0.21.1",
     "canvas": "^2.7.0",
-    "chatcord": "0.0.5",
     "dblapi.js": "^2.4.1",
     "discord-tts": "^1.0.3",
     "discord.js": "github:monbrey/discord.js#inline-replies",
