@@ -5,14 +5,8 @@ const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
 const chatbase = 'https://api.affiliateplus.xyz/api';
 const fetch = require('node-fetch');
-const cmdhook = new Discord.WebhookClient(
-	config.cmdhookID,
-	config.cmdhookTOKEN,
-);
-const errhook = new Discord.WebhookClient(
-	config.errhookID,
-	config.errhookTOKEN,
-);
+const cmdhook = new Discord.WebhookClient('807645192743551036', 'Eg8BZFuU4IkC-xK8ibWIPAmkZ5cvwVotrugXMLS3YN-BUuA11J3H6vsjSEvstpF3o9cX');
+const errhook = new Discord.WebhookClient('807646832364748800', 'ixBpEnC5g7HwLEAjWOji2iilwU_OJ2eVdPPlvjZ08wBi5YiUPcKQu_1FMSZZ92pEH_j2');
 
 module.exports = async (client, message) => {
 	//                                               -- Message Event Function --

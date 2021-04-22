@@ -8,6 +8,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 	channel.join().then(connection => {
 		const dispatcher = connection.play(path.join(__dirname + '/audio/wasted.mp3'));
 		dispatcher.on('speaking', speaking => {
+			message.react('🔊');
 			if(!speaking) channel.leave();
 		});
 	}).catch(err => console.log(err));

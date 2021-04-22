@@ -11,6 +11,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 	channel.join().then(connection => {
 		broadcast.play(discordTTS.getVoiceStream(`${args.join(' ')}`));
 		const dispatcher = connection.play(broadcast);
+		message.react('🔊');
 		dispatcher.on('speaking', speaking => {
 			if(!speaking) channel.leave();
 		});

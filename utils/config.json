@@ -1,27 +1,4 @@
 {
     "prefix": ".",
-    "ownername1": "AssassiN",
-    "ownername2": "Han Seo-jun",
-    "ownername3": "Pro_gamer007",
-    "ownername4": "IYA",
-    "ownername5": "Liaamm",
-    "guild": "780334622164254720",
-    "AME_API": "ab0afe2c2d4905df6323a43ca6301dc7d658d2192576d319b991e16086cf303a0c904f0db730e06f99efc5210c37aaa60fbd17a5a6d630aaaccfd8ce01c5757d",
-    "cmdhookID" : "807645192743551036",
-    "cmdhookTOKEN" : "Eg8BZFuU4IkC-xK8ibWIPAmkZ5cvwVotrugXMLS3YN-BUuA11J3H6vsjSEvstpF3o9cX",
-    "errhookID" : "807646832364748800",
-    "errhookTOKEN" : "ixBpEnC5g7HwLEAjWOji2iilwU_OJ2eVdPPlvjZ08wBi5YiUPcKQu_1FMSZZ92pEH_j2",
-    "unhhookID" : "807647245130006629",
-    "unhhookTOKEN" : "YAMbQMjaz5aNl-8dtvoQJJkXtVi3Ptbp8c12PPA0Kd4w9aFUstxqwc34_A1y8_0qK8Jk",
-	"restarthookID" : "826023398533759016",
-	"restarthookTOKEN" : "XP9tm8uubw-1_Z9cIykoJCGc52Qt1RZOBTT3ReMYkmBEZuf4Kpj73mrMaGJTymZiCL9n",
-    "categories": [
-		"Moderation",
-		"Fun",
-		"Actions",
-		"Information",
-		"More",
-		"Utility",
-		"Owner"
-	]
+    "owners": ["AssassiN#0002", "Han Seojun#1706", "pro_gamer007#3808", "Liaamm#7777"]
 }

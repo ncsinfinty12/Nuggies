@@ -13,7 +13,6 @@ module.exports.run = async (client, message, args, utils) => {
 	// ctx.closePath();
 	// ctx.clip();
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	// Move the image downwards vertically and constrain its height to 200, so it's a square
 	ctx.drawImage(avatar, 350, 150, 205, 205);
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), `Drip${member.user.username}.jpg`);
 	message.channel.send(attachment);
@@ -23,7 +22,7 @@ module.exports.help = {
 	aliases: [],
 	name: 'drip',
 	description: 'Emojify text',
-	usage: config.prefix + 'emojify',
+	usage: config.prefix + 'drip',
 };
 
 module.exports.config = {

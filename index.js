@@ -16,10 +16,7 @@ client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
 client.data = require('./functions/mongo');
 
-const unhhook = new Discord.WebhookClient(
-	config.unhhookID,
-	config.unhhookTOKEN,
-);
+const unhhook = new Discord.WebhookClient('807647245130006629', 'YAMbQMjaz5aNl-8dtvoQJJkXtVi3Ptbp8c12PPA0Kd4w9aFUstxqwc34_A1y8_0qK8Jk');
 
 async function startUp() {
 	// Handlers
@@ -58,17 +55,18 @@ async function startUp() {
 	});
 
 	console.log(tble.toString());
+	// only if you have a bot on top.gg
 	const DBL = require('dblapi.js');
-	const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3OTc0MTE2MjQ2NTUyNTc5MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyOTc4NDkwfQ.geSDKfgj7YQdMad9Z4FmyZd7XobpSWcdTpmsLzLUfQI', client);
+	const dbl = new DBL(process.env.dbl, client);
 
 	// mongoose connect
-	client.data.connect('mongodb+srv://Assassin1234:K@rt00$99@cluster0.qonl3.mongodb.net/Nuggies_main')
+	client.data.connect(process.env.mongo)
 		.then(() => {
 			// If it connects log the following
 			console.log('Connected to MongoDB database!');
 		}).catch((err) => {
 			// If it doesn't connect log the following
-			console.log('Unable to connect Economy to the Mongodb database. Error:' + err);
+			console.log('Unable to connect to the Mongodb database. Error:' + err);
 		});
 
 	client.login(process.env.token);

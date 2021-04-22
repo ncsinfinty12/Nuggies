@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args, utils) => {
 		message.channel.send(factembed);
 	}
 	else if (args[0] === 'cat') {
-		axios.get('https://api.monke.vip/facts/cat?key=xRbAMC0IZk2ik4cnssQHejIpj')
+		axios.get(`https://api.monke.vip/facts/cat?key=${process.env.monkedev}`)
 			.then(function(response) {
 				const catfactembed = new Discord.MessageEmbed()
 					.setColor('RANDOM')

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
-const { AME_API } = require('../../../utils/config.json');
+const AME_API = process.env.AME_API;
 const ameClient = require('amethyste-api');
 const AmeAPI = new ameClient(AME_API);
 
