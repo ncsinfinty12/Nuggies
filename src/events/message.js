@@ -3,16 +3,10 @@
 const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
-const chatcord = require('chatcord');
-const chatting = new chatcord.Client();
-const cmdhook = new Discord.WebhookClient(
-	config.cmdhookID,
-	config.cmdhookTOKEN,
-);
-const errhook = new Discord.WebhookClient(
-	config.errhookID,
-	config.errhookTOKEN,
-);
+const chatbase = 'https://api.affiliateplus.xyz/api';
+const fetch = require('node-fetch');
+const cmdhook = new Discord.WebhookClient('807645192743551036', 'Eg8BZFuU4IkC-xK8ibWIPAmkZ5cvwVotrugXMLS3YN-BUuA11J3H6vsjSEvstpF3o9cX');
+const errhook = new Discord.WebhookClient('807646832364748800', 'ixBpEnC5g7HwLEAjWOji2iilwU_OJ2eVdPPlvjZ08wBi5YiUPcKQu_1FMSZZ92pEH_j2');
 
 module.exports = async (client, message) => {
 	//                                               -- Message Event Function --
@@ -20,19 +14,19 @@ module.exports = async (client, message) => {
 
 	// nuggies x pwetzel chat
 
-	if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
-		setTimeout(async function() {
-			message.channel.startTyping();
-			await chatting.chat(message.content)
-				.then((reply) => {
-					message.inlineReply(Discord.Util.removeMentions(reply));
-					message.channel.stopTyping();
-				}).catch((error) => {
-					message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${error}\n\`\`\``);
-					message.channel.stopTyping();
-				});
-		}, 3000);
-	}
+	// if (message.channel.id === '814411982702510111' && message.author.id == '723112579584491571') {
+	// 	setTimeout(async function() {
+	// 		message.channel.startTyping();
+	// 		await chatting.chat(message.content)
+	// 			.then((reply) => {
+	// 				message.inlineReply(Discord.Util.removeMentions(reply));
+	// 				message.channel.stopTyping();
+	// 			}).catch((error) => {
+	// 				message.channel.send(`\`❌ CHAT ERROR\` \`\`\`xl\n${error}\n\`\`\``);
+	// 				message.channel.stopTyping();
+	// 			});
+	// 	}, 3000);
+	// }
 
 	if (message.author.bot) return;
 
@@ -92,20 +86,19 @@ module.exports = async (client, message) => {
 		const sChannel = message.guild.channels.cache.get(channel);
 		if (message.author.bot || sChannel.id !== message.channel.id) return;
 		sChannel.startTyping();
-
-		if (!message.content) return;
-
-		await chatting.chat(message.content).then((reply) => {
-			return message.inlineReply(Discord.Util.removeMentions(reply));
-			// The module will reply with the based on stimulus (1st parameter of the chat function!)
-		}).catch((error) => {
-			return message.channel.send(
-				`\`❌ CHAT ERROR\` \`\`\`xl\n${error}\n\`\`\``,
-			);
-		});
+		if(!message.content) return sChannel.stopTyping();
+		try {
+			const basefetch = await fetch(`${chatbase}/chatbot?message=${encodeURIComponent(message.content)}&botname=${encodeURIComponent('Nuggies')}&ownername=${encodeURIComponent('AssassiN#1234')}&user=${message.author.id}`, {});
+			const response = await basefetch.json();
+			message.reply(response.message);
+		}
+		catch (e) {
+			message.reply('something went wrong! please report it on our support server discord.gg/d98jT3mgxf');
+			console.log(e);
+			return sChannel.stopTyping;
+		}
 		sChannel.stopTyping();
 	}
-
 	if (message.author.bot) return;
 
 	// Ping Embed
@@ -139,7 +132,7 @@ module.exports = async (client, message) => {
 	const commandFile = client.commands.get(command);
 
 	if (!commandFile) return;
-
+	// if(client.commands.get(command).config.category === 'Actions') return message.channel.send('due to some difficulties, Actions commands are disabled for atleast a day, please join discord.gg/d98jT3mgxf for updates (we also do premium giveaways)');
 	if (client.commands.get(command).config.developers == true) {
 		if (data.user.developer == false) {
 			return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners.');
@@ -205,7 +198,7 @@ module.exports = async (client, message) => {
 				const errEmbed = new Discord.MessageEmbed().setTitle(`Command error in ${message.guild.name}`).addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false).setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``).setTimestamp();
 				errhook.send(errEmbed);
 			}
-			return message.channel.send(`\`❌ COMMAND ERROR\` \`\`\`xl\n${error.message}\n\`\`\``);
+			return message.channel.send(new Discord.MessageEmbed().setTitle('Something went wrong!').setDescription('please report it in our [support server](https://discord.gg/ut7PxgNdef)').setColor('RED'));
 		}
 	}
 };

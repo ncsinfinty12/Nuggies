@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, utils) => {
 	if (message.mentions.users.first().id == message.author.id) return message.reply('You said sorry to yourself! *Dies*');
 	axios.get('https://api.otakugifs.xyz/gif/sorry', {
 		headers: {
-			'X-API-KEY': 'FrDrFYi5XFr7dijUh6uhMcTnc0r5MeAIrHp2waZo8FWrk3LuRzvYgbmrVW4Z04pFgzcXf2x5yxJUJ7DDslmDqb',
+			'X-API-KEY': process.env.otakugifs,
 		},
 	})
 		.then(function(response) {
