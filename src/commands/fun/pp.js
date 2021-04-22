@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const config = require('../../../utils/config.json');
 
 module.exports.run = async (client, message, args, utils) => {
-	if(message.guild.id === '')
 	if(!message.mentions.users.first()) {
 		const number = Math.floor(Math.random() * 10);
 		const pp = '=';
