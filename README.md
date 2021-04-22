@@ -1,6 +1,7 @@
 # Nuggies
 ## Nuggies is a compact and easy to use multipurpose discord bot with loads of commands and features like automeme, moderation, actions, information, fun, chatbot and more!
 <br/>
+
 # how to run the bot?
 
 
