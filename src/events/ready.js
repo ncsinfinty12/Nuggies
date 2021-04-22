@@ -6,16 +6,10 @@ const config = require('../../utils/config.json');
 const axios = require('axios');
 module.exports = async (client) => {
 	console.log(`${client.user.username} is now online!`);
-	client.user.setActivity('PREMIUM GIVEAWAY IN SUPPORT SERVER!', { type: 'WATCHING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
-	if (!client.user.id == '779741162465525790') {
-		const Webhook = new Discord.WebhookClient(config.restarthookID, config.restarthookTOKEN);
-		const restartEmbed = new Discord.MessageEmbed()
-			.setTitle('Nuggies was restarted!')
-			.setDescription('Nuggies just got restarted!')
-			.setColor('e03854')
-			.setTimestamp();
-		Webhook.send(restartEmbed);
-	}
+	client.user.setActivity('bot.nuggetdev.com/premium', { type: 'WATCHING', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
+	if (client.user.id !== '779741162465525790') return;
+	const Webhook = new Discord.WebhookClient('834671152462430238', 'ZaUCRyZLsr3JTVliha1N-j3vw6H_SSnZVfGz0U2kws-mO7VN2Jyb0DLLFcWdhZO7QnD-');
+	Webhook.send(new Discord.MessageEmbed().setTitle('Nuggies was restarted!').setDescription('Nuggies just got restarted!').setColor('e03854').setTimestamp());
 
 	// automeme
 	automeme.find({ automeme_enabled: true }, async (err, data) => {

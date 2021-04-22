@@ -112,7 +112,7 @@ module.exports.run = async (client, message, args, utils) => {
 	const randomtruth = dare[Math.floor(Math.random() * dare.length)];
 	if(!message.mentions.users.first()) {
 		const embed = new Discord.MessageEmbed()
-			.setTitle(`Truth: ${randomtruth}`)
+			.setTitle(`Dare: ${randomtruth}`)
 			.setColor('RANDOM')
 			.setAuthor(message.author.username, message.author.avatarURL());
 		message.channel.send(embed);

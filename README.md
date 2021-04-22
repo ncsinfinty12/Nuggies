@@ -1,4 +1,19 @@
 # Nuggies
-## Please push to your own branch!
+## Nuggies is a compact and easy to use multipurpose discord bot with loads of commands and features like automeme, moderation, actions, information, fun, chatbot and more!
+<br> <br>
+> ## ```how to run the bot?``` <br>
+<br>
 
-### contact the head developers to merge pull requests
+### 1. make a .env file from .env.example
+### 2. get the tokens from the following websites:
+- [monkedev](https://monkedev.com/api)
+- [otakugifs](https://otakugifs.xyz)
+- [mongodb](https://www.mongodb.com/)
+- [dbl](https://top.gg) (only do this if you have a bot on top.gg)
+- [bot token](https://discord.com/developers/applications) <br>
+and paste it in the .env
+### 3. install the dependencies using `npm install`
+### 4. run the `node index.js` command
+<br>
+
+# make sure to invite Nuggies by clicking [here](https://top.gg/bot/779741162465525790/invite)
