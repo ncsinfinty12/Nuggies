@@ -5,8 +5,8 @@ const utils = require('../../utils/utils');
 const config = require('../../utils/config.json');
 const chatbase = 'https://api.affiliateplus.xyz/api';
 const fetch = require('node-fetch');
-const cmdhook = new Discord.WebhookClient('807645192743551036', 'Eg8BZFuU4IkC-xK8ibWIPAmkZ5cvwVotrugXMLS3YN-BUuA11J3H6vsjSEvstpF3o9cX');
-const errhook = new Discord.WebhookClient('807646832364748800', 'ixBpEnC5g7HwLEAjWOji2iilwU_OJ2eVdPPlvjZ08wBi5YiUPcKQu_1FMSZZ92pEH_j2');
+// const cmdhook = new Discord.WebhookClient('807645192743551036', 'Eg8BZFuU4IkC-xK8ibWIPAmkZ5cvwVotrugXMLS3YN-BUuA11J3H6vsjSEvstpF3o9cX');
+// const errhook = new Discord.WebhookClient('807646832364748800', 'ixBpEnC5g7HwLEAjWOji2iilwU_OJ2eVdPPlvjZ08wBi5YiUPcKQu_1FMSZZ92pEH_j2');
 
 module.exports = async (client, message) => {
 	//                                               -- Message Event Function --
@@ -184,8 +184,8 @@ module.exports = async (client, message) => {
 		try {
 			if (client.user.id === '779741162465525790') {
 				if (!command) return;
-				const m = new Discord.MessageEmbed().setTitle(`Command used in ${message.guild.name}`).setColor('RANDOM').addField('User:', `${message.author.tag}`).addField('User ID:', `${message.author.id}`).addField('Command:', `${command}`).addField('Message Content:', `${message.content}`).addField('Guild ID:', `${message.guild.id}`);
-				await cmdhook.send(m);
+				// const m = new Discord.MessageEmbed().setTitle(`Command used in ${message.guild.name}`).setColor('RANDOM').addField('User:', `${message.author.tag}`).addField('User ID:', `${message.author.id}`).addField('Command:', `${command}`).addField('Message Content:', `${message.content}`).addField('Guild ID:', `${message.guild.id}`);
+				// await cmdhook.send(m);
 			}
 			await timestamps.set(message.author.id, Date.now());
 			setTimeout(
@@ -194,10 +194,10 @@ module.exports = async (client, message) => {
 		}
 		catch (error) {
 			// Command Errors
-			if (client.user.id === '779741162465525790') {
-				const errEmbed = new Discord.MessageEmbed().setTitle(`Command error in ${message.guild.name}`).addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false).setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``).setTimestamp();
-				errhook.send(errEmbed);
-			}
+			// if (client.user.id === '779741162465525790') {
+			// 	const errEmbed = new Discord.MessageEmbed().setTitle(`Command error in ${message.guild.name}`).addField('Additional Details', `**Guild ID :** ${message.guild.id}\n**Author :** ${message.author.tag}(${message.author.id})\n**Command :** ${commandFile.help.name}\n**Content :** ${message.content}`, false).setDescription(`**Error:**\n\`\`\`js\n${error}\n\`\`\``).setTimestamp();
+			// 	errhook.send(errEmbed);
+			// }
 			return message.channel.send(new Discord.MessageEmbed().setTitle('Something went wrong!').setDescription('please report it in our [support server](https://discord.gg/ut7PxgNdef)').setColor('RED'));
 		}
 	}
