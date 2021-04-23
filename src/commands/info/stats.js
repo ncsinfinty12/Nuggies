@@ -34,6 +34,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 	if(serverPrefix !== null) Prefix = serverPrefix;
 	if(serverPrefix == null) Prefix = globalprefix;
 	osutils.cpuUsage(function(v) {
+		console.log(config.owners);
 		const embed = new Discord.MessageEmbed()
 			.setColor(0x7289DA)
 			.setThumbnail(client.user.avatarURL({ format: 'png', dynamic: true, size: 2048 }))
@@ -55,7 +56,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('Ping', `\`\`\`yaml\n${Math.round(client.ws.ping)}` + 'ms\`\`\`', true)
 			.addField('Uptime', `\`\`\`yaml\n${days + 'd ' + hours + 'h ' + minutes + 'm'}\`\`\``, true)
 			.addField('-----------------------------------------------------------------', '---------------------------------------------------------------')
-			.addField('Developers', config.owners.map(e => e.join(', ')));
+			.addField('Developers', config.owners.join(', '));
 		message.channel.send({ embed });
 	});
 
