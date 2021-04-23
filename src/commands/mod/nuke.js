@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const utils = require('../../../utils/utils');
 module.exports.run = async (client, message, args) => {
 	if(message.guild.id === '755739104188301362') return utils.quickEmbed('This command is disabled in Ultimate Dankers!');
-	if(!message.guild.me.hasPermission('MANAGE CHANNELS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE CHANNELS ` permission !');
+	if(!message.guild.me.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** I don\'t have the permission to do that! \n Please give me the `MANAGE CHANNELS ` permission !');
 	if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('❌**Error:** You don\'t have the permission to do that! \n you require the `MANAGE CHANNELS` permission');
 
 	const channel = message.guild.channels.cache.get(message.channel.id);
