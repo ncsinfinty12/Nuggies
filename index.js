@@ -16,7 +16,7 @@ client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
 client.data = require('./functions/mongo');
 
-// const unhhook = new Discord.WebhookClient('807647245130006629', 'YAMbQMjaz5aNl-8dtvoQJJkXtVi3Ptbp8c12PPA0Kd4w9aFUstxqwc34_A1y8_0qK8Jk');
+const unhhook = new Discord.WebhookClient(process.env.unhandled_rejection_webhook_id, process.env.command_webhook_token);
 
 async function startUp() {
 	// Handlers
@@ -76,11 +76,11 @@ startUp();
 // For any unhandled errors
 
 process.on('unhandledRejection', async (err) => {
-	// if (client.user) {
-	// 	if (client.user.id === '800588645006311444') {
-	// 		const errEmbed = new Discord.MessageEmbed().setTitle('unhandledRejection Error').setDescription(err.stack, { code: 'ini' }).setTimestamp();
-	// 		unhhook.send(errEmbed);
-	// 	}
-	// }
+	if (client.user) {
+		if (client.user.id === '800588645006311444') {
+			const errEmbed = new Discord.MessageEmbed().setTitle('unhandledRejection Error').setDescription(err.stack, { code: 'ini' }).setTimestamp();
+			unhhook.send(errEmbed);
+		}
+	}
 	return console.log(err);
 });
