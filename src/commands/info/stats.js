@@ -48,7 +48,7 @@ module.exports.run = async (client, message, args, utils, data) => {
 			.addField('-----------------------------------------------------------------', '---------------------------------------------------------------')
 			// .addField('Platform', `\`\`\`yaml\n${osutils.platform()}\`\`\``, true)
 			.addField('VPS CPU Cores', `\`\`\`yaml\n${osutils.cpuCount()}` + ' Cores```', true)
-			.addField('CPU Usage', `\`\`\`yaml\n${(v * 100).toString().split('.')[0] + '.' + (v * 100).toString().split('.')[1].split('')[0] + (v * 100).toString().split('.')[1].split('')[1]}%\`\`\``, true)
+			// .addField('CPU Usage', `\`\`\`yaml\n${(v * 100).toString().split('.')[0] + '.' + (v * 100).toString().split('.')[1].split('')[0] + (v * 100).toString().split('.')[1].split('')[1]}%\`\`\``, true)
 			.addField('Total Memory', `\`\`\`yaml\n${osutils.totalmem().toString().split('.')[0] + '.' + osutils.totalmem().toString().split('.')[1].split('')[0] + osutils.totalmem().toString().split('.')[1].split('')[1] + ' MB'}\`\`\``, true)
 			.addField('RAM Usage Of VPS', `\`\`\`yaml\n${(osutils.totalmem() - osutils.freemem()).toString().split('.')[0]}/${osutils.totalmem().toString().split('.')[0]} MB (${(100 - osutils.freememPercentage() * 100).toString().split('.')[0] + '.' + (100 - osutils.freememPercentage() * 100).toString().split('.')[1].split('')[0] + (100 - osutils.freememPercentage() * 100).toString().split('.')[1].split('')[1]}%)\`\`\``, true)
 			.addField('RAM Usage Of Bot', `\`\`\`yaml\n${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}` + '/' + `${osutils.totalmem().toString().split('.')[0]}` + ' MB\`\`\`', true)
